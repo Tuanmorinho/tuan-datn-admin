@@ -1,0 +1,63 @@
+<div class="loading-overlay"
+  *ngIf="(loading$ | async)">Loading&#8230;</div>
+<div class="card card-custom gutter-b">
+  <div class="card-body">
+    <form class="form form-label-right"
+      [formGroup]="formGroup"
+      (ngSubmit)="onSubmit()">
+      <!-- Table -->
+      <div class="table table-responsive angular-bootstrap-table ">
+        <table class="mt-5 p-3">
+          <thead>
+            <tr>
+              <th class="p-3 w-100">Tên chức năng</th>
+              <th class="p-3 min-w-150px text-center">Xem danh sách</th>
+              <th class="p-3 min-w-120px text-center">Thêm</th>
+              <th class="p-3 min-w-120px text-center">Sửa</th>
+              <th class="p-3 min-w-120px text-center">Xóa</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let item of permissionList">
+              <tr>
+                <td class="p-3">{{ item.description }}</td>
+                <td class="p-3 text-center">
+                  <section class="example-section">
+                    <mat-checkbox [color]="'primary'"
+                    [(ngModel)]="item.view" [ngModelOptions]="{standalone: true}"
+                    class="example-margin"></mat-checkbox>
+                  </section>
+                </td>
+                <td class="p-3 text-center">
+                  <section class="example-section">
+                    <mat-checkbox [color]="'primary'"
+                    [(ngModel)]="item.create" [ngModelOptions]="{standalone: true}"
+                    class="example-margin"></mat-checkbox>
+                  </section>
+                </td>
+                <td class="p-3 text-center">
+                  <section class="example-section">
+                    <mat-checkbox [color]="'primary'"
+                    [(ngModel)]="item.update" [ngModelOptions]="{standalone: true}"
+                    class="example-margin"></mat-checkbox>
+                  </section>
+                </td>
+                <td class="p-3 text-center">
+                  <section class="example-section">
+                    <mat-checkbox [color]="'primary'"
+                    [(ngModel)]="item.delete" [ngModelOptions]="{standalone: true}"
+                    class="example-margin"></mat-checkbox>
+                  </section>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+          <table class="table">
+            
+          </table>
+        </table>
+      </div>
+    </form>
+  </div>
+
+</div>

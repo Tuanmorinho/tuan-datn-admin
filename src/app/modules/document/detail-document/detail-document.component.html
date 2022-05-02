@@ -1,0 +1,254 @@
+<div class="loading-overlay"
+  *ngIf="isLoading$ | async">Loading&#8230;</div>
+<mat-progress-bar *ngIf="_downloadDocument$ | async as download"
+  [mode]="download.state == 'PENDING' ? 'buffer' : 'determinate'"
+  [value]="download.progress">
+</mat-progress-bar>
+<div class="card card-custom gutter-b">
+  <div class="card-header">
+    <div class="card-title h4">
+      <ng-container>Chi tiết tài liệu</ng-container>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-lg-9">
+        <div class="request-detail-box">
+          <div class="d-flex align-items-center flex-row-fluid flex-wrap">
+            <div class="flex-grow-1 me-2">
+              <h4 class="text-dark fw-bolder text-hover-primary mb-1 fs-6 button-show">{{
+                document?.createdBy.usernameFull }}</h4>
+              <span class="text-muted fw-bold d-block">
+                Đã phê duyệt ngày {{ document?.effectiveDate | date: 'dd/MM/yyyy HH:mm' }}
+              </span>
+            </div>
+            <a href="javascript:void(0)"
+              (click)="isShowDetailRequest = !isShowDetailRequest"
+              class="badge badge-light-danger fw-bolder my-2 button-show">
+              {{ isShowDetailRequest ? 'Thu gọn' : 'Hiển thị' }}
+            </a>
+          </div>
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="col-lg-12 col-md-12">
+                <ul class="nav nav-tabs nav-tabs-line mb-5"
+                  role="tablist">
+                  <li class="nav-item cursor-pointer">
+                    <a class="nav-link"
+                      data-toggle="tab"
+                      role="tab"
+                      [attr.aria-selected]="true"
+                      [class.active]="true">
+                      Thông tin cơ bản
+                    </a>
+                  </li>
+                </ul>
+                <div class="row mb-3">
+                  <div class="col-lg-4">
+                    <b>Bộ phận:</b>
+                  </div>
+                  <div class="col-lg-6">
+                    {{ document?.department?.nameVn }}
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-lg-4">
+                    <b>Loại tài liệu:</b>
+                  </div>
+                  <div class="col-lg-6">
+                    {{ document?.documentType?.nameVn }}
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-lg-4">
+                    <b>Cấp độ bảo mật:</b>
+                  </div>
+                  <div class="col-lg-6">
+                    {{ document?.securityLevel?.name }}
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-lg-4">
+                    <b>Tên tài liệu:</b>
+                  </div>
+                  <div class="col-lg-6">
+                    {{ document?.name }}
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-lg-4">
+                    <b>Mã tài liệu:</b>
+                  </div>
+                  <div class="col-lg-6">
+                    {{ document?.code }}
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-lg-4">
+                    <b>Mục đích sử dụng:</b>
+                  </div>
+                  <div class="col-lg-6">
+                    {{ document?.usingPurposeDocument === 1 ? 'Áp dụng' : 'Tham khảo' }}
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-lg-4">
+                    <b>Ngày hiệu lực:</b>
+                  </div>
+                  <div class="col-lg-6">
+                    {{ document?.effectiveDate | date: 'dd/MM/yyyy HH:mm' }}
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-lg-4">
+                    <b>Thời gian hiệu lực:</b>
+                  </div>
+                  <div class="col-lg-6">
+                    {{ document?.duration }} năm
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-lg-4">
+                    <b>Ngày hết hạn hiệu lực:</b>
+                  </div>
+                  <div class="col-lg-6">
+                    {{ document?.expirationDate }}
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col-lg-4">
+                    <b>File bản chính: </b>
+                  </div>
+                  <div class="col-lg-6">
+                    <div *ngFor="let file of document?.fileMain | filterFileDeleted:0">
+                      <div class="text-primary cursor-pointer mw-10"
+                        matTooltip="{{file?.name}}">{{file?.name}}
+                        <i class="fa fa-eye ml-2 mr-2" aria-hidden="true" *ngIf="checkExtAllow(file?.name)"></i>
+                        <i class="fa fa-download"
+                          aria-hidden="true"
+                          *ngIf="roleOfUser?.isDownload"
+                          (click)="checkPermissionDownload(file?.name, file?.filePath)"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-2"
+                  *ngIf="document?.fileMain | filterFileDeleted:1">
+                  <div class="col-lg-4">
+                    <b>File (bản chính version cũ): </b>
+                  </div>
+                  <div class="col-lg-6">
+                    <div *ngFor="let file of document?.fileMain | filterFileDeleted:1">
+                      <div class="text-primary cursor-pointer mw-10"
+                        matTooltip="{{file?.name}}">{{file?.name}}
+                        <i class="fa fa-eye ml-2 mr-2" aria-hidden="true" *ngIf="checkExtAllow(file?.name)"></i>
+                        <i class="fa fa-download"
+                          aria-hidden="true"
+                          *ngIf="roleOfUser?.isDownload"
+                          (click)="checkPermissionDownload(file?.name, file?.filePath)"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-lg-4">
+                    <b>Hồ sơ liên quan:</b>
+                  </div>
+                  <div class="col-lg-6">
+                    <div *ngFor="let file of document?.fileInvolved | filterFileDeleted:0">
+                      <div class="text-primary cursor-pointer mw-10"
+                        matTooltip="{{file?.name}}">{{file?.name}}
+                        <i class="fa fa-eye ml-2 mr-2" aria-hidden="true" *ngIf="checkExtAllow(file?.name)"></i>
+                        <i class="fa fa-download"
+                          aria-hidden="true"
+                          *ngIf="roleOfUser?.isDownload"
+                          (click)="checkPermissionDownload(file?.name, file?.filePath)"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="col-lg-6">
+              <div class="row">
+                <div class="col-lg-6 col-md-12">
+                  <ul class="nav nav-tabs nav-tabs-line mb-5"
+                    role="tablist">
+                    <li class="nav-item cursor-pointer">
+                      <a class="nav-link"
+                        data-toggle="tab"
+                        role="tab"
+                        [attr.aria-selected]="true"
+                        [class.active]="true">
+                        Kiểm tra phê duyệt
+                      </a>
+                    </li>
+                  </ul>
+
+                  <app-permission-detail [title]="'Soạn thảo:'"
+                    [document]="document"
+                    [name]="'Author'"></app-permission-detail>
+                  <app-permission-detail [title]="'Kiểm tra:'"
+                    [document]="document"
+                    [name]="'Checker'"></app-permission-detail>
+
+                  <app-permission-detail [title]="'Quản lý hệ thống (SMS):'"
+                    [document]="document"
+                    [name]="'SystemManagement'"></app-permission-detail>
+
+                  <app-permission-detail [title]="'Phê duyệt:'"
+                    [document]="document"
+                    [name]="'BOD'"></app-permission-detail>
+
+                  <app-permission-detail [title]="'Huấn luyện đào tạo:'"
+                    [document]="document"
+                    [name]="'StaffTraining'"></app-permission-detail>
+                  <app-permission-detail [title]="'Duyệt cấp bản in:'"
+                    [document]="document"
+                    [name]="'HardCopyApprovers'"></app-permission-detail>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                  <ul class="nav nav-tabs nav-tabs-line mb-5"
+                    role="tablist">
+                    <li class="nav-item cursor-pointer">
+                      <a class="nav-link"
+                        data-toggle="tab"
+                        role="tab"
+                        [attr.aria-selected]="true"
+                        [class.active]="true">
+                        Thông tin phân quyền
+                      </a>
+                    </li>
+                  </ul>
+                  <app-permission-detail [title]="'Được phép đọc:'"
+                    [document]="document"
+                    [name]="'AllowReadDoc'"></app-permission-detail>
+                  <app-permission-detail [title]="'Không được phép đọc:'"
+                    [document]="document"
+                    [name]="'NotAllowReadDoc'"></app-permission-detail>
+                  <app-permission-detail [title]="'Được phép in:'"
+                    [document]="document"
+                    [name]="'AllowPrintDoc'"></app-permission-detail>
+                  <app-permission-detail [title]="'Không được phép in:'"
+                    [document]="document"
+                    [name]="'NotAllowPrintDoc'"></app-permission-detail>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-12">
+        <div class="mt-3 text-right">
+          <button type="button"
+            class="btn btn-light btn-elevate mb-1 mr-2"
+            (click)="onBack()">
+            <i class="fa fa-arrow-left"></i>
+            Hủy
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,121 @@
+<div>
+  <div class="card-header py-0">
+    <div class="h4 font-weight-bold">
+      <i (click)="offcanvasService.dismiss()" style="cursor: pointer;" id="kt_quick_custom_close" class="fa fa-arrow-left text-dark mr-3"></i>
+      <ng-container>{{ member?.fullname }}</ng-container>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="form-group row">
+      <div class="col-lg-12 col-md-12">
+        <div class="row" *ngIf="member?.gender">
+          <label class="col-xl-2 col-lg-2 col-form-label form-label d-flex align-items-center">Vai trò:</label>
+          <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+            <label class="d-flex align-items-center m-0 font-weight-bold">{{member?.relationship}}</label>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="member?.gender">
+          <label class="col-xl-2 col-lg-2 col-form-label form-label d-flex align-items-center">Giới tính:</label>
+          <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+            <label class="d-flex align-items-center m-0 font-weight-bold">{{member?.gender}}</label>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="member?.birthday">
+          <label class="col-xl-2 col-lg-2 col-form-label form-label d-flex align-items-center">Ngày sinh:</label>
+          <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+            <label class="d-flex align-items-center m-0 font-weight-bold">{{member?.birthday}}</label>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="member?.identifyCode">
+          <label class="col-xl-2 col-lg-2 col-form-label form-label d-flex align-items-center">CMND/CCCD:</label>
+          <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+            <label class="d-flex align-items-center m-0 font-weight-bold">{{member?.identifyCode}}</label>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="member?.marriageState">
+          <label class="col-xl-2 col-lg-2 col-form-label form-label d-flex align-items-center">Tình trạng hôn
+            nhân:</label>
+          <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+            <label class="d-flex align-items-center m-0 font-weight-bold">{{member?.marriageState}}</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <label class="col-xl-2 col-lg-2 col-form-label form-label d-flex align-items-center">Địa chỉ thường
+            trú:</label>
+          <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+            <label class="d-flex align-items-center m-0 font-weight-bold">{{member?.permanentAddress}},
+              {{ member?.permanentWard?.value }} {{ member?.permanentDistrict?.value }}
+              {{ member?.permanentProvince?.value }} {{ member?.permanentCountry?.value }}</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <label class="col-xl-2 col-lg-2 col-form-label form-label d-flex align-items-center">Địa chỉ tạm trú:</label>
+          <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+            <label class="d-flex align-items-center m-0 font-weight-bold">{{member?.temporaryAddress}},
+              {{ member?.temporaryWard?.value }} {{ member?.temporaryDistrict?.value }}
+              {{ member?.temporaryProvince?.value }} {{ member?.temporaryCountry?.value }}</label>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="member?.email">
+          <label class="col-xl-2 col-lg-2 col-form-label form-label d-flex align-items-center">Email:</label>
+          <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+            <label class="d-flex align-items-center m-0 font-weight-bold">{{member?.email}}</label>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="member?.phone">
+          <label class="col-xl-2 col-lg-2 col-form-label form-label d-flex align-items-center">Số điện thoại:</label>
+          <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+            <label class="d-flex align-items-center m-0 font-weight-bold">{{member?.phone}}</label>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="member?.education">
+          <label class="col-xl-2 col-lg-2 col-form-label form-label d-flex align-items-center">Trình độ học vấn:</label>
+          <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+            <label class="d-flex align-items-center m-0 font-weight-bold">{{member?.education}}</label>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="member?.occupation">
+          <label class="col-xl-2 col-lg-2 col-form-label form-label d-flex align-items-center">Nghề nghiệp:</label>
+          <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+            <label class="d-flex align-items-center m-0 font-weight-bold">{{member?.occupation}}</label>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="member?.monthlyIncome">
+          <label class="col-xl-2 col-lg-2 col-form-label form-label d-flex align-items-center">Thu nhập:</label>
+          <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+            <label class="d-flex align-items-center m-0 font-weight-bold">{{member?.monthlyIncome}}</label>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="member?.bankAccounts.length">
+          <label class="col-xl-2 col-lg-2 col-form-label form-label d-flex align-items-center">Tài khoản ngân
+            hàng:</label>
+          <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+            <p class="d-flex align-items-center m-0 font-weight-bold" *ngFor="let account of member?.bankAccounts">
+              {{account?.bank?.name}} - {{ account?.number }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 modal-footer text-right">
+        <button type="button" *ngIf="member?.role !== 'OWNER'" class="btn btn-outline-danger btn-elevate mr-1"
+          (click)="onDelete()">
+          Xóa
+        </button>&nbsp;
+        <!-- <button type="button" (click)="onUpdate()" class="btn btn-primary btn-elevate">
+          Chỉnh sửa
+        </button> -->
+      </div>
+    </div>
+  </div>
+</div>

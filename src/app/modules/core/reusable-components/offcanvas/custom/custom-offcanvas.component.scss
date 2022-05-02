@@ -1,0 +1,11 @@
+#kt_quick_custom{
+    overflow-y: scroll;
+
+   
+}
+
+.offset {
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}

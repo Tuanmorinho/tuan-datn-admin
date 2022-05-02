@@ -1,0 +1,164 @@
+<div class="loading-overlay" *ngIf="(userService.isLoading$ | async)">Loading&#8230;</div>
+<div class="card card-custom gutter-b">
+  <div class="card-header">
+    <div class="card-body"
+      style="cursor: default; padding-left: 0 !important; padding-right: 0 !important; padding-bottom: 0 !important;">
+      <div class="d-flex">
+        <div type="button" class="card-subtitle mt-3 btn-product-infor" class="{{activeBtnPr}}"
+          (click)="toggleProductInf()">
+          <label type="button">Thông tin người dùng</label>
+        </div>
+        <div type="button" class="card-subtitle mt-3 btn-manual" class="{{activeBtnMn}}" (click)="toggleManual()">
+          <label type="button">Lịch sử hoạt động</label>
+        </div>
+      </div>
+      <hr class=" m-0" />
+    </div>
+  </div>
+  <div class="card-body pt-4">
+
+    <!-- Thông tin người dùng -->
+    <ng-container *ngIf="activePrForm">
+      <div class="row">
+        <div class="col-lg-6 col-xl-6">
+          <!-- Tên đăng nhập -->
+          <div class="form-group row py-2">
+            <label class="col col-form-label form-label d-flex align-items-center">Tên đăng nhập:</label>
+            <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+              <label class="d-flex align-items-center m-0">{{user?.username}}</label>
+            </div>
+          </div>
+  
+          <hr class=" m-0" />
+  
+          <!-- Tên người dùng -->
+          <div class="form-group row py-2">
+            <label class="col col-form-label form-label d-flex align-items-center">Tên người dùng: </label>
+            <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+              <label class="d-flex align-items-center m-0">{{user?.firstName}}</label>
+            </div>
+          </div>
+          <hr class=" m-0" />
+  
+          <div class="form-group row py-2">
+            <label class="col col-form-label form-label d-flex align-items-center">Vai trò:</label>
+            <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+              <span class="d-flex align-items-center m-0" *ngFor="let item of user?.realmRoles">{{item}}</span>
+            </div>
+          </div>
+  
+          <hr class=" m-0" />
+  
+          <!-- Ngày sinh -->
+          <div class="form-group row py-2">
+            <label class="col col-form-label form-label d-flex align-items-center">Ngày sinh:</label>
+            <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+              <label class="d-flex align-items-center m-0">{{user.attributes?.birthday | date:'dd/MM/yyyy'}}</label>
+            </div>
+          </div>
+  
+          <hr class=" m-0" />
+  
+          <!-- Giới tính -->
+          <div class="form-group row py-2">
+            <label class="col col-form-label form-label d-flex align-items-center">Giới tính:</label>
+            <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+              <label class="d-flex align-items-center m-0" *ngFor="let item of user.attributes?.gender">{{item === 'MALE' ? 'Nam': "Nữ"}}</label>
+            </div>
+          </div>
+  
+          <hr class=" m-0" />
+  
+          <!-- Địa chỉ thường trú -->
+          <div class="form-group row py-2">
+            <label class="col col-form-label form-label d-flex align-items-center">Địa chỉ thường trú:</label>
+            <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+              <label class="d-flex align-items-center m-0">{{user.attributes?.permanentAddress}}</label>
+            </div>
+          </div>
+  
+          <hr class=" m-0" />
+  
+          <!-- Địa chỉ tạm trú -->
+          <div class="form-group row py-2">
+            <label class="col col-form-label form-label d-flex align-items-center">Địa chỉ tạm trú:</label>
+            <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+              <label class="d-flex align-items-center m-0">{{user.attributes?.temporaryAddress}}</label>
+            </div>
+          </div>
+  
+          <hr class=" m-0" />
+  
+          <!-- Email -->
+          <div class="form-group row py-2">
+            <label class="col col-form-label form-label d-flex align-items-center">Email:</label>
+            <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+              <label class="d-flex align-items-center m-0">{{user.email}}</label>
+            </div>
+          </div>
+  
+          <hr class=" m-0" />
+  
+          <!-- Số điện thoại -->
+          <div class="form-group row py-2">
+            <label class="col col-form-label form-label d-flex align-items-center">Số điện thoại:</label>
+            <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+              <label class="d-flex align-items-center m-0">{{user.attributes?.phone}}</label>
+            </div>
+          </div>
+  
+          <hr class=" m-0" />
+  
+          <!-- Trình độ học vấn -->
+          <div class="form-group row py-2">
+            <label class="col col-form-label form-label d-flex align-items-center">Trình độ học vấn:</label>
+            <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+              <label class="d-flex align-items-center m-0">{{user.attributes?.education}}</label>
+            </div>
+          </div>
+  
+          <hr class=" m-0" />
+  
+          <!-- Chứng minh nhân dân/ Căn cước công dân -->
+          <div class="form-group row py-2">
+            <label class="col col-form-label form-label d-flex align-items-center">CMND/CCCD:</label>
+            <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+              <label class="d-flex align-items-center m-0">{{user.attributes?.identifyCode}}</label>
+            </div>
+          </div>
+  
+          <hr class=" m-0" />
+  
+          <!-- Trạng thái hoạt động -->
+  
+          <div class="form-group row py-2">
+            <label class="col col-form-label form-label d-flex align-items-center">Trạng thái hoạt động</label>
+            <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+              <label class="d-flex align-items-center m-0">{{user?.enabled==true? 'Hoạt động': 'Dừng hoạt động'}}</label>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Ảnh người dùng -->
+        <div class="col-lg-6 col-md-12">
+          <div class="form-group row">
+            <div class="col-lg-12 col-xl-12 d-flex justify-content-center flex-column">
+              <div class="avatar-upload d-flex justify-content-center">
+                <div class="avatar-preview">
+                  <img [src]="imageUrl" style="width: inherit;"/>
+                </div>
+              </div>
+              <label class="col-form-label form-label text-image text-muted text-center">Ảnh đại diện</label>
+            </div>
+          </div>
+        </div>
+        <!--  -->
+      </div>
+    </ng-container>
+
+    <!-- Lịch sử đăng nhập -->
+    <ng-container *ngIf="activeMnForm">
+      <app-history-user [idParam]="idParam"></app-history-user>
+    </ng-container>
+  </div>
+</div>

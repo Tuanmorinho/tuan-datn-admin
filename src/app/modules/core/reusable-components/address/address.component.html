@@ -1,0 +1,59 @@
+<!-- Địa chỉ thường trú -->
+<div [formGroup]="formGroup">
+    <label class="col-form-label form-label">{{ title }}<span class="required-field"
+            *ngIf="isRequire">*</span></label>
+    <div class="form-group row mb-4">
+        <div class="col-3">
+            <ng-select [items]="countryList" bindLabel="value" bindValue="id" class="form-control"
+                [formControlName]="formControlNameCountry" [notFoundText]="'Không có mục nào được chọn'"
+                placeholder="Quốc gia" loadingText="Đang tải" (change)="selectAdress($event, 0, addressType)" (clear)="clearData(0)"
+                [class.is-invalid]="isControlInvalid(formControlNameCountry)">
+            </ng-select>
+            <app-validation-error [field]="'Quốc gia'" [submitted]="isControlInvalid(formControlNameCountry)"
+                [control]="formGroup.controls[formControlNameCountry]">
+            </app-validation-error>
+        </div>
+        <div class="col-3">
+            <ng-select [items]="provinceList" bindLabel="value" bindValue="id" class="form-control"
+                [formControlName]="formControlNameProvince"
+                [notFoundText]="'Không có mục nào được chọn'" placeholder="Tỉnh / Thành phố" loadingText="Đang tải"
+                (change)="selectAdress($event, 1, addressType)" (clear)="clearData(1)"
+                [class.is-invalid]="isControlInvalid(formControlNameProvince)">
+            </ng-select>
+            <app-validation-error [field]="'Tỉnh / Thành phố'" [submitted]="isControlInvalid(formControlNameProvince)"
+                [control]="formGroup.controls[formControlNameProvince]">
+            </app-validation-error>
+        </div>
+        <div class="col-3">
+            <ng-select [items]="districtList" bindLabel="value" bindValue="id" class="form-control"
+                [formControlName]="formControlNameDistrict"
+                [notFoundText]="'Không có mục nào được chọn'" placeholder="Quận / Huyện" loadingText="Đang tải"
+                (change)="selectAdress($event, 2, addressType)" (clear)="clearData(2)"
+                [class.is-invalid]="isControlInvalid(formControlNameDistrict)">
+            </ng-select>
+            <app-validation-error [field]="'Quận / Huyện'" [submitted]="isControlInvalid(formControlNameDistrict)"
+                [control]="formGroup.controls[formControlNameDistrict]">
+            </app-validation-error>
+        </div>
+        <div class="col-3">
+            <ng-select [items]="wardList" bindLabel="value" bindValue="id" class="form-control"
+                [formControlName]="formControlNameWard" [notFoundText]="'Không có mục nào được chọn'"
+                placeholder="Phường / Xã" loadingText="Đang tải" (change)="selectAdress($event, 3, addressType)"
+                [class.is-invalid]="isControlInvalid(formControlNameWard)">
+            </ng-select>
+            <app-validation-error [field]="'Phường / Xã'" [submitted]="isControlInvalid(formControlNameWard)"
+                [control]="formGroup.controls[formControlNameWard]">
+            </app-validation-error>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-xl-12 col-lg-12">
+            <input matInput appTrim type="text" class="form-control" [formControlName]="addressDetail"
+                placeholder="Nhập địa chỉ chi tiết..." 
+                [class.is-invalid]="isControlInvalid(addressDetail)"/>
+            <app-validation-error [field]="'Phường / Xã'" [submitted]="isControlInvalid(addressDetail)"
+                [control]="formGroup.controls[addressDetail]">
+            </app-validation-error>
+        </div>
+    </div>
+</div>

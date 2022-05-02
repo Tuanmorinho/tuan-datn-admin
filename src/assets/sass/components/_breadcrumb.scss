@@ -1,0 +1,69 @@
+//
+// Breadcrumb
+//
+
+.breadcrumb {
+    align-items: center;
+
+    .breadcrumb-item {
+        display: flex;
+        
+        a {
+            display: flex;
+            align-items: center;
+        }
+
+        &.active,
+        &:hover {
+            i,
+            a {
+                transition: $transition-link;
+                color: $primary !important;
+            }
+        }
+    }
+
+    &.breadcrumb-transparent {
+        background-color: transparent;
+        border-radius: 0;
+    }
+
+    &.breadcrumb-line {
+        .breadcrumb-item {
+            &:before {
+                display: none;
+            }
+
+            &:after {
+                content: "-";
+                padding-left: $breadcrumb-item-padding;
+            }
+
+            &:last-child {
+                &:after {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    &.breadcrumb-forward {
+        .breadcrumb-item {
+            &:before {
+                display: none;
+            }
+
+            &:after {
+                content: "\003E";
+                padding-left: $breadcrumb-item-padding;
+                color: $light-inverse;
+            }
+
+            &:last-child {
+                &:after {
+                    display: none;
+                }
+            }
+        }
+    }
+}

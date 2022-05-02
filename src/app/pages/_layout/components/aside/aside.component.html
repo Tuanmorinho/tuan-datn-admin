@@ -1,0 +1,121 @@
+<!--begin::Brand-->
+
+<!--end::Brand-->
+
+<!--begin::Aside Menu-->
+<div class="aside aside-extended d-flex" style="display: none;"
+     id="aside-extended">
+     <div class="aside-menu-wrapper flex-column-fluid">
+      <!--begin::Menu Container-->
+      <div
+        id="kt_aside"
+        class="aside-menu"
+        [ngClass]="asideMenuCSSClasses"
+        data-menu-vertical="1"
+        [attr.data-menu-scroll]="asideMenuScroll"
+        [attr.data-menu-dropdown]="asideMenuDropdown"
+        data-menu-dropdown-timeout="500"
+      >
+        <!-- begin::Menu Nav -->
+        <ul class="menu-nav" [ngClass]="ulCSSClasses" style="margin-top: 0">
+          <!-- Material-UI -->
+          <!-- begin::1 Level -->
+          <ng-container *ngTemplateOutlet="menu;
+          context: {
+            menus:menus
+          }">
+        </ng-container>
+          <!-- end::1 Level -->
+  
+        </ul>
+        <!-- end::Menu Nav -->
+      </div>
+      <!--end::Menu Container-->
+    </div>
+</div>
+
+<div class="aside">
+  <div class="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper">
+    <!--begin::Menu Container-->
+    <div
+      id="kt_aside_menu"
+      class="aside-menu"
+      [ngClass]="asideMenuCSSClasses"
+      data-menu-vertical="1"
+      [attr.data-menu-scroll]="asideMenuScroll"
+      [attr.data-menu-dropdown]="asideMenuDropdown"
+      data-menu-dropdown-timeout="500"
+    >
+      <!-- begin::Menu Nav -->
+      <ul class="menu-nav" [ngClass]="ulCSSClasses">
+        <!-- Material-UI -->
+        <!-- begin::1 Level -->
+        <ng-container *ngTemplateOutlet="menu;
+        context: {
+          menus:menus
+        }">
+      </ng-container>
+        <!-- end::1 Level -->
+
+      </ul>
+      <!-- end::Menu Nav -->
+    </div>
+    <!--end::Menu Container-->
+  </div>
+</div>
+
+<ng-template #menu
+             let-menus="menus">
+  <li   class="menu-item menu-item-submenu"
+        aria-haspopup="true"
+        data-menu-toggle="hover"
+        routerLinkActive="menu-item-open"  *ngFor="let menu of menus">
+        <a
+          class="menu-link menu-toggle"
+          routerLinkActive="active"
+        >
+          <span
+            [inlineSVG]="menu.icon"
+            cacheSVG="true"
+            class="svg-icon menu-icon"
+          ></span>
+          <span class="menu-text font-weight-bolder" [innerHtml]="menu.title"></span>
+          <i class="menu-arrow"></i>
+        </a>
+  
+      <div class="menu-submenu">
+        <i class="menu-arrow"></i>
+        <ul class="menu-subnav">
+          <li class="menu-item" *ngFor="let sub of menu.subMenus"
+            routerLinkActive="menu-item-active"
+            aria-haspopup="true">
+            <ng-container *ngFor="let router of sub.routers; let i = index">
+              <a *ngIf="i===0;else notFirstChild"
+                 class="menu-link"
+                 [routerLinkActiveOptions]="{exact: true}"
+                 routerLinkActive="active"
+                 [queryParams]="sub.queryParams"
+                 [routerLink]="router">
+
+                <span class="menu-text p-submenu"
+                      [innerHtml]="sub.title"></span>
+              </a>
+              <ng-template #notFirstChild>
+                <a class="menu-link d-none"
+                   routerLinkActive="active"
+                   [queryParams]="sub.queryParams"
+                   [routerLink]="router">
+
+                  <span class="menu-text p-submenu"
+                        [innerHtml]="sub.title"></span>
+                </a>
+              </ng-template>
+
+            </ng-container>
+
+          </li>
+         
+        </ul>
+      </div>
+  </li>
+</ng-template>

@@ -1,0 +1,168 @@
+<div class="loading-overlay" *ngIf="(usersService.isLoading$ | async)">Loading&#8230;</div>
+<div class="d-flex justify-content-between">
+</div>
+<div class="card card-custom gutter-b">
+  <div class="card-body">
+    <form class="form form-label-right" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+      <p class="card-title font-weight-bolder text-dark mb-0">Thông tin cá nhân</p>
+      <div class="row">
+        <div class="col-lg-2 col-md-12">
+          <div class="form-group row">
+            <div class="col-lg-12 col-xl-12 d-flex justify-content-center flex-column">
+              <app-upload-files [formGroup]="formGroup" [formControlName]="'photo'" uploadType="image"
+                acceptFiles=".png, .jpg, .jpeg" [validTypeFiles]="validTypeFiles">
+              </app-upload-files>
+              <label class="col-form-label form-label text-image text-muted text-center">Ảnh đại diện</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-10 col-md-12">
+          <div class="form-group row">
+            <div [class]="!user ? 'col-3' : 'col'">
+              <label class="col-form-label form-label font-weight-bold">Tên đăng nhập<span
+                  class="required-field">*</span></label>
+              <div class="">
+                <input matInput appTrim type="text" class="form-control" formControlName="username"
+                  [class.is-invalid]="isControlInvalid('username')" placeholder="Nhập đăng nhập" [readonly]="user" />
+                <app-validation-error [field]="'Tên đăng nhập'" [submitted]="isControlInvalid('username')"
+                  [control]="formGroup.controls.username">
+                </app-validation-error>
+              </div>
+            </div>
+            <div *ngIf="!user" class="col-3">
+              <label class="col-form-label form-label">Mật khẩu</label>
+              <input matInput appTrim type="text" class="form-control" formControlName="password"
+                [class.is-invalid]="isControlInvalid('password')"
+                placeholder="Nhập mật khẩu" />
+                <app-validation-error [field]="'Mật khẩu'" [submitted]="isControlInvalid('password')"
+                  [control]="formGroup.controls.password">
+                </app-validation-error>
+            </div>
+            <div class="col-3">
+              <label class="col-xl-12 col-lg-12 col-form-label form-label font-weight-bold">Họ và tên<span
+                  class="required-field">*</span></label>
+              <div class="col-xl-12 col-lg-12">
+                <input matInput appTrim type="text" class="form-control" formControlName="firstName"
+                  [class.is-invalid]="isControlInvalid('firstName')" placeholder="Nhập họ và tên" />
+                <app-validation-error [field]="'Họ tên'" [submitted]="isControlInvalid('firstName')"
+                  [control]="formGroup.controls.firstName">
+                </app-validation-error>
+              </div>
+            </div>
+            <div class="col-3">
+              <label class="col-form-label form-label">Ngày sinh</label>
+              <div class="">
+                <div class="d-flex justify-content-between">
+                  <input matInput [matDatepicker]="picker1" placeholder="Ngày sinh" formControlName="birthday"
+                    [class.is-invalid]="isControlInvalid('birthday')" class="form-control custom-date-picker">
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
+                  <app-validation-error [field]="'Ngày sinh'" [submitted]="isControlInvalid('birthday')"
+                    [control]="formGroup.controls.birthday">
+                  </app-validation-error>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-3">
+              <label class="col-form-label form-label font-weight-bold">CMND/CCCD<span
+                  class="required-field">*</span></label>
+              <div class="">
+                <input matInput appTrim type="text" class="form-control" placeholder="Chứng minh thư/căn cước công dân"
+                  formControlName="identifyCode" />
+              </div>
+              <app-validation-error [field]="'CMND/CCCD'" [submitted]="isControlInvalid('identifyCode')"
+                [control]="formGroup.controls.identifyCode">
+              </app-validation-error>
+            </div>
+
+            <div class="col-3">
+              <label class="col-form-label form-label font-weight-bold">Email</label>
+              <div class="">
+                <input matInput appTrim type="email" class="form-control" placeholder="Nhập email"
+                  [class.is-invalid]="isControlInvalid('email')" formControlName="email" />
+                <app-validation-error [field]="'Email'" [submitted]="isControlInvalid('email')"
+                  [control]="formGroup.controls.email">
+                </app-validation-error>
+              </div>
+            </div>
+            <div class="col-3">
+              <label class="col-form-label form-label font-weight-bold">Số điện thoại</label>
+              <div class="">
+                <input matInput appTrim type="text" class="form-control" placeholder="Nhập số điện thoại"
+                  formControlName="phone" />
+              </div>
+            </div>
+            <div class="col-3">
+              <label class="col-form-label form-label font-weight-bold">Trình độ học vấn</label>
+              <div>
+                <input matInput appTrim type="text" class="form-control" placeholder="Nhập trình độ học vấn"
+                  [class.is-invalid]="isControlInvalid('education')" formControlName="education" />
+                <app-validation-error [field]="'Trình độ học vấn'" [submitted]="isControlInvalid('education')"
+                  [control]="formGroup.controls.education">
+                </app-validation-error>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-3">
+              <label class="col-form-label form-label font-weight-bold">Giới tính</label>
+              <div class="d-flex justify-content-start col-form-label mt-1">
+                <mat-radio-group [color]="'primary'" formControlName="gender" class="d-flex justify-content-between">
+                  <mat-radio-button value="MALE">Nam</mat-radio-button>
+                  <mat-radio-button value="FEMALE" class="ml-10">Nữ</mat-radio-button>
+                  <mat-radio-button value="UNKNOWN" class="ml-10">Không xác định</mat-radio-button>
+                </mat-radio-group>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="card-title font-weight-bolder text-dark mb-0">Địa chỉ</p>
+      <div class="row">
+        <div class="col-lg-6 col-md-6">
+          <app-address [title]="'Địa chỉ thường trú'" [isRequire]="true" [countryList]="initData?.countries"
+            [formControlNameCountry]="'permanentCountryId'" [formControlNameProvince]="'permanentProvinceId'"
+            [formControlNameDistrict]="'permanentDistrictId'" [formControlNameWard]="'permanentWardId'"
+            [addressDetail]="'permanentAddress'" [formGroup]="formGroup" [addressType]="3"></app-address>
+        </div>
+        <div class="col-lg-6 col-md-6">
+          <app-address [title]="'Địa chỉ tạm trú'" [countryList]="initData?.countries"
+            [formControlNameCountry]="'temporaryCountryId'" [formControlNameProvince]="'temporaryProvinceId'"
+            [formControlNameDistrict]="'temporaryDistrictId'" [formControlNameWard]="'temporaryWardId'"
+            [addressDetail]="'temporaryAddress'" [formGroup]="formGroup" [addressType]="3">
+          </app-address>
+        </div>
+      </div>
+      <p class="card-title font-weight-bolder text-dark mt-5 mb-0">Phân quyền</p>
+      <div class="row">
+        <div class="col-lg-6 col-md-6">
+          <label class=" col-form-label form-label font-weight-bold">Vai trò người
+            dùng<span class="required-field">*</span></label>
+          <ng-select [items]="roleList" bindLabel="name" bindValue="name" class="form-control"
+            formControlName="realmRoles" [multiple]="true" [notFoundText]="'Không có mục nào được chọn'"
+            loadingText="Đang tải" (change)="selectRoles($event)" [class.is-invalid]="isControlInvalid('realmRoles')"
+            placeholder="Chọn vai trò">
+          </ng-select>
+          <app-validation-error [field]="'Vai trò người dùng'" [submitted]="isControlInvalid('realmRoles')"
+            [control]="formGroup.controls.realmRoles">
+          </app-validation-error>
+        </div>
+        <div class="col-lg-6 col-md-6">
+          <div class="form-group row">
+            <label class="col-xl-12 col-lg-12 col-xs-12 col-form-label form-label font-weight-bold">Cài đặt trạng
+              thái</label>
+            <div class="col-lg-12 col-xl-12 col-xs-12 d-flex justify-content-start col-form-label">
+              <mat-radio-group [color]="'primary'" aria-label="Select an option" formControlName="activeStatus">
+                <mat-radio-button value="1">Hoạt động</mat-radio-button>
+                <mat-radio-button value="0" class="">Dừng hoạt hộng</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>

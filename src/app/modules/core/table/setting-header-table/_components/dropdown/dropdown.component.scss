@@ -1,0 +1,12 @@
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.card-custom {
+    position: absolute;
+    right: 40px;
+    top: -15px;
+    z-index: 99;
+    border: 1px solid #cacaca;
+}

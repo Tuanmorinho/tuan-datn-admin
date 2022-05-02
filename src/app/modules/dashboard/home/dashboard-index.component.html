@@ -1,0 +1,153 @@
+<div class="row">
+    <div class="col-6">
+        <div class="card card-custom bg-gray-100 card-stretch gutter-b">
+            <div class="card-body p-0 position-relative overflow-hidden">
+                <div
+                        id="kt_mixed_widget_1_chart"
+                        class="card-rounded-bottom bg-statistic pt-4"
+                        [style.height]="'200px'"
+                >
+                    <h1 class="text-center w-100 pt-5 mt-4 text-white text-uppercase">Thống kê chung</h1>
+                </div>
+                <div class="card-spacer mt-n25">
+                    <div class="row m-0">
+                        <div class="col bg-light-warning px-6 py-8 rounded-xl mr-7 mb-7">
+                            <div class="row">
+                                <div class="col-8">
+                        <span
+                                [inlineSVG]="'./assets/media/svg/icons/Media/Equalizer.svg'"
+                                class="svg-icon svg-icon-3x svg-icon-warning d-block my-2"
+                        ></span>
+                                    <a href="#" class="text-warning font-weight-bold font-size-h6">
+                                        Tổng số chi nhánh
+                                    </a>
+                                </div>
+                                <div class="col-4 d-flex align-items-center justify-content-center">
+                                    <h1 class="text-warning font-weight-bold">{{totalOfCompany}}</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col bg-light-primary px-6 py-8 rounded-xl mb-7">
+                            <div class="row">
+                                <div class="col-8">
+
+                              <span
+                                      [inlineSVG]="'./assets/media/svg/icons/Design/Layers.svg'"
+                                      class="svg-icon svg-icon-3x svg-icon-danger d-block my-2"
+                              ></span>
+                                    <a href="#" class="text-danger font-weight-bold font-size-h6 mt-2">
+                                        Tổng số phòng ban
+                                    </a>
+                                </div>
+                                <div class="col-4 d-flex align-items-center justify-content-center">
+                                    <h1 class="text-danger font-weight-bold">{{totalOfDepartment}}</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row m-0">
+                        <div class="col bg-light-danger px-6 py-8 rounded-xl mr-7 mb-7">
+                            <div class="row">
+                                <div class="col-8">
+                            <span
+                                    [inlineSVG]="'./assets/media/svg/icons/Communication/Add-user.svg'"
+                                    class="svg-icon svg-icon-3x svg-icon-primary d-block my-2"
+                            ></span>
+                                    <a href="#" class="text-primary font-weight-bold font-size-h6 mt-2">
+                                        Tổng số nhân viên
+                                    </a>
+                                </div>
+                                <div class="col-4 d-flex align-items-center justify-content-center">
+                                    <h1 class="text-primary font-weight-bold">{{totalOfStaff}}</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col bg-light-success px-6 py-8 rounded-xl mb-7">
+                            <div class="row">
+                                <div class="col-8">
+                              <span
+                                      [inlineSVG]="
+                                  './assets/media/svg/icons/Communication/Urgent-mail.svg'
+                                "
+                                      class="svg-icon svg-icon-3x svg-icon-success d-block my-2"
+                              ></span>
+                                    <a href="#" class="text-success font-weight-bold font-size-h6 mt-2">
+                                        Tổng số biểu mẫu
+                                    </a>
+                                </div>
+                                <div class="col-4 d-flex align-items-center justify-content-center">
+                                    <h1 class="text-success text- font-weight-bold">{{totalOfForm}}</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-0">
+                        <div class="col bg-lt-page px-6 py-8 rounded-xl mr-7 mb-7">
+                            <div class="row">
+                                <div class="col-8">
+                                    <i class="fa fa-book w-100" style="font-size: 42px;color:#7f7a92"></i>
+                                    <a href="#" class="text-black-50 font-weight-bold font-size-h6">
+                                        Tổng số tài liệu nội bộ
+                                    </a>
+                                </div>
+                                <div class="col-4 d-flex align-items-center justify-content-center">
+                                    <h1 class="text-black-50 font-weight-bold">{{totalOfDomLongThanh}}</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col bg-light-primary px-6 py-8 rounded-xl mb-7">
+                            <div class="row">
+                                <div class="col-8">
+                          <span
+                                  [inlineSVG]="'./assets/media/svg/icons/Common/Newspaper.svg'"
+                                  class="svg-icon svg-icon-3x svg-icon-primary d-block my-2"
+                          ></span>
+                                    <a href="#" class="text-primary font-weight-bold font-size-h6 mt-2">
+                                        Tổng số tài liệu ngoài
+                                    </a>
+                                </div>
+                                <div class="col-4 d-flex align-items-center justify-content-center">
+                                    <h1 class="text-warning font-weight-bold">{{totalOfDomExternal}}</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--end::Row-->
+
+            </div>
+            <!--end::Stats-->
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card card-custom">
+            <!--begin::Header-->
+            <div class="card-header border-0">
+                <h3 class="card-title font-weight-bolder text-dark">Danh sách tài liệu cần phê duyệt</h3>
+                <div class="card-toolbar">
+
+                </div>
+            </div>
+            <!--end::Header-->
+
+            <!--begin::Body-->
+            <div class="card-body pt-0 pb-3">
+                <!--begin::Item-->
+                <div class="mb-6">
+                    <!--begin::Content-->
+
+
+                    <!--end::Content-->
+                </div>
+                <!--end::Item-->
+
+            </div>
+            <!--end: Card Body-->
+        </div>
+
+    </div>
+</div>
+

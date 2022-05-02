@@ -1,0 +1,60 @@
+$font-default: 0.9rem;
+
+*,
+body {
+    font-size: $font-default;
+}
+
+.form-control {
+    font-size: $font-default !important;
+    // width: 90%;
+    height: calc(1.5em + 1.3rem + 1px);
+    padding-bottom: 10px !important;
+}
+
+.btn {
+    font-size: $font-default * 1.1 !important;
+}
+
+span {
+    font-size: $font-default !important;
+}
+
+label {
+    font-size: $font-default !important;
+}
+
+.required-field {
+    font-size: $font-default !important;
+}
+
+.card-label {
+    font-size: $font-default * 1.5 !important;
+}
+
+.subheader > h2 {
+    font-size: $font-default !important;
+}
+
+.mat-date-range-input-mirror {
+    padding-right: 8px;
+}
+
+.btn-custom-close {
+    // left: 79% !important;
+}
+
+.custom-file-label{
+    width:65%;
+}
+
+.table th, .table td{
+    padding: 0.25rem;
+}
+
+@media screen and ( max-width: 767px  ) {
+    .ng-select-container {
+        min-height: 30px !important;
+        height: 32px !important;
+    }
+}

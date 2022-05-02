@@ -1,0 +1,43 @@
+@import "../../../../assets/sass/components/variables.bootstrap";
+@import "../../../../assets/sass/components/variables_ext_custom";
+
+.modal-header {
+    padding: 0.7rem 1.75rem;
+}
+
+.confirm-modal {
+    &__content {
+        font-size: 14px !important;
+        color: #828282;
+    }
+
+    &__svg-delete {
+        transform: scale(1.2);
+        margin-bottom: 30px;
+        margin-top: 15px;
+
+        &::before {
+            content: url("../../../../assets/media/svg/icons/Common/Delete.svg");
+        }
+    }
+
+    &__svg-cancel {
+        transform: scale(1.2);
+        margin-bottom: 30px;
+        margin-top: 15px;
+
+        &::before {
+            content: url("../../../../assets/media/svg/icons/Common/XCircle.svg");
+        }
+    }
+
+    &__svg-approve {
+        transform: scale(1.2);
+        margin-bottom: 30px;
+        margin-top: 15px;
+
+        &::before {
+            content: url("../../../../assets/media/svg/icons/Common/CheckCircle.svg");
+        }
+    }
+}

@@ -1,0 +1,272 @@
+<div class="loading-overlay"
+  *ngIf="isLoading$ | async">Loading&#8230;</div>
+<div class="card card-custom gutter-b">
+  <div class="card-header">
+    <div class="card-title h4">
+      <ng-container>Chi tiết phiếu yêu cầu điều chỉnh dữ liệu</ng-container>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-lg-9">
+        <div class="request-detail-box">
+          <div class="d-flex align-items-center flex-row-fluid flex-wrap">
+            <div class="flex-grow-1 me-2">
+              <h4 class="text-dark fw-bolder text-hover-primary mb-1 fs-6 button-show">{{
+                accData?.createdBy.usernameFull }}</h4>
+              <span class="text-muted fw-bold d-block">Đã tạo yêu cầu ngày {{ accData?.dateCreated | date:
+                'dd/MM/yyyy HH:mm' }}</span>
+            </div>
+            <a href="javascript:void(0)"
+              (click)="isShowDetailRequest = !isShowDetailRequest"
+              class="badge badge-light-danger fw-bolder my-2 button-show">
+              {{ isShowDetailRequest ? 'Thu gọn' : 'Hiển thị' }}
+            </a>
+          </div>
+          <div class="row"
+            *ngIf="isShowDetailRequest">
+            <div class="col-lg-7 col-md-12">
+              <ul class="nav nav-tabs nav-tabs-line mb-5"
+                role="tablist">
+                <li class="nav-item cursor-pointer">
+                  <a class="nav-link"
+                    data-toggle="tab"
+                    role="tab"
+                    [attr.aria-selected]="true"
+                    [class.active]="true">
+                    Thông tin cơ bản
+                  </a>
+                </li>
+              </ul>
+              <div class="row mb-3">
+                <div class="col-lg-4">
+                  <b>ACC#:</b>
+                </div>
+                <div class="col-lg-6">
+                  {{ accData?.code }}
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-lg-4">
+                  <b>Thông tin thuộc trách nhiệm của phòng ban:</b>
+                </div>
+                <div class="col-lg-6">
+                  {{ accData?.department.code }} | {{ accData?.department.abbreviationName }} | {{
+                  accData?.department.nameVn }}
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-lg-4">
+                  <b>Phần mềm:</b>
+                </div>
+                <div class="col-lg-6">
+                  {{ accData?.software?.name }}
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-lg-4">
+                  <b>Hình thức điều chỉnh:</b>
+                </div>
+                <div class="col-lg-6">
+                  {{ accData?.typeSetting?.name }}
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-lg-4">
+                  <b>Phạm vi điều chỉnh:</b>
+                </div>
+                <div class="col-lg-6">
+                  {{ accData?.rangeSetting.name }}
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-lg-4">
+                  <b>Thông tin điều chỉnh:</b>
+                </div>
+                <div class="col-lg-6">
+                  {{ accData?.rangeSettingDetail.name }}
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-lg-4">
+                  <b>Nhân viên lập sai phiếu:</b>
+                </div>
+                <div class="col-lg-6">
+                  <span *ngFor="let item of accData?.accEmployeeCorrective">
+                    #{{ item?.usernameFull }},
+                  </span>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-lg-4">
+                  <b>Ticket liên quan:</b>
+                </div>
+                <div class="col-lg-6">
+                  {{ accData?.ticket }}
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-lg-4">
+                  <b>File yêu cầu:</b>
+                </div>
+                <div class="col-lg-6">
+                  <div *ngFor="let file of accData?.attachedFiles">
+                    <a class="text-primary cursor-pointer mw-10"
+                      href="{{file?.filePath}}"
+                      target="_blank"
+                      matTooltip="{{file?.name}}">{{file?.name}}</a>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <h4>Nội dung cần điều chỉnh</h4>
+              <div class="row mb-3">
+                <div class="col-lg-4">
+                  <b>Loại chứng từ:</b>
+                </div>
+                <div class="col-lg-6">
+                  {{accData?.typeDocument.name}}
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-lg-4">
+                  <b>Số chứng từ:</b>
+                </div>
+                <div class="col-lg-6">
+                  {{ accData?.licenseNumber }}
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-lg-4">
+                  <b>Ngày:</b>
+                </div>
+                <div class="col-lg-6">
+                  {{ accData?.dateContent | date:'dd/MM/yyyy HH:mm' }}
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-lg-4">
+                  <b>Nội dung sai (cần ghi tay lên chứng từ):</b>
+                </div>
+                <div class="col-lg-6">
+                  <p [innerHTML]="accData?.contentIncorrect"></p>
+                </div>
+              </div>
+              <div class="row mb-3">
+                <div class="col-lg-4">
+                  <b>Nội dung khắc phục (cần ghi tay lên chứng từ):</b>
+                </div>
+                <div class="col-lg-6">
+                  <p [innerHTML]="accData?.contentCorrective"></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-5 col-md-12">
+              <ul class="nav nav-tabs nav-tabs-line mb-5"
+                role="tablist">
+                <li class="nav-item cursor-pointer">
+                  <a class="nav-link"
+                    data-toggle="tab"
+                    role="tab"
+                    [attr.aria-selected]="true"
+                    [class.active]="true">
+                    Kiểm tra phê duyệt
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-12">
+        <div class="mt-3 text-right">
+          <button type="button"
+            class="btn btn-light btn-elevate mb-1 mr-2"
+            [routerLink]="'/acc/list/'">
+            Hủy
+          </button>
+          <button type="button"
+            class="btn btn-primary btn-elevate mb-1"
+            *ngIf="checkAuthor()"
+            [routerLink]="'/acc/edit/' + accData?.id">
+            Cập nhật
+          </button>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <form class="form form-label-right" *ngIf="accData?.assigneeTo >= 6"
+      [formGroup]="formGroup">
+      <div class="row mt-3">
+        <div class="col-lg-6 col-md-6">
+          <h4>Nội dung thực hiện</h4>
+          <div class="form-group row">
+            <div class="col-lg-10">
+              <label class="col-form-label form-label"><b>Nội dung đã thực hiện<span
+                    class="required-field">*</span></b></label>
+              <textarea matInput
+                appTrim
+                type="text"
+                rows="4"
+                class="form-control"
+                placeholder="Nội dung đã thực hiện"
+                [class.is-invalid]="isControlInvalid('content')"
+                [readonly]="accData?.assigneeTo != 6"
+                formControlName="content"></textarea>
+              <app-validation-error [field]="'Nội dung đã thực hiện'"
+                [submitted]="isControlInvalid('content')"
+                [control]="formGroup.controls.content">
+              </app-validation-error>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-lg-10">
+              <label class="col-form-label form-label"><b>Tài liệu đính kèm<span
+                    class="required-field">*</span></b></label>
+              <app-upload-files [formGroup]="formGroup"
+                [formControlName]="'attachedFiles'"
+                [isRequired]="true"
+                [isView]="accData?.assigneeTo != 6"
+                [field]="'Tài liệu đính kèm '"
+                [maxLength]="3">
+              </app-upload-files>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-lg-10">
+              <label class="col-form-label form-label"><b>Ngày thực hiện<span
+                    class="required-field">*</span></b></label>
+              <div class="input-group pt-2">
+                <input formControlName="startDate"
+                  class="form-control table-input"
+                  [owlDateTime]="dtPicker4"
+                  readonly
+                  required
+                  [(ngModel)]="formGroup.value.startDate"
+                  [class.is-invalid]="isControlInvalid('startDate')">
+                <div class="input-group-append">
+                  <span class="trigger pt-3"
+                    [owlDateTimeTrigger]="dtPicker4" [disabled]="accData?.assigneeTo != 6">
+                    <i class="fas fa-calendar-alt"></i>
+                  </span>
+                </div>
+                <owl-date-time #dtPicker4 [disabled]="accData?.assigneeTo != 6"></owl-date-time>
+              </div>
+              <app-validation-error [field]="'Ngày thực hiện'"
+                [submitted]="isControlInvalid('startDate')"
+                [control]="formGroup.controls.startDate">
+              </app-validation-error>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer" class="row col-lg-6 col-md-6" *ngIf="accData?.assigneeTo === 6">
+        <button type="button"
+          (click)="onSaveActualResult()"
+          class="btn btn-primary btn-elevate">
+          Lưu
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

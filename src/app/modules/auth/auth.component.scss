@@ -1,0 +1,25 @@
+@import "../../../assets/sass/pages/login/login-1.scss";
+
+:host {
+  height: 100%;
+}
+.version {
+  position: fixed;
+  bottom: 5px;
+  color: rgb(17, 16, 16);
+  right: 10px;
+}
+
+.slideshow-indicators {
+  padding-left: 0px;
+  padding-right: 0px;}
+
+:host ::ng-deep .carousel-item {
+  height: 100vh ;
+  transition: transform 0.06s ease-in-out;
+}
+
+.coblocks-gallery--item
+{
+	--wp-block-coblocks-gallery-carousel--overlay--opacity: 0;
+}

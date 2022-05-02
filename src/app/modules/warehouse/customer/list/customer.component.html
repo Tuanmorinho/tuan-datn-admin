@@ -1,0 +1,46 @@
+
+<div class="loading-overlay" *ngIf="customerService.isLoading$ | async">
+  Loading&#8230;
+</div>
+<div class="card card-custom gutter-b">
+  <div class="card-body">
+    <!-- Filter -->
+    <form class="form form-label-right" [formGroup]="searchGroup">
+      <div class="form-group row">
+        <div class="col-lg-1 col-md-1">
+          <p class="card-subtitle mt-1">Khách hàng: <span style="color: #27AE60;">{{ customerService.paginator.total
+              }}</span>
+          </p>
+        </div>
+        <div class="col-lg-2 col-md-2">
+          <input matInput appTrim appTrim type="text" class="form-control" placeholder="Tên khách hàng" value=""
+            formControlName="name" />
+          <i class="fa fa-search" aria-hidden="true"
+            style="position: absolute; right: 20px; top: 14px; font-size: 12px;"></i>
+        </div>
+        <div class="col-lg-2 col-md-2">
+          <input matInput appTrim appTrim type="text" class="form-control" placeholder="Mã khách hàng" value=""
+            formControlName="codeLike" />
+          <i class="fa fa-search" aria-hidden="true"
+            style="position: absolute; right: 20px; top: 14px; font-size: 12px;"></i>
+        </div>
+        <div class="col-lg-4 col-md-4">
+          <button class="btn btn-outline-primary" (click)="reset()" type="button">
+            Làm mới
+          </button>
+          <button class="btn btn-primary ml-6" (click)="search()" type="submit">
+            Tìm kiếm
+          </button>
+        </div>
+      </div>
+    </form>
+    <!-- Table -->
+    <div class="table-responsive angular-bootstrap-table">
+      <basic-table [isModal]="isModal" [ids]="ids" [isSelectedOnlyItem]="isSelectedOnlyItem" (outputSort)="sort($event)"
+        [items]="customerService.items$" [columns]="columnsConfig" [grouping]="customerService.grouping"
+        [paginator]="customerService.paginator" [sorting]="customerService.sorting" [isHideDeleteBtn]="true"
+        [isHideEditBtn]="true">
+      </basic-table>
+    </div>
+  </div>
+</div>

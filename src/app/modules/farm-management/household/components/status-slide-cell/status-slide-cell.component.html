@@ -1,0 +1,7 @@
+<form [formGroup]="formGroup" ngNativeValidate>  
+    <mat-slide-toggle 
+        [color]="'primary'"
+        formControlName="statusToggle"
+        (change)="onChange($event)">
+    </mat-slide-toggle>
+</form>

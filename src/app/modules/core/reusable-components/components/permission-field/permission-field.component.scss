@@ -1,0 +1,19 @@
+.btn-custom-mat-chip {
+    max-height: 38.25px;
+    pointer-events: auto;
+}
+
+::ng-deep .mat-chip-list-wrapper::-webkit-scrollbar-track {
+    border-radius: 5px;
+    background-color: rgb(202, 202, 202);
+}
+
+::ng-deep .mat-chip-list-wrapper::-webkit-scrollbar {
+    width: 7px;
+    background-color: rgb(202, 202, 202);
+}
+
+::ng-deep .mat-chip-list-wrapper::-webkit-scrollbar-thumb {
+    border-radius: 1px;
+    background-color: rgb(165, 165, 165);
+}

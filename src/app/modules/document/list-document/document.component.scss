@@ -1,0 +1,36 @@
+@media (max-width: 767px) {
+    .col-md-4 {
+        margin-top: 10px;
+    }
+}
+
+:host ::ng-deep .mat-expansion-panel-body{
+    padding-left: 0 ;
+    padding-right: 0;
+}
+
+.mat-expansion-panel-header:hover{
+    background: rgb(132 132 132 / 4%);
+}
+
+.mat-expansion-panel-header{
+    height: 40px;
+}
+
+:host ::ng-deep .mat-expansion-panel-header {
+    padding: 0px 4px;
+}
+
+:host ::ng-deep .mat-expansion-indicator {
+    left: -40%;
+    position: relative;
+
+    &::after {
+        color: #b5b5c3;
+    }
+}
+
+::ng-deep .mat-datepicker-toggle {
+    position: absolute;
+    right: 12px;
+}

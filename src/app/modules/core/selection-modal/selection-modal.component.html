@@ -1,0 +1,20 @@
+<div class="modal-content">
+    <div class="btn-selection btn-custom-close">
+        <i class="ki ki-bold-close icon-xs align-text-bottom cursor-pointer"
+           (click)="modal.dismiss()"></i>
+    </div>
+    <ng-template customTable [component]="component" [filter]="filter" [ids]="ids" [isSelectedOnlyItem]="isSelectedOnlyItem"></ng-template>
+    <div class="modal-footer" *ngIf="!isForm">
+        <div>
+            <button type="button"
+                    class="btn btn-light btn-elevate mr-1"
+                    (click)="modal.dismiss()">
+                Hủy
+            </button>&nbsp;
+            <button *ngIf="!isSelectedOnlyItem" type="button"
+                    class="btn btn-primary btn-elevate" (click)="closeModal()">
+                Chọn
+            </button>
+        </div>
+    </div>
+</div>

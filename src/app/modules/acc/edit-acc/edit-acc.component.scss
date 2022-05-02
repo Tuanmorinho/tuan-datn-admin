@@ -1,0 +1,53 @@
+.btn-custom-add {
+    position: relative;
+    top: 25px;
+    border: 1px solid #cbe4fd;
+}
+
+.btn-custom-danger {
+    width: 40px;
+    height: 40px;
+}
+
+.btn-group-select {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.list-position {
+    background-color: #d8e3ee;
+    border-radius: 10px;
+}
+
+.btn-custom-close {
+    position: absolute;
+    left: 90%;
+    top: 8px;
+
+    .ki-bold-close:hover{
+        color: #D0021B;
+    }
+}
+
+::ng-deep .mat-datepicker-toggle {
+    position: absolute;
+    right: 12px;
+}
+
+::ng-deep .mat-date-range-input{
+
+    &.is-invalid{
+        background-image: none;
+    }
+}
+
+.table-custom {
+    table-layout: fixed;
+    white-space: nowrap;
+    &.resizing {
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      cursor: col-resize;
+    }
+}

@@ -1,0 +1,14 @@
+<div class="d-inline-block ml-3">
+    <span class="symbol-label"
+          [ngbPopover]="popContent"
+          [popoverTitle]="title"
+          #p2="ngbPopover">
+        <span [inlineSVG]="'./assets/media/svg/icons/Common/Question-mark-circle.svg'"
+              cacheSVG="true"
+              class="svg-icon h-75 align-self-end"></span>
+    </span>
+
+    <ng-template #popContent>
+        <b><span [innerHTML]="content"></span></b>
+    </ng-template>
+</div>

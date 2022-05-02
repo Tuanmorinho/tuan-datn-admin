@@ -1,0 +1,6 @@
+<a *ngIf="prop?.status === 'PENDING' || prop?.status === 'EFFECTIVE'" title="Sửa" class="btn btn-icon btn-delete-item btn-sm btn-remove bg-white m-1 mr-3" style="border-color: #e8e8e8"
+  [routerLink]="'/farm-management/farming-contract/edit/' + prop.id">
+  <span [inlineSVG]="'./assets/media/svg/icons/Common/Pencil-alt.svg'" cacheSVG="true"
+    class="svg-icon svg-icon-sm svg-icon-primary">
+  </span>
+</a>

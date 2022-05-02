@@ -1,0 +1,33 @@
+<ng-container [formGroup]="formGroup">
+    <div class="input-group">
+        <input [owlDateTime]="dt1"
+               class="hidden-owl-input">
+        <mat-chip-list #chipList
+                       [ngClass]="{'disabled':disabled}"
+                       [class.is-invalid]="isControlInValid(formControlName)"
+                       class="form-control d-table overflow-hidden">
+            <mat-chip *ngFor="let timer of formGroup.controls[formControlName]?.value"
+                      [removable]="!disabled"
+                      (removed)="removeById(timer,formControlName)">
+                <span>{{timer | date : dateType}}</span>
+                <mat-icon *ngIf="!disabled"
+                          matChipRemove>cancel</mat-icon>
+            </mat-chip>
+        </mat-chip-list>
+        <div class="input-group-append">
+            <button class="input-group-text"
+                    [owlDateTimeTrigger]="dt1"
+                    *ngIf="!disabled"
+                    [disabled]="isSelectedOnlyItem ? formGroup.controls[formControlName]?.value?.length !== 0 : false"
+                    id="basic-addon2"><span>Chọn</span></button>
+        </div>
+    </div>
+    <owl-date-time [pickerType]="'calendar'"
+                   [startView]="'multi-years'"
+                   (monthSelected)="chosenMonthHandler($event,dt1)"
+                   #dt1="owlDateTime"></owl-date-time>
+    <app-validation-error [field]="errorField"
+                          [submitted]="isControlInValid(formControlName)"
+                          [control]="formGroup.controls[formControlName]">
+    </app-validation-error>
+</ng-container>

@@ -1,0 +1,19 @@
+<table class="table table-head-custom table-vertical-center overflow-hidden">
+    <thead>
+      <th *ngFor="let column of columns" [ngStyle]="{'min-width':column.minWidth && column.minWidth+'px','width':column.width && column.width+'px'}">
+        {{column.label}}
+        <app-sort-icon [column]="column.dataKey"
+         ></app-sort-icon>
+      </th>
+      <th style="min-width:130px"></th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items | async;index as i">
+        <td *ngFor="let column of columns">
+          <span *ngIf="!column.component">{{ column.dataKey === 'No' ? i + offset : item[column.dataKey]}}</span>
+          <ng-template *ngIf="column.component" customCell [component]="column.component" [prop]="item">
+          </ng-template>
+        </td>
+      </tr>
+    </tbody>
+  </table>

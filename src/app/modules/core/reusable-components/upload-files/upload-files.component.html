@@ -1,0 +1,169 @@
+<div [formGroup]="formGroup">
+  <ng-container *ngIf="uploadType === 'file'">
+
+    <div class="form-controlGroup-inputWrapper">
+      <label class="form-input form-input__file form-control mb-0" [class.is-invalid]="isControlInvalid()">
+        <span class="form-input__file-placehoder text-gray-300">Chọn file</span>
+        <span class="form-input__file-button" [ngClass]="{'form-input__file-button-disabled': isDisabled}">Browse</span>
+        <input class="form-input__file-hidden" (change)="onFilesChange($event.target.files)" #input type="file"
+          id="customFileUpload" autocomplete="off" id="file" [disabled]="isDisabled" multiple />
+      </label>
+    </div>
+
+    <ngb-progressbar type="primary" class="custom-progressbar" *ngIf="progress < 100 && progress > 0" [value]="progress"
+      [striped]="true"></ngb-progressbar>
+
+    <div class="required-field d-block mt-3" [ngStyle]="fileContainerStyle"
+      *ngIf="formGroup.controls[formControlName].hasError('required') && isControlInvalid()">
+      {{field}} là trường bắt buộc
+    </div>
+    <div class="required-field d-block mt-3" [ngStyle]="fileContainerStyle"
+      *ngIf="formGroup.controls[formControlName].hasError('oversize')">
+      Tổng dung lượng tối đa files không quá {{maxSize}}MB!
+    </div>
+    <div class="required-field d-block mt-3" [ngStyle]="fileContainerStyle"
+      *ngIf="formGroup.controls[formControlName].hasError('wrongType')">
+      File không đúng định dạng! <br />
+      (hỗ trợ: .pdf, .docx, .doc, .xls, .xlsx, .jpg, .jpeg, .png, .zip, .ppt, .pptx)
+    </div>
+    <div class="required-field d-block mt-3" [ngStyle]="fileContainerStyle"
+      *ngIf="formGroup.controls[formControlName].hasError('filesLimited')">
+      Số file đính kèm tối đa là {{maxLength}} file!
+    </div>
+    <ng-container *ngIf="listFile.length>0">
+      <div class="row m-1" [ngStyle]="fileContainerStyle" *ngFor="let doc of listFile">
+
+        <div class="col-10 col-xl-10 col-form-label text-wrap">
+          <a class="text-primary cursor-pointer mw-10" href="{{doc?.filePath}}" target="_blank">
+            <span [inlineSVG]="'./assets/media/svg/icons/Design/File.svg'" cacheSVG="true"
+              class="svg-icon svg-icon-sm svg-icon-danger">
+            </span>
+            <span>
+              {{doc?.name || doc?.fileName}}</span></a>
+        </div>
+        <div class="col-2 col-xl-2 col-form-label text-right" *ngIf="!isView">
+          <span (click)="onRemoveFile(doc)" [inlineSVG]="'./assets/media/svg/icons/Common/Delete.svg'" cacheSVG="true"
+            class="svg-icon svg-icon-sm svg-icon-danger">
+          </span>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+  <!--  -->
+  <ng-container *ngIf="uploadType==='file_styled'">
+    <div class="avatar-upload d-flex justify-content-center">
+      <div class="avatar-edit">
+        <input class="form-input__file-hidden" (change)="onFilesChange($event.target.files)" #inputFile type="file"
+          id="customFileUpload" autocomplete="off" id="file" [disabled]="isDisabled" multiple />
+      </div>
+      <div class="d-flex aign-items-center justify-content-between w-100">
+        <span>Tài liệu: <strong style="color: #6BA425;">{{ listFile.length }}</strong></span>
+        <button (click)="inputFile.click()" type="button" class="btn btn-primary get-data btn-elevate">
+          <i class="ki ki-plus icon-sm"></i>
+          Thêm tài liệu
+        </button>
+      </div>
+    </div>
+
+    <ngb-progressbar type="primary" class="custom-progressbar" *ngIf="progress < 100 && progress > 0" [value]="progress"
+      [striped]="true"></ngb-progressbar>
+
+    <div class="required-field d-block mt-3" [ngStyle]="fileContainerStyle"
+      *ngIf="formGroup.controls[formControlName].hasError('required') && isControlInvalid()">
+      {{field}} là trường bắt buộc
+    </div>
+    <div class="required-field d-block mt-3" [ngStyle]="fileContainerStyle"
+      *ngIf="formGroup.controls[formControlName].hasError('oversize')">
+      Tổng dung lượng tối đa files không quá {{maxSize}}MB!
+    </div>
+    <div class="required-field d-block mt-3" [ngStyle]="fileContainerStyle"
+      *ngIf="formGroup.controls[formControlName].hasError('wrongType')">
+      File không đúng định dạng! <br />
+      (hỗ trợ: .pdf, .docx, .doc, .xls, .xlsx, .jpg, .jpeg, .png, .zip, .ppt, .pptx)
+    </div>
+    <div class="required-field d-block mt-3" [ngStyle]="fileContainerStyle"
+      *ngIf="formGroup.controls[formControlName].hasError('filesLimited')">
+      Số file đính kèm tối đa là {{maxLength}} file!
+    </div>
+
+    <ng-container *ngIf="listFile.length===0">
+      <div class="d-flex justify-content-center">
+        <label style="color: #828282;">Chưa có thông tin !!!</label>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="listFile.length>0">
+      <div class="row m-1 mt-4" [ngStyle]="fileContainerStyle" *ngFor="let doc of listFile">
+
+        <div class="col-10 col-xl-10 col-form-label text-wrap">
+          <a class="text-primary cursor-pointer mw-10" href="{{doc?.filePath}}" target="_blank">
+            <span [inlineSVG]="'./assets/media/svg/icons/Design/File.svg'" cacheSVG="true"
+              class="svg-icon svg-icon-sm svg-icon-danger">
+            </span>
+            <span>
+              {{doc?.name || doc?.fileName}}</span></a>
+        </div>
+        <div class="col-2 col-xl-2 col-form-label text-right" *ngIf="!isView">
+          <span (click)="onRemoveFile(doc)" [inlineSVG]="'./assets/media/svg/icons/Common/Delete.svg'" cacheSVG="true"
+            class="svg-icon svg-icon-sm svg-icon-danger">
+          </span>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+  <!--  -->
+  <ng-container *ngIf="uploadType === 'image'">
+    <div class="avatar-upload d-flex justify-content-center">
+      <div class="avatar-edit">
+        <input *ngIf="!isView" type='file' id="imageUpload" [accept]="acceptFiles" #fileInput [multiple]="multiImage"
+          (change)="onFilesChange($event.target.files)" />
+      </div>
+      <div class="avatar-preview">
+        <div *ngIf="!isView" id="imagePreview" [style.backgroundImage]="'url('+ (imageUrl) +')'">
+        </div>
+        <div *ngIf="isView" id="imagePreview" [style.backgroundImage]="'url('+ (imageUrl) +')'">
+        </div>
+      </div>
+      <ng-container *ngIf="!multiImage">
+        <div class="bg-text"
+          *ngIf="imageUrl && !isView && imageUrl != './assets/media/svg/icons/Common/Group.svg'; else addImg">
+          <a title="Sửa" (click)="onfileInput()" class="btn btn-icon btn-primary m-1 btn-sm">
+            <span [inlineSVG]="'./assets/media/svg/icons/edit.svg'" cacheSVG="true"
+              class="svg-icon svg-icon-sm svg-icon-primary">
+            </span>
+          </a>
+          <a title="Xóa" class="ml-3" (click)="deleteSingleFile()" class="btn btn-icon btn-danger m-1 btn-sm">
+            <span [inlineSVG]="'./assets/media/svg/icons/delete.svg'" cacheSVG="true"
+              class="svg-icon svg-icon-sm svg-icon-danger">
+            </span>
+          </a>
+        </div>
+        <ng-template #addImg>
+          <div class="bg-text">
+            <a title="Thêm ảnh" (click)="onfileInput()" class="btn btn-icon btn-primary m-1 btn-sm">
+              <span [inlineSVG]="'./assets/media/svg/icons/add.svg'" cacheSVG="true">
+              </span>
+            </a>
+          </div>
+        </ng-template>
+      </ng-container>
+    </div>
+    <ng-container *ngIf="multiImage">
+      <div class="list-img d-flex justify-content-center">
+        <div *ngFor="let item of listImg ; let i = index" class="item-img d-flex justify-content-center m-2">
+          <div class="icon-img">
+            <img width="64px" *ngIf="imageUrl" [src]="item" class="image" (click)="showImg($event.target.src)">
+            <span *ngIf="!isView" [inlineSVG]="'./assets/media/svg/icons/Common/XCircle.svg'" cacheSVG="true"
+              class="svg-icon svg-icon-sm svg-icon-danger" (click)="removeImg(i)">
+            </span>
+          </div>
+        </div>
+        <div class="add-img-btn item-img d-flex justify-content-center m-2" *ngIf="listImg.length < maxLength">
+          <div class="icon-img" *ngIf="!isView">
+            <img width="64px" src="./assets/media/svg/icons/Common/Add-Image.svg" class="image" (click)="onfileInput()">
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>

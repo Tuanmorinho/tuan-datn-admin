@@ -1,0 +1,23 @@
+<div [formGroup]="formGroup">
+    <ng-select [items]="items"
+               [loading]="isLoading$ | async"
+               [addTag]="true"
+               [multiple]="multi"
+               [addTagText]="tagText"
+               (change)="add($event)"
+               (search)="search($event)"
+               (scrollToEnd)="scrollToEnd($event)"
+               (clear)="clear($event)"
+               (remove)="remove($event)"
+               [appendTo]="appendTo"
+               [bindLabel]="label"
+               [bindValue]="value"
+               [placeholder]="placeholder"
+               [notFoundText]="notFoundText"
+               [class.is-invalid]=""
+               [formControlName]="formControlName">
+               <ng-template ng-option-tmp let-item="item">
+                <span title="{{item.label}}">{{item.label}}</span>
+                </ng-template>
+    </ng-select>
+</div>

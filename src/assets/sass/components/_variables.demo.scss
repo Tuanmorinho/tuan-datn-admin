@@ -1,0 +1,19 @@
+//
+// To make future updates easier consider overriding the global variables from _variables.bootstrap.scss and _variables.custom.scss for current demo in this file.
+// Note that this file is included first and variables defined in _variables.bootstrap.scss and _variables.custom.scss
+// are not accessible in this file but you can override any global variable as shown below:
+//
+
+// Theme colors
+// Override primary color variants
+$primary: #6BA425; // Bootstrap variable
+$primary-hover: #57901B; // Custom variable
+$primary-light: #e1f0ff; // Custom variable
+$primary-inverse: #ffffff; // Custom variable
+$table-compact-head-color: #4d4d4d;
+$table-compact-head-border: 1px solid #ebedf3;
+$color-1: #fff;
+$color-2: #3f3f3f;
+$table-blue-bg: #C9EDF9;
+$table-light-row: #F3F3F3;
+$table-light-50-row: #f8f5f5;

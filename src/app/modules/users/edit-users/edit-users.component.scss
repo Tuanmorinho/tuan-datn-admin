@@ -1,0 +1,61 @@
+.btn-custom-add {
+    position: relative;
+    top: 25px;
+    border: 1px solid #cbe4fd;
+}
+
+.btn-custom-danger {
+    width: 40px;
+    height: 40px;
+}
+
+.btn-group-select {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.list-position {
+    background-color: #d8e3ee;
+    border-radius: 10px;
+}
+
+.btn-custom-close {
+    position: absolute;
+    left: 80%;
+    top: 3px;
+
+    .ki-bold-close:hover{
+        color: #D0021B;
+    }
+}
+
+::ng-deep .mat-datepicker-toggle {
+    position: absolute;
+    right: 12px;
+}
+
+.custom-date-picker{
+
+    &.is-invalid{
+        background-image: none;
+    }
+}
+
+.card-header {
+    border-bottom: none;
+}
+
+.modal-footer {
+    border-top: none; 
+}
+
+.btn-delete-item {
+    background-color: #F2F2F2 !important;
+}
+
+.btn-delete-item:hover {
+    color: #3F4254 !important;
+}
+.btn-remove:hover .svg-icon svg > path {
+    fill: #3F4254 !important;
+}

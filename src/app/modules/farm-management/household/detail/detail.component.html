@@ -1,0 +1,78 @@
+<div class="loading-overlay" *ngIf="(householdService.isLoading$ | async)">Loading&#8230;</div>
+<div class="card card-custom gutter-b">
+  <div class="card-header">
+    <div class="card-body"
+      style="cursor: default; padding-left: 0 !important; padding-right: 0 !important; padding-bottom: 0 !important;">
+      <div class="d-flex mt-3">
+        <!--  -->
+        <div type="button" class="card-subtitle mt-3 btn-household-infor" class="{{activeBtnHh}}" (click)="toggleHouseholdInfor()">
+          <label type="button">Thông tin hộ khẩu</label>
+        </div>
+        <!--  -->
+        <div type="button" class="card-subtitle mt-3 btn-plotsOfField-infor" class="{{activeBtnPloF}}"
+          (click)="togglePlotsOfFieldInfor()">
+          <label type="button">Thông tin thửa ruộng</label>
+        </div>
+        <!--  -->
+        <div type="button" class="card-subtitle mt-3 btn-contract-infor" class="{{activeBtnContr}}" (click)="toggleContractInfor()">
+          <label type="button">Hợp đồng canh tác</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div [class]="activeContr ? 'pt-4' : 'card-body pt-4'" [formGroup]="formGroup">
+    <!-- Thông tin hộ khẩu -->
+    <ng-container *ngIf="activeHh">
+      <div class="card card-custom gutter-b shadow-none">        
+        <p class="card-title font-weight-bolder text-dark mb-0">Trạng thái hoạt động</p>
+        <div class="d-flex justify-content-start col-form-label mt-1" *ngIf="detailHousehold?.status === 'ACTIVE' || detailHousehold?.status === 'INACTIVE'">
+          <mat-radio-group [color]="'primary'" formControlName="status" class="d-flex justify-content-between" >
+            <mat-radio-button value="ACTIVE" (change)="radioChange($event.value)">Hoạt động</mat-radio-button>
+            <mat-radio-button value="INACTIVE" class="ml-10" (change)="radioChange($event.value)">Dừng hoạt động</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <p *ngIf="detailHousehold?.status === 'WAITING_APPROVE'" class="font-weight-bold" style="color: #F2C94C;">Chờ duyệt</p>
+        <p *ngIf="detailHousehold?.status === 'REJECT'" class="font-weight-bold" style="color: #EB5757;">Từ chối</p>
+        <div class="row">
+          <div class="col">
+            <p class="card-title font-weight-bolder text-dark mb-0 mt-4">Thông tin hộ gia đình</p>
+            <div class="mt-3 mb-5" style="height: 50px;">
+              <div class="my-2">
+                <span class="card-subtitle">Mã hộ gia đình: <strong>{{detailHousehold?.registrationBookCode}}</strong></span>
+              </div>
+              <div class="my-2">
+                <span class="card-subtitle">Thành viên: <strong>{{ detailHousehold?.members.length }}</strong></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 text-right">
+            <button class="btn btn-primary get-data btn-elevate mt-4" (click)="addMember(detailHousehold)">Thêm thành viên</button>
+          </div>
+        </div>
+        <div class="card-body card-subBody">
+            <div class="row">
+              <ng-container *ngFor="let member of detailHousehold?.members;">
+                <div class="col-6 mt-5" app-house-hold-item [member]="member" (updateEvent)="updateEvent($event)" (detailEvent)="onDetail($event)"></div>
+              </ng-container>
+            </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- Thông tin thửa ruộng -->
+    <ng-container *ngIf="activePloF">
+        <app-plots-of-field></app-plots-of-field>
+    </ng-container>
+
+    <!-- Hợp đồng canh tác -->
+    <ng-container *ngIf="activeContr">
+        <app-list-farming-contracts [filter]="filter"></app-list-farming-contracts>
+    </ng-container>
+  </div>
+</div>
+
+<div class="d-hidden" id="kt_quick_custom_toggle"></div>
+<ng-container *ngIf="show">
+  <custom-offcanvas [component]="component"  [isForm]="true" [filter]="member"></custom-offcanvas>
+</ng-container>
+

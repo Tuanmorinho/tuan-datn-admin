@@ -1,0 +1,109 @@
+<div class="d-flex justify-content-between align-items-center flex-wrap">
+    <div class="d-flex align-items-center py-3"><span> Tổng số bản ghi: <b>{{paginator.total}}</b></span>
+    </div>
+
+</div>
+
+
+<div class="table-responsive angular-bootstrap-table">
+    <table class="table table-head-custom table-vertical-center"
+           [ngClass]="{'table-custom overflow-auto': this.hasScrollbarX}">
+        <thead>
+            <th *ngFor="let column of columns"
+            [ngClass]="{'sortable position-relative mr-10':column.sort,'selection-cell-header position-sticky':column.dataKey==='actionCell'}"
+            [ngStyle]="
+          {
+            'min-width':column.minWidth && column.minWidth+'px',
+            'width':column.width && column.width+'px',
+            'text-align':(column.subLabels || column.subLabelsNoData) &&'center'
+          }">
+        <span>
+          {{column.label}}
+            <ng-container *ngIf="column.subLabels">
+            <tr class="sub-header text-left">
+              <td *ngFor="let subLabel of column.subLabels"
+                  [ngStyle]="
+              {
+                'width':subLabel.width}">
+                {{subLabel.label}}
+              </td>
+            </tr>
+          </ng-container>
+
+          <ng-container *ngIf="column.subLabelsNoData">
+            <tr class="sub-header text-left">
+              <td *ngFor="let subLabel of column.subLabelsNoData"
+                  [ngStyle]="
+              {
+                'width':subLabel.width}">
+                {{subLabel.label}}
+              </td>
+            </tr>
+          </ng-container>
+
+        </span>
+            <ng-container *ngIf="column.sort">
+                <app-sort-icon [column]="column.dataKey"
+                               [activeColumn]="sorting.column"
+                               [activeDirection]="sorting.direction"
+                               (sort)="sort($event)"></app-sort-icon>
+            </ng-container>
+        </th>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let item of items | async;index as i">
+                <tr>
+
+
+                    <td *ngFor="let column of columns"
+                        [ngClass]="{'selection-cell position-sticky':column.dataKey==='actionCell'}">
+
+                        <ng-container *ngIf="!column.subLabels">
+                  <span *ngIf="!column.component && !column.predict">{{ column.dataKey === 'No' ? i + offset :
+                      item[column.dataKey]}}</span>
+                            <span *ngIf="column.predict && !column.component">
+                    {{column.predict(item)}}
+                  </span>
+                            <ng-template *ngIf="column.component"
+                                         customCell
+                                         [component]="column.component"
+                                         [dataKey]="column.dataKey"
+                                         [isModal]="isModal"
+                                         [prop]="item">
+                            </ng-template>
+                        </ng-container>
+
+                    </td></tr>
+
+
+                <!-- Children rows -->
+                <ng-container *ngIf="item.childrens && item.childrens.length>0">
+                    <ng-container *ngFor="let childItem of item.childrens;index as cIndex">
+                        <tr [@enterAnimation]
+                            class="expanded-row">
+                            <td>{{childItem?.name}}</td>
+                            <td>{{childItem?.datePublished | date: 'dd/MM/yyyy HH:mm'}}</td>
+                            <td>{{childItem?.department.nameVn}}</td>
+                            <td>
+                                <a target="_blank" href="{{childItem?.fileMain?.filePath}}">{{childItem?.fileMain?.name}}</a>
+                            </td>
+
+
+                        </tr>
+
+                    </ng-container>
+                </ng-container>
+
+            </ng-container>
+
+        </tbody>
+    </table>
+    <div *ngIf="(items| async)?.length <= 0">
+        <p class="text-dark-50 m-0 pt-5 font-weight-normal text-center">Không tìm thấy kết quả !!!</p>
+    </div>
+</div>
+
+<app-paginator class="d-flex justify-content-between align-items-center flex-wrap"
+               [paginator]="paginator"
+               [isLoading]="isLoading"
+               (paginate)="paginate($event)"></app-paginator>

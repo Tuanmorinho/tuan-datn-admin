@@ -1,0 +1,119 @@
+<!--begin::Signin-->
+<div class="login-form login-signin">
+  <!--begin::Form-->
+  <form class="form"
+    [formGroup]="loginForm"
+    novalidate="novalidate"
+    id="kt_login_signin_form"
+    (ngSubmit)="submit()">
+    <!--begin::Title-->
+    <div class="d-flex text-center justify-content-center flex-row-fluid bgi-no-repeat bgi-position-y-bottom bgi-position-x-center mt-10 pb-10 pt-lg-0 pt-5">
+      <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">
+        Đăng nhập
+      </h3>
+    </div>
+    <!--end::Title-->
+    <!-- begin::Alert error-->
+    <app-alert-flash></app-alert-flash>
+    <!--begin::Form group-->
+    <div class="form-group">
+      <span class="font-weight-bolder text-dark">Email</span>
+      <input class="input-login form-control form-control-solid h-auto px-6 mt-2"
+        type="text"
+        appTrim
+        name="username"
+        formControlName="username"
+        autocomplete="off"
+        [class.is-invalid]="isControlInvalid('username')" />
+      <ng-container [ngTemplateOutlet]="formError"
+        [ngTemplateOutletContext]="{
+          validation: 'required',
+          message: 'Tên đăng nhập không được bỏ trống!',
+          control: loginForm.controls['username']
+        }"></ng-container>
+    </div>
+    <!--end::Form group-->
+
+    <!--begin::Form group-->
+    <div class="form-group mt-5 pt-5">
+      <div class="d-flex justify-content-between mt-n5">
+        <span class="font-weight-bolder text-dark pt-5">Mật khẩu</span>
+        <div class="text-right pt-5">
+          <a routerLink="/auth/forgot-password"
+            class="text-hover-primary "
+            id="kt_login_forgot">
+            Quên mật khẩu ?
+          </a>
+        </div>
+      </div>
+
+      <input class="input-login form-control form-control-solid h-auto px-6 mt-2"
+        [type]="showPass ? 'text' : 'password'"
+        name="password"
+        appTrim
+        autocomplete="off"
+        formControlName="password"
+        [class.is-invalid]="isControlInvalid('password')" />
+      <span (click)="showPass = !showPass"
+        class="fa fa-fw field-icon toggle-password"
+        [ngClass]="(showPass)?' fa-eye':' fa-eye-slash'"></span>
+      <ng-container [ngTemplateOutlet]="formError"
+        [ngTemplateOutletContext]="{
+          validation: 'required',
+          message: 'Mật khẩu không được bỏ trống!',
+          control: loginForm.controls['password']
+        }"></ng-container>
+    </div>
+    <!--end::Form group-->
+
+    <!--begin::Action-->
+    <div class="d-flex justify-content-center pb-lg-0 pb-5 mt-5 pt-5">
+      <button type="submit"
+        id="kt_login_signin_submit"
+        class="btn btn-sm btn-success font-weight-bolder my-3 pt-3 pb-3 btn-block btn-login">
+        Đăng nhập
+      </button>
+
+      <ng-container *ngIf="isLoading$ | async">
+        <span class="spinner spinner-primary ml-5"></span>
+      </ng-container>
+    </div>
+    <!--end::Action-->
+  </form>
+  <!--end::Form-->
+</div>
+<!--end::Signin-->
+
+<div class="text-or text-center pt-3">
+  Hoặc
+</div>
+
+<div class=" d-flex justify-content-center pt-3">
+  <div class="social-media-link m-3 d-flex justify-content-center align-items-center">
+    <div class="item-img">
+      <img class="icon-img" src="../../../../assets/login/f.png" alt="facebook">
+    </div>
+  </div>
+  <div class="social-media-link m-3 google d-flex justify-content-center align-items-center">
+    <div class="item-img">
+      <img class="icon-img" src="../../../../assets/login/google.png" alt="google">
+    </div>
+  </div>
+  <div class="social-media-link m-3 zalo d-flex justify-content-center align-items-center">
+    <div class="item-img">
+      <img class="icon-img" src="../../../../assets/login/Logo-Zalo-Arc.png" alt="zalo">
+    </div>
+  </div>
+</div>
+<ng-template #formError
+  let-control="control"
+  let-message="message"
+  let-validation="validation">
+  <ng-container *ngIf="control.hasError(validation) && (control.dirty || control.touched)">
+    <div class="fv-plugins-message-container">
+      <div class="fv-help-block">
+        {{ message }}
+      </div>
+    </div>
+  </ng-container>
+</ng-template>

@@ -1,0 +1,273 @@
+<div class="loading-overlay" *ngIf="(skuService.isLoading$ | async)">Loading&#8230;</div>
+<div class="card card-custom gutter-b">
+    <div *ngIf="skuItems?.groupCode === 'PB' || skuItems?.groupCode === 'TBVTV'" class="header-nav py-3 d-flex mt-3">
+        <div type="button" class="card-subtitle mt-3 btn-product-infor" class="{{activeBtnPr}}"
+            (click)="toggleProductInf()">
+            <label type="button">Thông tin sản phẩm</label>
+        </div>
+        <div type="button" class="card-subtitle mt-3 btn-manual" class="{{activeBtnMn}}" (click)="toggleManual()">
+            <label type="button">Hướng dẫn sử dụng</label>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row" [formGroup]="formGroup">
+            <div *ngIf="skuItems?.groupCode === 'PB' || skuItems?.groupCode === 'TBVTV'" class="col-lg-6 col-md-12">
+                <ng-container *ngIf="activePrForm">
+                    <div class="form-group row py-2">
+                        <label class="col-xl-2 col-lg-2 col-form-label form-label d-flex align-items-center">Tên sản
+                            phẩm:</label>
+                        <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                            <label class="d-flex align-items-center m-0">{{skuItems?.name}}</label>
+                        </div>
+                    </div>
+
+                    <hr class=" m-0" />
+
+                    <div class="form-group row py-2">
+                        <label class="col-xl-2 col-lg-2 col-form-label form-label d-flex align-items-center">Khối
+                            lượng:</label>
+                        <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                            <label class="d-flex align-items-center m-0">{{skuItems?.netWeight}} {{unitAndType?.weiUnit}}</label>
+                        </div>
+                    </div>
+
+                    <hr class=" m-0" />
+
+                    <div class="form-group row py-2">
+                        <label class="col-xl-2 col-lg-2 col-form-label form-label d-flex align-items-center">Đơn
+                            vị:</label>
+                        <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                            <label class="d-flex align-items-center m-0">{{unitAndType?.unit}}</label>
+                        </div>
+                    </div>
+
+                    <hr class=" m-0" />
+
+                    <div class="form-group row py-2">
+                        <label class="col-xl-2 col-lg-2 col-form-label form-label d-flex align-items-center">Xuất
+                            xứ</label>
+                        <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                            <label class="d-flex align-items-center m-0">{{skuItems?.susr07}}</label>
+                        </div>
+                    </div>
+
+                    <hr class=" m-0" />
+
+                    <div class="form-group row py-2">
+                        <label class="col-xl-2 col-lg-2 col-form-label form-label d-flex align-items-center">Đơn vị sản
+                            xuất</label>
+                        <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                            <label class="d-flex align-items-center m-0">{{skuItems?.manufacture}}</label>
+                        </div>
+                    </div>
+
+                    <hr class=" m-0" />
+
+                    <div class="form-group row py-2">
+                        <label class="col-xl-2 col-lg-2 col-form-label form-label d-flex align-items-start">Thành
+                            phần:</label>
+                        <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                            <label class="d-flex align-items-center m-0">{{skuItems?.susr09}}</label>
+                        </div>
+                    </div>
+
+                    <hr class=" m-0" />
+
+                    <div *ngIf="skuItems?.groupCode === 'PB'" class="form-group row py-2">
+                        <label
+                            class="col-xl-2 col-lg-2 col-form-label form-label d-flex align-items-center">Loại:</label>
+                        <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                            <label class="d-flex align-items-center m-0">{{unitAndType?.typeFert}}</label>
+                        </div>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="activeMnForm">
+                    <div class="form-group row py-2">
+                        <label class="col-xl-3 col-lg-3 col-form-label form-label d-flex align-items-start">Công dụng
+                            chính:</label>
+                        <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                            <label class="d-flex align-items-center m-0">{{skuItems?.susr04}}</label>
+                        </div>
+                    </div>
+
+                    <hr class=" m-0" />
+
+                    <div class="form-group row py-2">
+                        <label class="col-xl-3 col-lg-3 col-form-label form-label d-flex align-items-start">Liều lượng
+                            sử
+                            dụng:</label>
+                        <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                            <label class="d-flex align-items-center m-0">{{skuItems?.susr05}}</label>
+                        </div>
+                    </div>
+
+                    <hr class=" m-0" />
+
+                    <div class="form-group row py-2">
+                        <label class="col-xl-3 col-lg-3 col-form-label form-label d-flex align-items-start">Lưu
+                            ý:</label>
+                        <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                            <label class="d-flex align-items-center m-0">{{skuItems?.susr06}}</label>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+
+            <!--  -->
+
+            <div *ngIf="skuItems?.groupCode === 'MM' || skuItems?.groupCode === 'X'" class="col-lg-6 col-md-12">
+
+                <div class="form-group row py-2">
+                    <label *ngIf="skuItems?.groupCode === 'MM'"
+                        class="col-xl-3 col-lg-3 col-form-label form-label d-flex align-items-center">Tên máy:</label>
+                    <label *ngIf="skuItems?.groupCode === 'X'"
+                        class="col-xl-3 col-lg-3 col-form-label form-label d-flex align-items-center">Tên xe:</label>
+                    <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                        <label class="d-flex align-items-center m-0">{{skuItems?.name}}</label>
+                    </div>
+                </div>
+
+                <hr class=" m-0" />
+
+                <div class="form-group row py-2">
+                    <label class="col-xl-3 col-lg-3 col-form-label form-label d-flex align-items-center">Thương hiệu:</label>
+                    <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                        <label class="d-flex align-items-center m-0">{{skuItems?.manufacture}}</label>
+                    </div>
+                </div>
+
+                <hr class=" m-0" />
+
+                <div class="form-group row py-2">
+                    <label *ngIf="skuItems?.groupCode === 'MM'"
+                        class="col-xl-3 col-lg-3 col-form-label form-label d-flex align-items-center">Loại máy:</label>
+                    <label *ngIf="skuItems?.groupCode === 'X'"
+                        class="col-xl-3 col-lg-3 col-form-label form-label d-flex align-items-center">Loại xe:</label>
+                    <div *ngIf="skuItems?.groupCode === 'MM'" class="col-lg-7 col-xl-7 col-form-label ml-6">
+                        <label class="d-flex align-items-center m-0">{{unitAndType?.typeAgri}}</label>
+                    </div>
+                    <div *ngIf="skuItems?.groupCode === 'X'" class="col-lg-7 col-xl-7 col-form-label ml-6">
+                        <label class="d-flex align-items-center m-0">{{unitAndType?.typeAgri}}</label>
+                    </div>
+                </div>
+
+                <hr class=" m-0" />
+
+                <div class="form-group row py-2">
+                    <label class="col-xl-3 col-lg-3 col-form-label form-label d-flex align-items-center">Khối lượng:</label>
+                    <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                        <label class="d-flex align-items-center m-0">{{skuItems?.netWeight}} {{unitAndType?.weiUnit}}</label>
+                    </div>
+                </div>
+
+                <hr class=" m-0" />
+
+                <div *ngIf="skuItems?.groupCode === 'X'" class="form-group row py-2">
+                    <label class="col-xl-3 col-lg-3 col-form-label form-label d-flex align-items-center">Tải trọng:</label>
+                    <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                        <label class="d-flex align-items-center m-0">{{skuItems?.grossWeight}} {{unitAndType?.weiUnit}}</label>
+                    </div>
+                </div>
+
+                <hr *ngIf="skuItems?.groupCode === 'X'" class=" m-0" />
+
+                <div class="form-group row py-2">
+                    <label class="col-xl-3 col-lg-3 col-form-label form-label d-flex align-items-center">Công suất:</label>
+                    <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                        <label class="d-flex align-items-center m-0">{{skuItems?.susr06}} {{unitAndType?.watUnit}}</label>
+                    </div>
+                </div>
+
+                <hr class=" m-0" />
+
+                <div class="form-group row py-2">
+                    <label class="col-xl-3 col-lg-3 col-form-label form-label d-flex align-items-center">Sức chứa nhiên liệu:</label>
+                    <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                        <label class="d-flex align-items-center m-0">{{skuItems?.susr05}} {{unitAndType?.volUnit}}</label>
+                    </div>
+                </div>
+
+                <hr class=" m-0" />
+
+                <div class="form-group row py-2">
+                    <label class="col-xl-3 col-lg-3 col-form-label form-label d-flex align-items-center">Loại nhiên liệu:</label>
+                    <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                        <label class="d-flex align-items-center m-0">{{unitAndType?.typeFuel}}</label>
+                    </div>
+                </div>
+
+            </div>
+
+            <div *ngIf="skuItems?.groupCode === 'GL'" class="col-lg-6 col-md-12">
+
+                <div class="form-group row py-2">
+                    <label class="col-xl-3 col-lg-3 col-form-label form-label d-flex align-items-center">Tên giống lúa:</label>
+                    <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                        <label class="d-flex align-items-center m-0">{{skuItems?.name}}</label>
+                    </div>
+                </div>
+
+                <hr class=" m-0" />
+
+                <div class="form-group row py-2">
+                    <label class="col-xl-3 col-lg-3 col-form-label form-label d-flex align-items-center">Nguồn gốc:</label>
+                    <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                        <label class="d-flex align-items-center m-0">{{skuItems?.manufacture}}</label>
+                    </div>
+                </div>
+
+                <hr class=" m-0" />
+
+                <div class="form-group row py-2">
+                    <label class="col-xl-3 col-lg-3 col-form-label form-label d-flex align-items-center">Loại giống lúa:</label>
+                    <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                        <label class="d-flex align-items-center m-0">{{skuItems?.susr08}}</label>
+                    </div>
+                </div>
+
+                <hr class=" m-0" />
+
+                <div class="form-group row py-2">
+                    <label class="col-xl-3 col-lg-3 col-form-label form-label d-flex align-items-center">Thời gian sinh trưởng:</label>
+                    <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                        <label class="d-flex align-items-center m-0">{{skuItems?.susr04}}</label>
+                    </div>
+                </div>
+
+                <hr class=" m-0" />
+
+                <div class="form-group row py-2">
+                    <label class="col-xl-3 col-lg-3 col-form-label form-label d-flex align-items-center">Năng xuất:</label>
+                    <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                        <label class="d-flex align-items-center m-0">{{skuItems?.susr05}}</label>
+                    </div>
+                </div>
+
+                <hr class=" m-0" />
+
+                <div class="form-group row py-2">
+                    <label class="col-xl-3 col-lg-3 col-form-label form-label d-flex align-items-center">Điểm chống sâu bệnh:</label>
+                    <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                        <label class="d-flex align-items-center m-0">{{skuItems?.susr07}}</label>
+                    </div>
+                </div>
+            </div>
+
+            <!--  -->
+
+            <!--  -->
+            <div class="col-lg-6 col-md-12">
+                <div class="form-group row">
+                    <div class="col-lg-12 col-xl-12 d-flex justify-content-center flex-column">
+                        <app-upload-files [formGroup]="formGroup" [formControlName]="'photos'" uploadType="image"
+                            multiImage="true" acceptFiles=".png, .jpg, .jpeg" [validTypeFiles]="validTypeFiles"
+                            [isView]="true">
+                        </app-upload-files>
+                        <label class="col-form-label form-label text-image text-muted text-center">Ảnh sản phẩm</label>
+                    </div>
+                </div>
+            </div>
+            <!--  -->
+        </div>
+    </div>
+</div>

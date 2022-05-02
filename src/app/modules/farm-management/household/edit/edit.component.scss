@@ -1,0 +1,28 @@
+.card-header {
+    border-bottom: none;
+}
+
+.card-body {
+    padding-bottom: 0 !important;
+}
+
+.card-subHeader {
+    padding: 0 !important;
+    border: none !important;
+}
+
+.card-subBody {
+    padding: 0 !important;
+}
+
+::ng-deep .mat-datepicker-toggle {
+    position: absolute;
+    right: 12px;
+}
+
+.custom-date-picker{
+
+    &.is-invalid{
+        background-image: none;
+    }
+}

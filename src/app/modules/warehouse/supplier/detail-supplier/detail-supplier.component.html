@@ -1,0 +1,96 @@
+<div class="loading-overlay" *ngIf="(supplierService.isLoading$ | async)">Loading&#8230;</div>
+<div class="card card-custom gutter-b">
+  <div class="card-body pt-4">
+    <div class="row">
+      <div class="col-lg-8 col-md-12">
+
+        <!-- Tên nhà cung cấp -->
+        <div class="form-group row py-2">
+          <label class="col-xl-2 col-lg-2 col-form-label form-label d-flex align-items-center">Tên nhà cung cấp:</label>
+          <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+            <label class="d-flex align-items-center m-0">{{supplier?.name}}</label>
+          </div>
+        </div>
+
+        <hr class=" m-0" />
+
+        <!-- Khối lượng -->
+        <div class="form-group row py-2">
+          <label class="col-xl-2 col-lg-2 col-form-label form-label d-flex align-items-center">Mã nhà cung cấp:</label>
+          <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+            <label class="d-flex align-items-center m-0">{{supplier?.code}}</label>
+          </div>
+        </div>
+
+        <hr class=" m-0" />
+
+        <!-- Đơn vị -->
+        <div class="form-group row py-2">
+          <label class="col-xl-2 col-lg-2 col-form-label form-label d-flex align-items-center">Loại vật tư:</label>
+          <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+            <label class="d-flex align-items-center m-0">{{supplier?.groupName}}</label>
+          </div>
+        </div>
+
+        <hr class=" m-0" />
+
+        <!-- Xuất xứ -->
+        <div class="form-group row py-2">
+          <label class="col-xl-2 col-lg-2 col-form-label form-label d-flex align-items-center">Mã số thuế:</label>
+          <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+            <label class="d-flex align-items-center m-0">{{supplier?.taxCode}}</label>
+          </div>
+        </div>
+
+        <hr class=" m-0" />
+
+        <!-- Thành phần -->
+        <div class="form-group row py-2">
+          <label class="col-xl-2 col-lg-2 col-form-label form-label d-flex align-items-center">Email:</label>
+          <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+            <label class="d-flex align-items-center m-0">{{supplier?.email}}</label>
+          </div>
+        </div>
+
+        <hr class=" m-0" />
+
+        <!-- Đơn vị sản xuất -->
+        <div class="form-group row py-2">
+          <label class="col-xl-2 col-lg-2 col-form-label form-label d-flex align-items-center">Số điện thoại:</label>
+          <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+            <label class="d-flex align-items-center m-0">{{supplier?.phone}}</label>
+          </div>
+        </div>
+
+        <hr class=" m-0" />
+
+        <!-- Nhà cung cấp -->
+        <div class="form-group row py-2">
+          <label class="col-xl-2 col-lg-2 col-form-label form-label d-flex align-items-center">Địa chỉ:</label>
+          <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+            <label class="d-flex align-items-center m-0">{{supplier?.address}}</label>
+          </div>
+        </div>
+
+        <hr class=" m-0" />
+
+      </div>
+
+      <!--  -->
+      <div class="col-lg-4 col-md-12">
+        <div class="form-group row">
+          <div class="col-lg-12 col-xl-12 d-flex justify-content-center flex-column">
+            <div class="avatar-upload d-flex justify-content-center">
+              <div class="avatar-preview">
+                <img [src]="imageUrl" style="width: inherit;"/>
+              </div>
+            </div>
+            <label class="col-form-label form-label text-image text-muted text-center">Ảnh đại diện</label>
+          </div>
+        </div>
+      </div>
+      <!--  -->
+    </div>
+  </div>
+
+</div>

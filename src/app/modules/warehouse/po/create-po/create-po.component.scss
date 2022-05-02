@@ -1,0 +1,31 @@
+::ng-deep .mat-datepicker-toggle {
+    position: absolute;
+    right: 12px;
+}
+
+.custom-date-picker{
+
+    &.is-invalid{
+        background-image: none;
+    }
+}
+
+#wrap::after {
+    content: "v";
+    position: relative;
+    margin-left: -20px;
+    pointer-events: none;
+}
+
+tr {
+    background-color: transparent !important;
+}
+
+.table {
+    thead {
+        border-top: 1px solid #EBEDF3;
+    }
+    td {
+        border-top: 1px solid #EBEDF3 !important; 
+    }
+}

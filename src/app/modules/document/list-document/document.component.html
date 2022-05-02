@@ -1,0 +1,212 @@
+<div class="loading-overlay">Loading&#8230;</div>
+<div class="card card-custom gutter-b">
+    <div class="card-header">
+        <div class="card-title">
+            <h3 class="card-label">Hệ thống tài liệu</h3>
+        </div>
+    </div>
+    <div class="card-body"
+         *ngIf="roleOfUser?.isApproveView || isModal">
+        <!-- Filter -->
+        <form class="form form-label-right"
+              [formGroup]="searchGroup">
+            <div class="form-group row">
+                <label class="col-xl-2 col-lg-2 col-form-label form-label"><b>Mã tài liệu</b></label>
+                <div class="col-lg-6 col-xl-6">
+                    <input matInput
+                           appTrim
+                           type="text"
+                           class="form-control"
+                           name="code"
+                           placeholder="Mã tài liệu"
+                           value=""
+                           formControlName="code" />
+                </div>
+            </div>
+            <ng-container *ngIf="searchGroup.get('deleteFlag').value != 1">
+                <div class="form-group row">
+                    <label class="col-xl-2 col-lg-2 col-form-label form-label "><b>Mục đích</b></label>
+                    <div class="col-lg-6 col-xl-6">
+                        <mat-radio-group formControlName="usingPurposeDocument"
+                                         name="usingPurposeDocument"
+                                         class="form-control border-0">
+                            <mat-radio-button class="example-margin"
+                                              value=""
+                                              [checked]="true">Tất cả</mat-radio-button>
+                            <mat-radio-button class="example-margin"
+                                              value="1">Áp dụng</mat-radio-button>
+                            <mat-radio-button class="example-margin"
+                                              value="2">Tham khảo</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-xl-2 col-lg-2 col-form-label form-label "><b>Phân loại</b></label>
+                    <div class="col-lg-6 col-xl-6">
+                        <mat-radio-group formControlName="documentTypeFlag"
+                                         name="documentTypeFlag"
+                                         class="form-control border-0">
+                            <mat-radio-button class="example-margin"
+                                              value="0"
+                                              [checked]="searchGroupValue.documentTypeFlag == 0">Tất cả</mat-radio-button>
+                            <mat-radio-button class="example-margin"
+                                              [checked]="searchGroupValue.documentTypeFlag == 1"
+                                              value="1">Phê duyệt</mat-radio-button>
+                            <mat-radio-button class="example-margin"
+                                              [checked]="searchGroupValue.documentTypeFlag == 2"
+                                              value="2">Publish đến CBNV</mat-radio-button>
+                            <mat-radio-button class="example-margin"
+                                              [checked]="searchGroupValue.documentTypeFlag == 3"
+                                              value="3">Hủy Publish</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </div>
+            </ng-container>
+            <div class="form-group row">
+                <label class="col-xl-2 col-lg-2 col-form-label form-label "><b>Từ khóa</b></label>
+                <div class="col-lg-6 col-xl-6">
+                    <input matInput
+                           appTrim
+                           type="text"
+                           class="form-control"
+                           placeholder="Hãy nhập tìm kiếm"
+                           formControlName="keyword" />
+                </div>
+            </div>
+            <mat-expansion-panel class="form-group row"
+                                 style="box-shadow: none">
+                <mat-expansion-panel-header class="col-lg-2 col-xl-2 offset-lg-2 offset-xl-2">
+                    <mat-panel-title class="d-flex">
+                        <span class="text-dark-75">Tìm kiếm nâng cao</span>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="form-group row">
+                    <label class="col-xl-2 col-lg-2 col-form-label form-label "><b>Tên tài liệu</b></label>
+                    <div class="col-lg-6 col-xl-6">
+                        <input matInput
+                               appTrim
+                               type="text"
+                               class="form-control"
+                               name="code"
+                               placeholder="Tiêu đề"
+                               value=""
+                               formControlName="code" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-xl-2 col-lg-2 col-form-label form-label "><b>Ngày tạo</b></label>
+                    <div class="col-lg-6 col-xl-6 d-flex justify-content-start">
+                        <mat-date-range-input [rangePicker]="picker"
+                                              class="form-control col-lg-12">
+                            <input matStartDate
+                                   formControlName="dateFrom"
+                                   placeholder="Từ ngày">
+                            <input matEndDate
+                                   formControlName="dateTo"
+                                   name="end"
+                                   placeholder="Đến ngày">
+                        </mat-date-range-input>
+                        <mat-datepicker-toggle matSuffix
+                                               [for]="picker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #picker></mat-date-range-picker>
+                    </div>
+                    <div class="invalid-feedback"
+                         *ngIf="searchGroup.controls.dateFrom.hasError('matStartDateInvalid')">
+                        Ngày bắt đầu sai định dạng</div>
+                    <div class="invalid-feedback"
+                         *ngIf="searchGroup.controls.dateTo.hasError('matEndDateInvalid')">Ngày kết thúc sai định dạng
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-xl-2 col-lg-2 col-form-label form-label "><b>Thời gian lưu
+                            trữ</b></label>
+                    <div class="col-lg-6 col-xl-6 mr-auto">
+                        <input matInput
+                               appTrim
+                               type="number"
+                               min="0"
+                               class="form-control"
+                               name="duration"
+                               placeholder=""
+                               value=""
+                               formControlName="duration" />
+                    </div>
+                </div>
+                <div class="form-group row"
+                     *ngIf="!filter?.departmentId">
+                    <label class="col-xl-2 col-lg-2 col-form-label form-label "><b>Phòng ban</b></label>
+                    <div class="col-lg-6 col-xl-6 mr-auto">
+                        <ng-select [items]="departmentList"
+                                   class="form-control col-lg-12"
+                                   bindLabel="name"
+                                   bindValue="value"
+                                   placeholder="Chọn phòng ban"
+                                   formControlName="departmentId"
+                                   [notFoundText]="'Không có phòng ban nào'">
+                                   <ng-template ng-option-tmp let-item="item">
+                                    <span title="{{item.name}}">{{item.name}}</span>
+                                    </ng-template>
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="form-group row"
+                     *ngIf="!filter?.documentTypeId">
+                    <label class="col-xl-2 col-lg-2 col-form-label form-label "><b>Loại tài liệu</b></label>
+                    <div class="col-lg-6 col-xl-6 mr-auto">
+                        <ng-select [items]="documentTypeList"
+                                   class="form-control col-lg-12"
+                                   [ngClass]="{'disabled':!!!searchGroup.controls.departmentId.value}"
+                                   bindLabel="name"
+                                   bindValue="value"
+                                   placeholder="Chọn loại tài liệu"
+                                   loadingText="Đang tải"
+                                   [readonly]="!!!searchGroup.controls.departmentId.value"
+                                   [notFoundText]="'Không có loại tài liệu nào'"
+                                   formControlName="documentTypeId">
+                                   <ng-template ng-option-tmp let-item="item">
+                                    <span title="{{item.name}}">{{item.name}}</span>
+                                    </ng-template>
+                        </ng-select>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+            <div classs="form-group row">
+                <div class="offset-xl-2 offset-lg-2 col-lg-6 col-xl-6 mt-5">
+                    <div class="col-lg-12 pl-0">
+                        <button class="btn btn-info btn-elevate"
+                                (click)="reset()"
+                                type="button">Làm mới</button>
+                        <button class="btn btn-primary btn-elevate ml-3"
+                                (click)="search()"
+                                type="submit">Tìm kiếm</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card card-custom gutter-b"
+     *ngIf="roleOfUser?.isApproveView || isModal">
+    <div class="card-body">
+        <!-- Table -->
+        <div class="table-responsive angular-bootstrap-table ">
+            <!-- <basic-table [isModal]="isModal"
+                         [ids]="ids"
+                         [isSelectedOnlyItem]="isSelectedOnlyItem"
+                         (outputSort)="sort($event)"
+                         [items]="documentService.items$"
+                         [columns]="columnsConfig"
+                         [grouping]="documentService.grouping"
+                         [isExpand]="false"
+                         [paginator]="documentService.paginator"
+                         [sorting]="documentService.sorting"
+                         [isLoading]="isLoading"
+                         [isHideEditBtn]="true"
+                         [isHideDeleteBtn]="true"
+                         [isApprove]="isApprove"
+                         [hasScrollbarX]="false">
+            </basic-table> -->
+        </div>
+    </div>
+</div>

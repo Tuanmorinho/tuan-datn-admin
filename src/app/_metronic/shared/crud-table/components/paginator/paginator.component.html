@@ -1,0 +1,27 @@
+<!-- start: Paginator -->
+<div class="col-lg-4 d-flex align-items-center">
+  <!-- begin: loading -->
+  <div class="d-flex align-items-center" *ngIf="isLoading">
+    <div class="mr-2 text-muted">Đang tải...</div>
+    <div class="spinner spinner-primary mr-10"></div>
+  </div>
+  <!-- end: loading -->
+
+  <!-- begin: pageSize -->
+  <span class="react-bootstrap-table-pagin ation-total mr-3" style="color: #828282;">Tổng số <strong
+      style="color:black;">{{ Math.ceil(paginator.total /
+      paginator.pageSize) }}</strong> trang</span>
+
+</div>
+<div class="d-flex flex-wrap py-2 mr-3">
+  <select class="form-control form-control-sm font-weight-bold mr-4 border-0 bg-light false text-muted"
+    style="width: 150px; height: 35px; margin-top: 6px;" [(ngModel)]="paginator.pageSize" (change)="sizeChange()">
+    <option class="btn text-muted" value="{{ ps }}" *ngFor="let ps of pageSizes">
+      {{ ps }} bản ghi/trang
+    </option>
+  </select>
+  <ng-pagination [collectionSize]="paginator.total" [(page)]="paginator.page" [maxSize]="4" [rotate]="true"
+    [boundaryLinks]="true" [pageSize]="paginator.pageSize" (pageChange)="pageChange($event)"></ng-pagination>
+</div>
+<!-- end: pageSize -->
+<!-- end: Paginator -->

@@ -1,0 +1,53 @@
+<div class="loading-overlay" *ngIf="(isLoading$ | async)">Loading&#8230;</div>
+<div [class]="filter?.householdId ? 'card card-custom-none-shadow gutter-b' : 'card card-custom gutter-b'">
+    <div class="card-body">
+        <!-- Filter -->
+        <form class="form form-label-right mb-3" [formGroup]="searchGroup">
+            <div class="form-group row">
+                <div class="col-lg-1 col-md-1" style="min-width: 160px">
+                    <p class="card-subtitle mt-1">Hợp đồng canh tác: <span style="color: #27AE60;">{{ contractsService.paginator.total }}</span>
+                    </p>
+                </div>
+                <div class="col-lg-2 col-md-2">
+                    <input matInput appTrim appTrim type="text" class="form-control" placeholder="Tìm kiếm" value=""
+                        formControlName="q" />
+                    <i class="fa fa-search" aria-hidden="true" style="position: absolute; right: 20px; top: 14px; font-size: 12px;"></i>
+                </div>
+                <div class="col-lg-2 col-md-2">
+                    <ng-select [items]="statusContracts" class="form-control col-lg-12" bindLabel="value"
+                        bindValue="code" placeholder="Trạng thái hợp đồng" formControlName="status"
+                        [notFoundText]="'Không có trạng thái nào'">
+                        <ng-template ng-option-tmp let-item="item">
+                            <span title="{{item.value}}">{{item.value}}</span>
+                        </ng-template>
+                    </ng-select>
+                </div>
+                <div class="col-2" *ngIf="isShowHouseholdList">
+                    <ng-select [items]="households" bindLabel="owner.fullname" bindValue="id" class="form-control"
+                        formControlName="householdId" placeholder="Tìm hộ gia đình..."
+                        [notFoundText]="'Không có mục nào được chọn'" loadingText="Đang tải">
+                        <ng-template ng-option-tmp let-item="item">
+                            <span title="{{ item.owner.fullname }}">{{ item.owner.fullname }}</span>
+                        </ng-template>
+                    </ng-select>
+                </div>
+                <div class="col-lg-3 col-md-3">
+                    <button class="btn btn-outline-primary" (click)="reset()" type="button">
+                        Làm mới
+                    </button>
+                    <button class="btn btn-primary ml-6" (click)="search()" type="submit">Lấy dữ
+                        liệu</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Table -->
+        <div class="table-responsive angular-bootstrap-table ">
+            <basic-table [isModal]="isModal" [ids]="ids" [isSelectedOnlyItem]="isSelectedOnlyItem"
+                [items]="contractsService.items$" [columns]="columnsConfig" [grouping]="contractsService.grouping"
+                [paginator]="contractsService.paginator" [sorting]="contractsService.sorting" [isHideDeleteBtn]="true"
+                [isHideEditBtn]="true" (outputSort)="sort($event)">
+            </basic-table>
+        </div>
+    </div>
+</div>

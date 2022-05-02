@@ -1,0 +1,71 @@
+<ng-container *ngIf="user$ | async as _user">
+  <ng-container *ngIf="extrasUserDropdownStyle === 'dark'">
+    <div class="d-flex align-items-center p-3 rounded-top">
+      <div class="symbol symbol-md bg-light-primary mr-3 flex-shrink-0">
+        <img src="./assets/media/users/300_21.jpg" alt="" />
+      </div>
+      <div class="m-0 pt-3 flex-grow-1 mr-3 font-size-h5">
+        <h5 class="text-dark">{{ _user.name }}</h5>
+        <p>{{ _user.email }}</p>
+      </div>
+    </div>
+    <div class="separator separator-solid"></div>
+  </ng-container>
+
+  <ng-container *ngIf="extrasUserDropdownStyle === 'light'">
+    <!--begin::Header-->
+    <div
+      class="d-flex align-items-center justify-content-between flex-wrap p-3 bgi-size-cover bgi-no-repeat rounded-top"
+      style="background-image: url('./assets/media/users/300_21.jpg');"
+    >
+      <div class="d-flex align-items-center mr-2">
+        <!--begin::Symbol-->
+        <div class="symbol bg-white-o-15 mr-3">
+          <span
+            class="symbol-label text-success font-weight-bold font-size-h4"
+            >{{ _user.name }}</span
+          >
+        </div>
+        <!--end::Symbol-->
+
+        <!--begin::Text-->
+        <div class="text-white m-0 flex-grow-1 mr-3 font-size-h5">
+          {{ _user.email }}
+        </div>
+        <!--end::Text-->
+      </div>
+      >
+    </div>
+    <!--end::Header-->
+  </ng-container>
+
+  <!--begin::Nav-->
+  <div class="navi navi-spacer-x-0 pt-3">
+    <!--begin::Item-->
+    <a class="navi-item px-5 cursor-pointer" routerLink="/user-profile">
+      <div class="navi-link">
+        <div class="navi-text">
+          <p class="font-size-h6">Trang cá nhân</p>
+        </div>
+      </div>
+    </a>
+    <a class="navi-item px-5 cursor-pointer" (click)="logout()">
+      <div class="navi-link">
+        <div class="navi-text">
+          <p class="font-size-h6">
+           Đăng xuất
+          </p>
+        </div>
+      </div>
+    </a>
+
+    <!-- <div class="navi-separator mt-3"></div>
+    <div class="navi-footer px-8 py-5">
+      <a
+        class="btn btn-light-primary font-weight-bold cursor-pointer"
+        (click)="logout()"
+        >Sign Out</a
+      >
+    </div> -->
+  </div>
+</ng-container>

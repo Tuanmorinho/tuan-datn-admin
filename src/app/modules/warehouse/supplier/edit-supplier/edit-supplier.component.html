@@ -1,0 +1,110 @@
+<div class="loading-overlay" *ngIf="supllierService.isLoading$ | async">
+    Loading&#8230;
+</div>
+<div class="card card-custom gutter-b">
+    <div class="card-body pt-4">
+        <form class="form form-label-right" [formGroup]="formGroup">
+            <p class="card-title font-weight-bolder text-dark mb-0">Thông tin cá nhân</p>
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-xl-2">
+                    <div class="form-group row">
+                        <div class="col-lg-12 col-xl-12 d-flex justify-content-center flex-column">
+                            <app-upload-files [formGroup]="formGroup" [formControlName]="'logo'" uploadType="image"
+                                acceptFiles=".png, .jpg, .jpeg" [validTypeFiles]="validTypeFiles">
+                            </app-upload-files>
+                            <label class="col-form-label form-label text-image text-muted text-center">Ảnh nhà cung
+                                cấp</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-10 col-md-10 col-xl-10">
+                    <div class="form-group row">
+                        <div class="col-4">
+                            <label class="col-form-label form-label" style="padding-left: 0">Mã nhà
+                                cung cấp:<span class="required-field">*</span></label>
+                            <input matInput disabled placeholder="---" value="{{supplier?.code}}" class="form-control custom-date-picker" />
+                        </div>
+                        <div class="col-4">
+                            <label class="col-form-label form-label">Tên nhà cung cấp:<span
+                                    class="required-field">*</span></label>
+                            <input matInput appTrim type="text" class="form-control" formControlName="name"
+                                placeholder="Nhập tên nhà cung cấp..." />
+                            <app-validation-error [field]="'Tên nhà cung cấp'" [submitted]="isControlInvalid('name')"
+                                [control]="formGroup.controls.name">
+                            </app-validation-error>
+                        </div>
+                        <div class="col-4">
+                            <label class="col-form-label form-label">Mã số thuế:<span
+                                    class="required-field">*</span></label>
+                            <input matInput appTrim type="text" class="form-control" formControlName="taxCode"
+                                placeholder="Nhập mã số thuế..." />
+                            <app-validation-error [field]="'Mã số thuế'" [submitted]="isControlInvalid('taxCode')"
+                                [control]="formGroup.controls.taxCode">
+                            </app-validation-error>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-8">
+                            <label class="col-form-label form-label">Loại vật tư:<span
+                                    class="required-field">*</span></label>
+                            <ng-select [items]="itemGroups" bindLabel="name" bindValue="code"
+                                class="form-control" [multiple]="true" formControlName="groupCodes"
+                                [notFoundText]="'Không có mục nào được chọn'"
+                                placeholder="Chọn loại vật tư nhà cung cấp" loadingText="Đang tải"
+                                [class.is-invalid]="isControlInvalid('groupCodes')">
+                                <ng-template ng-option-tmp let-item="item">
+                                    <span title="{{ item.name }}">{{item.name}}</span>
+                                </ng-template>
+                            </ng-select>
+                            <app-validation-error [field]="'Loại vật tư'"
+                                [submitted]="isControlInvalid('groupCodes')"
+                                [control]="formGroup.controls.groupCodes">
+                            </app-validation-error>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <p class="card-title font-weight-bolder text-dark mb-0 mt-3">Liên hệ</p>
+                    <div class="form-group row">
+                        <div class="col-6">
+                            <label class="col-form-label form-label">Email:<span class="required-field">*</span></label>
+                            <input matInput appTrim type="text" class="form-control" formControlName="email"
+                                placeholder="Nhập email..." />
+                            <app-validation-error [field]="'Email'" [submitted]="isControlInvalid('email')"
+                                [control]="formGroup.controls.email">
+                            </app-validation-error>
+                        </div>
+        
+                        <div class="col-6">
+                            <label class="col-form-label form-label">Số điện thoại:<span
+                                    class="required-field">*</span></label>
+                            <input matInput appTrim type="text" class="form-control" formControlName="phone"
+                                placeholder="Nhập số điện thoại..." />
+                            <app-validation-error [field]="'Số điện thoại'" [submitted]="isControlInvalid('phone')"
+                                [control]="formGroup.controls.phone">
+                            </app-validation-error>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <p class="card-title font-weight-bolder text-dark mb-0 mt-3">Địa chỉ</p>
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <label class="col-form-label form-label">Nhập địa chỉ:<span
+                                class="required-field">*</span></label>
+                            <input matInput appTrim type="text" class="form-control" formControlName="address"
+                                placeholder="Nhập chi tiết địa chỉ..." />
+                            <app-validation-error [field]="'Mã Địa chỉ'" [submitted]="isControlInvalid('address')"
+                                [control]="formGroup.controls.address">
+                            </app-validation-error>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

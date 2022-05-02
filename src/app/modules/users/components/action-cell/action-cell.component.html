@@ -1,0 +1,19 @@
+<!-- <a title="Cập nhật mật khẩu" class="btn btn-icon btn-primary m-1 btn-sm">
+  <span [inlineSVG]="'./assets/media/svg/icons/General/Update.svg'" cacheSVG="true"
+    class="svg-icon svg-icon-sm svg-icon-primary">
+  </span>
+</a> -->
+
+<a title="Sửa" class="btn btn-icon btn-primary m-1 btn-sm" style="border-color: #e8e8e8"
+  [routerLink]="'/system-admin/users/edit/' + prop.id">
+  <span [inlineSVG]="'./assets/media/svg/icons/Common/Pencil-alt.svg'" cacheSVG="true"
+    class="svg-icon svg-icon-sm svg-icon-primary">
+  </span>
+</a>
+
+<a title="Xóa" class="btn btn-icon btn-danger m-1 btn-sm" style="border-color: #e8e8e8"
+  (click)="delete(prop)">
+  <span [inlineSVG]="'./assets/media/svg/icons/Common/Trash.svg'" cacheSVG="true"
+    class="svg-icon svg-icon-sm svg-icon-danger">
+  </span>
+</a>

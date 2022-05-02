@@ -1,0 +1,13 @@
+<a title="Sửa" class="btn btn-icon btn-light btn-hover-primary m-1 btn-sm" style="border-color: #e8e8e8"
+  (click)="edit(prop)" *ngIf="checkAuthor()">
+  <span [inlineSVG]="'./assets/media/svg/icons/Common/Pencil-alt.svg'" cacheSVG="true"
+    class="svg-icon svg-icon-md svg-icon-primary">
+  </span>
+</a>
+
+<a title="Xóa" class="btn btn-icon btn-light btn-hover-danger m-1 btn-sm" style="border-color: #e8e8e8"
+  (click)="delete(prop)" *ngIf="checkAuthor()">
+  <span [inlineSVG]="'./assets/media/svg/icons/Common/Trash.svg'" cacheSVG="true"
+    class="svg-icon svg-icon-md svg-icon-danger">
+  </span>
+</a>

@@ -1,0 +1,23 @@
+::ng-deep .modal-fullscreen .modal-dialog {
+    margin: 0 auto;
+    .modal-content {
+        height: 100%;
+        border-radius: 0;
+        .modal-body {
+            height: 100%;
+        }
+    }
+}
+
+.btn-selection {
+    &.btn-custom-close {
+        position: absolute;
+        top: 15px;
+        left: 96% !important;
+        z-index: 1;
+    }
+}
+
+.card-body > .table-responsive{
+    overflow-x: hidden !important;
+}

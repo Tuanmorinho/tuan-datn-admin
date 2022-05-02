@@ -1,0 +1,53 @@
+<flash-messages></flash-messages>
+<div class="loading-overlay" *ngIf="(usersService.isLoading$ | async)">Loading&#8230;</div>
+<div class="d-flex justify-content-between">
+    <div class="" style="cursor: default">
+    </div>
+</div>
+<div class="card card-custom gutter-b">
+    <div class="card-body">
+        <!-- Filter -->
+        <form class="form form-label-right mb-2" [formGroup]="searchGroup">
+            <div class="form-group row">
+                <div class="col-lg-1 col-md-1">
+                    <p class="card-subtitle mt-1">Người dùng: <span style="color: #27AE60;">{{ usersService.paginator.total }}</span>
+                    </p>
+                </div>
+                <div class="col-lg-2 col-md-2">
+                    <input matInput appTrim appTrim type="text" class="form-control input" placeholder="Tìm kiếm"
+                        formControlName="keyword" />
+                    <i class="fa fa-search" aria-hidden="true" style="position: absolute; right: 20px; top: 14px; font-size: 12px;"></i>
+                </div>
+
+                <div class="col-lg-2 col-md-2">
+                    <ng-select [items]="roleList" class="form-control col-lg-12  input" bindLabel="name" bindValue="name"
+                        placeholder="Vai trò" formControlName="realmRoles" [notFoundText]="'Không có vai trò nào'">
+                    </ng-select>
+                </div>
+
+                <div class="col-lg-2 col-md-2">
+                    <ng-select [items]="enableList" class="form-control col-lg-12  input" bindLabel="name" bindValue="name"
+                        placeholder="Trạng thái" formControlName="enabled" [notFoundText]="'Không có trạng thái nào'">
+                    </ng-select>
+                </div>
+
+                <div class="col-lg-4 col-md-4">
+                    <button class="btn btn-outline-primary btn-elevate" (click)="reset()" type="button">
+                        Làm mới
+                    </button>
+                    <button class="btn btn-primary get-data btn-elevate ml-6" (click)="search()" type="submit">Lấy dữ
+                        liệu</button>
+                </div>
+            </div>
+        </form>
+        <!-- Table -->
+        <div class="table-responsive angular-bootstrap-table ">
+            <basic-table [isModal]="isModal"
+                [ids]="ids" [isSelectedOnlyItem]="isSelectedOnlyItem"
+                (outputSort)="sort($event)" [items]="usersService.items$" [columns]="columnsConfig"
+                [grouping]="usersService.grouping" [paginator]="usersService.paginator" [sorting]="usersService.sorting"
+                [isHideDeleteBtn]="true" [isHideEditBtn]="true">
+            </basic-table>
+        </div>
+    </div>
+</div>

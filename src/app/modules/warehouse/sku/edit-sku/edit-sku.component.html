@@ -1,0 +1,67 @@
+<div class="loading-overlay" *ngIf="skuService.isLoading$ | async">
+    Loading&#8230;
+</div>
+<div class="card card-custom gutter-b">
+    <div class="card-body pt-4">
+        <form class="form form-label-right" [formGroup]="formGroup">
+            <div class="row">
+                <div class="col-lg-6 col-md-12">
+                    <div *ngIf="!formGroup.controls['code'].value" class="form-group row">
+                        <label class="col-xl-6 col-lg-6 col-form-label form-label font-weight-bold">Chọn vật tư cần thêm
+                            mới<span class="required-field">*</span></label>
+                        <div class="col-lg-12 col-xl-12">
+                            <ng-select [items]="groupCodes" bindLabel="name" bindValue="code" class="form-control"
+                                formControlName="groupCode" [notFoundText]="'Không có mục nào được chọn'"
+                                placeholder="Chọn vật tư" loadingText="Đang tải"
+                                [class.is-invalid]="isControlInvalid('groupCode')">
+                                <ng-template ng-option-tmp let-item="item">
+                                    <span title="{{ item.name }}">{{item.name}}</span>
+                                </ng-template>
+                            </ng-select>
+                            <app-validation-error [field]="'Vật tư'" [submitted]="isControlInvalid('groupCode')"
+                                [control]="formGroup.controls.groupCode">
+                            </app-validation-error>
+                        </div>
+                    </div>
+
+                    <hr *ngIf="!formGroup.controls['code'].value" class="my-3" />
+
+                    <!-- Phân bón + Thuốc BVTV -->
+                    <div
+                        *ngIf="formGroup.controls['groupCode'].value === 'PB' || formGroup.controls['groupCode'].value === 'TBVTV'">
+                        <app-edit-fertilizer-pesticide [formGroup]="formGroup"></app-edit-fertilizer-pesticide>
+                    </div>
+
+                    <!-- Máy móc + Xe cơ giới -->
+                    <div
+                        *ngIf="formGroup.controls['groupCode'].value === 'X' || formGroup.controls['groupCode'].value === 'MM'">
+                        <app-edit-machines-vehicles [formGroup]="formGroup">
+                        </app-edit-machines-vehicles>
+                    </div>
+
+                    <!-- Giống lúa -->
+                    <div
+                        *ngIf="formGroup.controls['groupCode'].value === 'GL'">
+                        <app-edit-rice-seeds [formGroup]="formGroup">
+                        </app-edit-rice-seeds>
+                    </div>
+
+                </div>
+
+                <!--  -->
+                <div class="col-lg-6 col-md-12">
+                    <div class="form-group row">
+                        <div class="col-lg-12 col-xl-12 d-flex justify-content-center flex-column">
+                            <app-upload-files [formGroup]="formGroup" [formControlName]="'images'" uploadType="image"
+                                multiImage="true" acceptFiles=".png, .jpg, .jpeg" [validTypeFiles]="validTypeFiles">
+                            </app-upload-files>
+                            <label class="col-form-label form-label text-image text-muted text-center">Ảnh vật tư</label>
+                        </div>
+                    </div>
+                </div>
+                <!--  -->
+            </div>
+        </form>
+    </div>
+
+</div>

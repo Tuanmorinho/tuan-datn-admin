@@ -1,0 +1,22 @@
+@import "../../../../assets/sass/components/variables.bootstrap";
+@import "../../../../assets/sass/components/variables_ext_custom";
+
+.modal-header {
+    padding: 0.7rem 1.75rem;
+}
+
+.confirm-modal {
+    &__content {
+        font-size: 14px !important;
+    }
+
+    &__svg-confirm {
+        transform: scale(3.5);
+        margin-bottom: 30px;
+        margin-top: 15px;
+
+        &::before {
+            content: url("../../../../assets/media/svg/icons/Common/Exclamation.svg");
+        }
+    }
+}

@@ -1,0 +1,47 @@
+<div class="d-flex justify-content-end align-items-center flex-wrap">
+  <div class="d-flex align-items-center py-3"> <span> Tổng số bản ghi: {{ page.paginator.total }}</span>
+  </div>
+</div>
+<div class="table-responsive angular-bootstrap-table">
+  <table class="table table-head-custom table-vertical-center overflow-hidden">
+    <thead>
+      <th *ngFor="let column of columnsConfig" class="sortable position-relative mr-10">
+        <span>
+          {{column.label}}
+        </span>
+      </th>
+      <th class="selection-cell-header" data-row-selection="true">
+        <label *ngIf="!isSelectedOnlyItem" class="checkbox checkbox-single"><input type="checkbox" (click)="selectAllRows()"
+            [checked]="page.grouping.checkAreAllDetailRowsSelected()" /><span></span></label>
+      </th>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let item of items | async;index as i">
+        <tr>
+          <td *ngFor="let column of columnsConfig">
+            <span *ngIf="!column.component">{{ item[column.dataKey] }}</span>
+            <ng-template *ngIf="column.component" customCell [component]="column.component" [prop]="item">
+            </ng-template>
+          </td>
+          <td class="selection-cell">
+            <ng-container *ngIf="!isSelectedOnlyItem">
+              <label class="checkbox checkbox-single"><input type="checkbox" (click)="select(item)" [checked]="page.grouping.isDetailRowSelected(item.id)"/>
+                <span></span>
+              </label>
+            </ng-container>
+            <ng-container *ngIf="isSelectedOnlyItem">
+              <button class="btn btn-primary btn-elevate "
+                      (click)="selectOnlyItem(item)">Chọn </button>
+            </ng-container>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+  <div *ngIf="(items| async)?.length <= 0">
+    <p class="text-dark-50 m-0 pt-5 font-weight-normal text-center">Không tìm thấy kết quả !!!</p>
+  </div>
+</div>
+<app-paginator class="d-flex justify-content-between align-items-center flex-wrap" [paginator]="page.paginator"
+[isLoading]="isLoading"
+(paginate)="paginate($event)"></app-paginator>

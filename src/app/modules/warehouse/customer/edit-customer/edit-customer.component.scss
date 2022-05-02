@@ -1,0 +1,88 @@
+.btn-custom-add {
+    position: relative;
+    top: 25px;
+    border: 1px solid #cbe4fd;
+}
+
+.btn-custom-danger {
+    width: 40px;
+    height: 40px;
+}
+
+.btn-group-select {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.list-position {
+    background-color: #d8e3ee;
+    border-radius: 10px;
+}
+
+.btn-custom-close {
+    position: absolute;
+    left: 80%;
+    top: 3px;
+
+    .ki-bold-close:hover{
+        color: #D0021B;
+    }
+}
+
+::ng-deep .mat-datepicker-toggle {
+    position: absolute;
+    right: 12px;
+}
+
+.custom-date-picker{
+
+    &.is-invalid{
+        background-image: none;
+    }
+}
+
+.card-header {
+    border-bottom: none;
+}
+
+
+.btn-product-infor {
+    background-color: #fff;
+    text-align: left;
+    height: 30px;    
+}
+.btn-product-infor label {
+    font-size: 14px; 
+    font-weight: 500;
+    color: #828282;
+}
+.btn-product-infor:hover {
+    opacity: 0.8;
+}
+.btn-product-infor-active {
+    border-bottom: 2px solid #6BA425;
+}
+.btn-product-infor-active label {
+    color: #6BA425 !important;
+}
+
+
+.btn-manual {
+    background-color: #fff;
+    height: 30px;
+    margin-left: 30px;
+}
+.btn-manual label {
+    font-size: 14px; 
+    font-weight: 500;
+    color: #828282;
+}
+.btn-manual:hover {
+    opacity: 0.8;
+}
+.btn-manual-active {
+    border-bottom: 2px solid #6BA425;
+}
+.btn-manual-active label {
+    color: #6BA425 !important;
+}

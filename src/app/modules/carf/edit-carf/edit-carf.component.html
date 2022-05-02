@@ -1,0 +1,46 @@
+<div class="loading-overlay"
+  *ngIf="isLoading$ | async">Loading&#8230;</div>
+<form class="form form-label-right"
+  [formGroup]="formGroup">
+  <div class="card card-custom gutter-b">
+    <div class="card-header">
+      <div class="card-title h4">
+        <ng-container *ngIf="correctiveAuditData?.id">Sửa</ng-container>
+        <ng-container *ngIf="!correctiveAuditData?.id">Tạo</ng-container>
+        khắc phục phòng ngừa
+      </div>
+    </div>
+    <div class="card-body">
+      <hr>
+      <div class="col-lg-5">
+        <h3 class="text-decoration-underline text-primary">Kiểm tra phê duyệt</h3>
+        <div class="row"
+          *ngFor="let reviewProcess of reviewProcesses">
+          <label class="col-xl-3 col-lg-3 form-label font-weight-bold pt-4">{{ reviewProcess.displayName }}
+            <span *ngIf="reviewProcess.isRequired"
+              class="required-field">*</span></label>
+          <div class="col-lg-9">
+           
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer custom-footer">
+      <button type="button"
+        class="btn btn-light btn-elevate mr-2"
+        [routerLink]="'/carf'">
+        Trở về
+      </button>
+      <button type="button"
+        (click)="onSubmit(actionType.save)"
+        class="btn btn-primary btn-elevate">
+        Lưu
+      </button>
+      <button type="button"
+        (click)="onSubmit(actionType.submit)"
+        class="btn btn-primary btn-elevate">
+        Chuyển kiểm tra
+      </button>
+    </div>
+  </div>
+</form>

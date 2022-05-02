@@ -1,0 +1,194 @@
+//
+// Login 1
+// Pages SASS files are compiled into separate css files
+//
+
+// Initialization of global variables, mixins and functions
+@import "../../init";
+
+.login.login-1 {
+    // background-image: url("../../../media/bg/saigon.jpg");
+    // background-size: cover;
+
+    .login-aside {
+        .login-uppercase {
+            color:  #333333;
+            
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 28px;
+            line-height: 33px;
+            
+            text-align: center;
+        }
+        
+        .aside-img {
+            min-height: 250px;
+        }
+
+        .aside-logo {
+            min-height: 95px;
+        }
+
+        &.custom {
+            background-color: #fff;
+        }
+    }
+
+    // Form modes
+    .login-signin,
+    .login-signup,
+    .login-forgot {
+        display: none;
+    }
+
+    &.login-signin-on {
+        .login-signup {
+            display: none;
+        }
+
+        .login-signin {
+            display: block;
+        }
+
+        .login-forgot {
+            display: none;
+        }
+    }
+
+    &.login-signup-on {
+        .login-signup {
+            display: block;
+        }
+
+        .login-signin {
+            display: none;
+        }
+
+        .login-forgot {
+            display: none;
+        }
+    }
+
+    &.login-forgot-on {
+        .login-signup {
+            display: none;
+        }
+
+        .login-signin {
+            display: none;
+        }
+
+        .login-forgot {
+            display: block;
+        }
+    }
+}
+
+// Desktop view
+@include media-breakpoint-up(lg) {
+    .login.login-1 {
+        .login-aside {
+            width: 100%;
+
+            &.custom {
+                // margin: 5rem;
+                border-radius: 2%;
+                background-color: #ffffff;
+                // background-image: url("../../../media/svg/illustrations/login-visual-1.svg");
+                background-size: 100% 32%;
+                background-position: 35% 100%;
+                background-repeat: no-repeat;
+                // box-shadow: rgb(46 46 97 / 33%) 0px 13px 27px -5px, rgb(0 0 0) 0px 8px 16px -8px;
+            }
+        }
+
+        .login-content {
+            width: 100%;
+            max-width: 500px;
+
+            &.-left {
+                max-width: 900px;
+            }
+
+            .login-form {
+                width: 100%;
+                max-width: 450px;
+            }
+        }
+    }
+}
+
+// Tablet and Mobile mode
+@include media-breakpoint-between(lg, xl) {
+    .login.login-1 {
+        .login-aside {
+            width: 100%;
+            max-width: 450px;
+
+            &.custom {
+                background-color: #fff;
+            }
+        }
+
+        .login-aside {
+            height: 100vh;
+        }
+    }
+
+    #kt_login {
+        flex-direction: column-reverse !important;
+    }
+}
+
+// Tablet mode
+@include media-breakpoint-down(md) {
+    .login.login-1 {
+        .login-content {
+            .login-form {
+                width: 100%;
+                max-width: 400px;
+            }
+        }
+
+        .login-aside {
+            height: 100vh;
+        }
+    }
+
+    #kt_login {
+        flex-direction: column-reverse !important;
+    }
+}
+
+// Mobile mode
+@include media-breakpoint-down(xs) {
+    .login.login-1 {
+        .aside-img {
+            min-height: 250 !important;
+            background-size: 400px;
+        }
+
+        .aside-logo {
+            min-height: 95px !important;
+            background-size: 150px;
+        }
+
+        .login-content {
+            min-width: 250px;
+            .login-form {
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+
+        .login-aside {
+            height: 100vh;
+        }
+    }
+
+    #kt_login {
+        flex-direction: column-reverse !important;
+    }
+}

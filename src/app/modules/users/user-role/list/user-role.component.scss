@@ -1,0 +1,54 @@
+@media (max-width: 767px) {
+    .col-md-4 {
+        margin-top: 10px;
+    }
+}
+
+:host ::ng-deep .mat-expansion-panel-header {
+    padding: 0px 4px;
+}
+
+:host ::ng-deep .mat-expansion-indicator {
+    left: -40%;
+    position: relative;
+
+    &::after {
+        color: #b5b5c3;
+    }
+}
+
+:host ::ng-deep .mat-expansion-panel-body{
+    padding-left: 0 ;
+    padding-right: 0;
+}
+
+.mat-expansion-panel-header:hover{
+    background: rgb(132 132 132 / 4%);
+}
+
+.mat-expansion-panel-header{
+    height: 40px;
+}
+
+::ng-deep .mat-datepicker-toggle {
+    position: absolute;
+    right: 12px;
+}
+
+.btn-user {
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
+    border-radius: 6px;
+}
+
+.text-user {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+
+    letter-spacing: 0.02em;
+
+    /* Gray 2 */
+    color: #4F4F4F;
+}

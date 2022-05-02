@@ -1,0 +1,104 @@
+// 
+.btn-proxy-infor {
+    background-color: #fff;
+    text-align: left;
+    height: 30px;    
+}
+.btn-proxy-infor label {
+    font-size: 14px; 
+    font-weight: 500;
+    color: #828282;
+}
+.btn-proxy-infor:hover {
+    opacity: 0.8;
+}
+.btn-proxy-infor-active {
+    border-bottom: 2px solid #6BA425;
+}
+.btn-proxy-infor-active label {
+    color: #6BA425 !important;
+}
+
+
+.btn-household-infor {
+    background-color: #fff;
+    height: 30px;
+    // margin-left: 30px;
+}
+.btn-household-infor label {
+    font-size: 14px; 
+    font-weight: 500;
+    color: #828282;
+}
+.btn-household-infor:hover {
+    opacity: 0.8;
+}
+.btn-household-infor-active {
+    border-bottom: 2px solid #6BA425;
+}
+.btn-household-infor-active label {
+    color: #6BA425 !important;
+}
+
+
+.btn-plotsOfField-infor {
+    background-color: #fff;
+    height: 30px;
+    margin-left: 30px;
+}
+.btn-plotsOfField-infor label {
+    font-size: 14px; 
+    font-weight: 500;
+    color: #828282;
+}
+.btn-plotsOfField-infor:hover {
+    opacity: 0.8;
+}
+.btn-plotsOfField-infor-active {
+    border-bottom: 2px solid #6BA425;
+}
+.btn-plotsOfField-infor-active label {
+    color: #6BA425 !important;
+}
+
+
+.btn-contract-infor {
+    background-color: #fff;
+    height: 30px;
+    margin-left: 30px;
+}
+.btn-contract-infor label {
+    font-size: 14px; 
+    font-weight: 500;
+    color: #828282;
+}
+.btn-contract-infor:hover {
+    opacity: 0.8;
+}
+.btn-contract-infor-active {
+    border-bottom: 2px solid #6BA425;
+}
+.btn-contract-infor-active label {
+    color: #6BA425 !important;
+}
+
+// 
+.form-label {
+    color: #828282;
+}
+
+.form-group {
+    margin-bottom: 0;
+}
+
+p.col.d-flex.align-items-center.fw-bold {
+    font: Roboto;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.02em;
+    color: #333333;
+}
+

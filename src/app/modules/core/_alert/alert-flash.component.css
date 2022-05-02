@@ -1,0 +1,9 @@
+.close{
+    position: absolute;
+    top:25%;
+    right: 10px;
+}
+
+li {
+    list-style-type: none;
+}

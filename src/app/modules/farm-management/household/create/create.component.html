@@ -1,0 +1,44 @@
+<div class="loading-overlay" *ngIf="loading$ | async">Loading&#8230;</div>
+<div class="card card-custom gutter-b">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-lg-6 col-md-12">
+        <div class="form-group row">
+          <label class="col-xl-12 col-lg-12 col-form-label form-label font-weight-bold">Mã hộ gia đình:<span
+              class="required-field">*</span></label>
+          <div class="col-xl-12 col-lg-12" [formGroup]="formGroup">
+            <input matInput appTrim type="text" class="form-control" formControlName="registrationBookCode"
+              placeholder="Nhập số sổ hộ khẩu..." [class.is-invalid]="isControlInvalid('registrationBookCode')" />
+            <app-validation-error [field]="'Số sổ hộ khẩu'" [submitted]="isControlInvalid('registrationBookCode')"
+              [control]="formGroup.controls.registrationBookCode">
+            </app-validation-error>
+          </div>
+        </div>
+        <hr>
+      </div>
+    </div>
+    <user-info [formGroup]="formGroup" [validTypeFiles]="validTypeFiles" [initData]="initData" [ownerData]="ownerData" isOwner="true"></user-info>
+    <hr>
+  </div>
+  <div class="card-header pt-3" style="min-height: 0;">
+    <div>
+      <h3 class="card-label text-user">Danh sách thành viên</h3>
+      <span class="card-subtitle">Thành viên: <strong style="color: #6BA425;">{{ memebers?.length }}</strong></span>
+    </div>
+    <div>
+      <button type="button" class="btn btn-primary get-data btn-elevate" (click)="addMember()" id="kt_quick_custom_toggle">
+        <i class="ki ki-plus icon-sm"></i>
+        Thêm thành viên</button>
+    </div>
+  </div>
+  <div class="card-body pt-0 pb-2">
+    <div class="row mb-5">
+      <ng-container *ngFor="let member of memebers; let i = index">
+        <div class="col-6 mt-5" app-house-hold-item [member]="member" [index]="i" (updateEvent)="updateEvent($event)"
+          (deleteEvent)="deleteEvent($event)"></div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<custom-offcanvas [component]="component" [isForm]="true" [filter]="filter" isMember="true"></custom-offcanvas>

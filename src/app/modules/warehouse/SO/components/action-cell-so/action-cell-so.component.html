@@ -1,0 +1,14 @@
+<ng-container *ngIf="prop?.status != '1' && prop?.status != '2' && prop?.status != '95'">
+    <a title="Sửa" class="btn btn-icon btn-primary m-1 btn-sm" style="border-color: #e8e8e8"
+        [routerLink]="'/warehouse/so/edit/' + prop.id + '/' + prop.orderKey">
+        <span [inlineSVG]="'./assets/media/svg/icons/Common/Pencil-alt.svg'" cacheSVG="true"
+            class="svg-icon svg-icon-sm svg-icon-primary">
+        </span>
+    </a>
+    
+    <a title="Xóa" class="btn btn-icon btn-danger m-1 btn-sm" style="border-color: #e8e8e8" (click)="delete(prop)">
+        <span [inlineSVG]="'./assets/media/svg/icons/Common/Trash.svg'" cacheSVG="true"
+            class="svg-icon svg-icon-sm svg-icon-danger">
+        </span>
+    </a>
+</ng-container>

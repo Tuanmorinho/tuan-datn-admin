@@ -1,0 +1,10 @@
+:host ::ng-deep table {
+  width: 100% !important;
+}
+
+.table-bordered {
+  th,td{
+    border-left: none;
+    border-right: none;
+  }
+}

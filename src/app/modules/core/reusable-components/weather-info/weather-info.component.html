@@ -1,0 +1,66 @@
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+        <p class="card-title font-weight-bolder text-dark mb-0">Thông tin chi tiết thửa ruộng</p>
+        <div class="row">
+            <label class="col-lg-3 col-xl-3 col-form-label form-label d-flex align-items-center">Số thửa:</label>
+            <div class="col-lg-7 col-xl-7 ml-6">
+                <label class="font-weight-bold">{{ filter?.slot }}</label>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-lg-3 col-xl-3 col-form-label form-label d-flex align-items-center">Diện tích:</label>
+            <div class="col-lg-7 col-xl-7 ml-6">
+                <label class="font-weight-bold">{{ filter?.area }}</label>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-lg-3 col-xl-3 col-form-label form-label d-flex align-items-center">Chu vi:</label>
+            <div class="col-lg-7 col-xl-7 ml-6">
+                <label class="font-weight-bold">{{ filter?.perimeter }}</label>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-lg-3 col-xl-3 col-form-label form-label d-flex align-items-center">Loại:</label>
+            <div class="col-lg-7 col-xl-7 ml-6">
+                <label class="font-weight-bold">{{ filter?.type }}</label>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12 col-md-12">
+        <p class="card-title font-weight-bolder text-dark mb-0">Dự báo thời tiết 7 ngày tới</p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Mặt trời</th>
+                    <th scope="col">Áp suất</th>
+                    <th scope="col">Nhiệt độ</th>
+                    <th scope="col">Độ ẩm</th>
+                    <th scope="col">Tốc độ gió</th>
+                    <th scope="col">Tỷ lệ mây</th>
+                    <th scope="col">Đánh giá</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of weathers">
+                    <td>
+                        Mặt trời mọc: <strong>{{ item.sunrise }}</strong> <br>
+                        Mặt trời lặn: <strong>{{ item.sunset }}</strong>
+                    </td>
+                    <td><strong>{{ item.pressure }}hPa</strong></td>
+                    <td>
+                        Cao nhất <strong>{{ item.temperature.max }}°C</strong> <br>
+                        Thấp nhất <strong>{{ item.temperature.min }}°C</strong> <br>
+                        Buổi sáng <strong>{{ item.temperature.morning }}°C</strong> <br>
+                        Buổi trưa <strong>{{ item.temperature.day }}°C</strong> <br>
+                        Buổi tối <strong>{{ item.temperature.night }}°C</strong> <br>
+                        Buổi đêm <strong>{{ item.temperature.evening }}°C</strong>
+                    </td>
+                    <td><strong>{{ item.humidity }}%</strong></td>
+                    <td><strong>{{ item.speed }}m/s</strong></td>
+                    <td><strong>{{ item.clouds }}%</strong></td>
+                    <td><strong>{{ item.weather }}</strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

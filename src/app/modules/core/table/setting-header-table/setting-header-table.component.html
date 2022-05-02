@@ -1,0 +1,59 @@
+<colgroup>
+    <ng-container *ngFor="let header of headersConfig">
+        <ng-container *ngIf="header.width;else hasSub">
+            <col *ngIf="header.isShowed"
+                 [id]="'col-'+header.id"
+                 [width]="header.width+'px'">
+        </ng-container>
+        <ng-template #hasSub>
+            <ng-container *ngFor="let h of header.subheaders">
+                <ng-container *ngIf="h.isShowed">
+                    <col [id]="'col-'+h.id"
+                         [width]="h.width+'px'">
+                </ng-container>
+            </ng-container>
+        </ng-template>
+    </ng-container>
+
+
+</colgroup>
+<thead>
+    <tr>
+        <ng-container *ngFor="let header of headersConfig">
+            <td *ngIf="header.isShowed"
+                [id]="header.id"
+                [attr.rowspan]="header.rowspan"
+                [attr.colspan]="header.colspan"
+                class="align-middle text-center col-resizable pt-0 pb-0"
+                [ngClass]="header.background"
+                [resizeColumn]="true"
+                [innerHTML]="header.title"><span *ngIf="header.required">*</span></td>
+        </ng-container>
+    </tr>
+    <tr class="sub-header text-center">
+        <ng-container *ngTemplateOutlet="submenu;
+        context: {headersConfig:headersConfig}">
+        </ng-container>
+    </tr>
+
+</thead>
+
+<ng-template #submenu
+             let-headersConfig="headersConfig">
+    <ng-container *ngFor="let header of headersConfig">
+        <ng-container *ngIf="header.subheaders?.length>0">
+            <ng-container *ngFor="let subhead of header.subheaders">
+                <td *ngIf="subhead.isShowed"
+                    [id]="subhead.id"
+                    [attr.rowspan]="subhead.rowspan"
+                    [attr.colspan]="subhead.colspan"
+                    [resizeColumn]="true"
+                    class="align-middle text-center col-resizable"
+                    [ngClass]="header.background">{{subhead.title}}<span *ngIf="subhead.required">*</span></td>
+            </ng-container>
+
+        </ng-container>
+    </ng-container>
+
+
+</ng-template>

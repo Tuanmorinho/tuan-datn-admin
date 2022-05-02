@@ -1,0 +1,74 @@
+<flash-messages></flash-messages>
+<div class="loading-overlay" *ngIf="(userRoleService.isLoading$ | async)">Loading&#8230;</div>
+<div class="card card-custom gutter-b">
+    <!-- <div class="card-header">
+        <div class="card-title">
+            <h3 class="card-label text-user">Phân quyền vai trò</h3>
+        </div>
+        <div class="card-toolbar" *ngIf="!isModal">
+            <button type="button" class="btn btn-primary get-data btn-elevate" (click)="addRole(roleForm)">
+                <i class="ki ki-plus icon-sm"></i>
+                Thêm vai trò</button>
+        </div>
+    </div> -->
+    <div class="card-body">
+        <!--  select user role -->
+        <div class="col-lg col-md btn-user d-flex justify-content-between align-items-center p-3 m-3"
+            *ngFor="let item of userRolesList ">
+            <div class="text-user">{{ item.name }}</div>
+            <div>
+                <button class="btn btn-primary" type="button" (click)="edit(item.id)">
+                    Phân quyền
+                </button>
+                <a (click)="updateRole(roleForm, item)" title="Sửa" class="btn btn-icon btn-primary m-1 btn-sm"
+                    style="border-color: #e8e8e8">
+                    <span [inlineSVG]="'./assets/media/svg/icons/Common/Pencil-alt.svg'" cacheSVG="true"
+                        class="svg-icon svg-icon-sm svg-icon-primary">
+                    </span>
+                </a>
+                <a *ngIf="item.lock" (click)="deleteRole(item)" title="Xóa" class="btn btn-icon btn-danger m-1 btn-sm" style="border-color: #e8e8e8">
+                    <span [inlineSVG]="'./assets/media/svg/icons/Common/Trash.svg'" cacheSVG="true"
+                        class="svg-icon svg-icon-sm svg-icon-danger">
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #roleForm let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">
+            {{ actionStatus ? 'Thêm' : 'Sửa' }} vai trò</h4>
+        <button type="button" class="btn btn-close" aria-label="Close" (click)="d('Cross click')">X</button>
+    </div>
+    <form class="form form-label-right" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+        <div class="modal-body">
+            <div class="form-group row">
+                <label class="col-xl-12 col-lg-12 col-form-label form-label font-weight-bold">Tên vai trò<span
+                        class="required-field">*</span></label>
+                <div class="col-xl-12 col-lg-12">
+                    <input matInput appTrim type="text" class="form-control" formControlName="name"
+                        [class.is-invalid]="isControlInvalid('name')" placeholder="Nhập vai trò..." />
+                    <app-validation-error [field]="'Tên'" [submitted]="isControlInvalid('name')"
+                        [control]="formGroup.controls.name">
+                    </app-validation-error>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-xl-12 col-lg-12 col-form-label form-label font-weight-bold">Mô tả vai trò</label>
+                <div class="col-xl-12 col-lg-12">
+                    <input matInput appTrim type="text" class="form-control" formControlName="description"
+                        [class.is-invalid]="isControlInvalid('description')" placeholder="Nhập mô tả..." />
+                    <app-validation-error [field]="'Mô tả'" [submitted]="isControlInvalid('description')"
+                        [control]="formGroup.controls.description">
+                    </app-validation-error>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">{{ actionStatus ? 'Thêm' : 'Sửa' }}</button>
+        </div>
+    </form>
+</ng-template>

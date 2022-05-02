@@ -1,0 +1,11 @@
+::ng-deep .mat-datepicker-toggle {
+    position: absolute;
+    right: 12px;
+}
+
+.custom-date-picker{
+
+    &.is-invalid{
+        background-image: none;
+    }
+}

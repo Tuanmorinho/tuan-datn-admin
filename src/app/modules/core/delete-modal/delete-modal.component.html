@@ -1,0 +1,24 @@
+<div class="modal-header"
+     [style]="{'background-color':bgColor}">
+  <div class="modal-title h4 text-light">{{ info.title }}</div>
+</div>
+<div class="modal-body py-10 pt-3 pb-0 text-center">
+  <div class="svg-icon svg-icon-md delete-modal__svg-delete"></div>
+  <span [innerHTML]="info.content"
+        class="delete-modal__content">
+  </span>
+</div>
+<div class="modal-footer p-3">
+  <div>
+    <button type="button"
+            class="btn btn-light btn-elevate mr-1"
+            (click)="modal.close(false)">
+      Hủy
+    </button>&nbsp;
+    <button type="button"
+            class="btn btn-danger btn-elevate"
+            (click)="delete()">
+      Xóa
+    </button>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+.btn-product-infor {
+    background-color: #fff;
+    text-align: left;
+    height: 30px;    
+}
+.btn-product-infor label {
+    font-size: 14px; 
+    font-weight: 500;
+    color: #828282;
+}
+.btn-product-infor:hover {
+    opacity: 0.8;
+}
+.btn-product-infor-active {
+    border-bottom: 2px solid #6BA425;
+}
+.btn-product-infor-active label {
+    color: #6BA425 !important;
+}
+
+
+.btn-manual {
+    background-color: #fff;
+    height: 30px;
+    margin-left: 30px;
+}
+.btn-manual label {
+    font-size: 14px; 
+    font-weight: 500;
+    color: #828282;
+}
+.btn-manual:hover {
+    opacity: 0.8;
+}
+.btn-manual-active {
+    border-bottom: 2px solid #6BA425;
+}
+.btn-manual-active label {
+    color: #6BA425 !important;
+}
+
+.form-label {
+    color: #828282;
+}
+
+.form-group {
+    margin-bottom: 0;
+}
+
+.header-nav {
+    padding-left: 31.5px !important;
+    padding-right: 31.5px !important;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 25px 20px -20px !important;
+}

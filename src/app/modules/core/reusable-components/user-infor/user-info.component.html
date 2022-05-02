@@ -1,0 +1,283 @@
+<form [formGroup]="formGroup" class=" form form-label-right">
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <p class="card-title font-weight-bolder text-dark mb-0">Thông tin người đại diện</p>
+            <div class="form-group row">
+                <div [class]="isOwner ? 'col-lg-2 col-md-2 col-xl-3' : 'col-lg-4 col-md-4'">
+                    <app-upload-files [formGroup]="formGroup" [formControlName]="'avatar'" uploadType="image"
+                        acceptFiles=".png, .jpg, .jpeg" [validTypeFiles]="validTypeFiles">
+                    </app-upload-files>
+                </div>
+                <div [class]="isOwner ? 'col-lg-10 col-md-10 col-xl-9' : 'col-lg-8 col-md-8'">
+                    <ng-container *ngIf="isOwner">
+                        <div class="form-group row">
+                            <div class="col-lg-3 col-md-6">
+                                <label class="col-form-label form-label">Chọn người dùng</label>
+                                <ng-select [items]="users" bindLabel="firstName" bindValue="id" formControlName="userId"
+                                    [notFoundText]="'Không có mục nào được chọn'" placeholder="Chọn tài khoản"
+                                    loadingText="Đang tải" (change)="selectUser($event)">
+                                </ng-select>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <label class="col-form-label form-label">Họ và tên<span
+                                        class="required-field">*</span></label>
+                                <input matInput appTrim type="text" class="form-control" formControlName="fullname"
+                                    placeholder="Nhập họ và tên..." [class.is-invalid]="isControlInvalid('fullname')" />
+                                <app-validation-error [field]="'Họ và tên'" [submitted]="isControlInvalid('fullname')"
+                                    [control]="formGroup.controls.fullname">
+                                </app-validation-error>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <label class="col-form-label form-label">Ngày sinh<span
+                                        class="required-field">*</span></label>
+                                <div class="">
+                                    <div class="d-flex justify-content-between">
+                                        <input matInput [matDatepicker]="picker2"
+                                            [class.is-invalid]="isControlInvalid('birthday')" placeholder="Ngày sinh"
+                                            formControlName="birthday" class="form-control custom-date-picker">
+                                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker2></mat-datepicker>
+                                    </div>
+                                    <app-validation-error [field]="'Ngày sinh'"
+                                        [submitted]="isControlInvalid('birthday')"
+                                        [control]="formGroup.controls.birthday">
+                                    </app-validation-error>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <label class="col-form-label form-label">Tình trạng hôn
+                                    nhân</label>
+                                <ng-select formControlName="marriageState">
+                                    <ng-option *ngFor="let item of initData?.marriageStates" [value]="item.code">{{
+                                        item.value }}
+                                    </ng-option>
+                                </ng-select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-3 col-md-6">
+                                <label class="col-form-label form-label">Giới tính <span
+                                        class="required-field">*</span></label>
+                                <div class="d-flex justify-content-start col-form-label">
+                                    <mat-radio-group [color]="'primary'" formControlName="gender">
+                                        <mat-radio-button *ngFor="let item of initData?.genders" [value]="item.code">{{
+                                            item.value
+                                            }}
+                                        </mat-radio-button>
+                                    </mat-radio-group>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <label class="col-form-label form-label">CMND / CCCD<span
+                                        class="required-field">*</span></label>
+                                <input matInput appTrim type="text" class="form-control"
+                                    placeholder="Nhập số CMND / CCCD..." formControlName="identifyCode"
+                                    [class.is-invalid]="isControlInvalid('identifyCode')" />
+                                <app-validation-error [field]="'CMND / CCCD'"
+                                    [submitted]="isControlInvalid('identifyCode')"
+                                    [control]="formGroup.controls.identifyCode">
+                                </app-validation-error>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6">
+                                <label class="col-form-label form-label">Trình độ học vấn</label>
+                                <input matInput appTrim type="text" class="form-control"
+                                    placeholder="Nhập trình độ học vấn..." formControlName="education" />
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="!isOwner">
+                        <div class="form-group row">
+                            <div class="col-lg-6 col-md-6">
+                                <label class="col-form-label form-label font-weight-bold">Quan hệ<span
+                                        class="required-field">*</span></label>
+                                <ng-select [items]="relationships" bindLabel="name" bindValue="name"
+                                    formControlName="relationship" [notFoundText]="'Không có mục nào được chọn'"
+                                    placeholder="Chọn mối quan hệ" loadingText="Đang tải">
+                                </ng-select>
+                                <app-validation-error [field]="'Quan hệ'" [submitted]="isControlInvalid('relationship')"
+                                    [control]="formGroup.controls.relationship">
+                                </app-validation-error>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <label class="col-form-label form-label">Chọn người dùng</label>
+                                <ng-select [items]="users" bindLabel="firstName" bindValue="id" formControlName="userId"
+                                    [notFoundText]="'Không có mục nào được chọn'" placeholder="Chọn tài khoản"
+                                    loadingText="Đang tải" (change)="selectUser($event)">
+                                </ng-select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-lg-6 col-md-6">
+                                <label class="col-form-label form-label">Họ và tên<span
+                                        class="required-field">*</span></label>
+                                <input matInput appTrim type="text" class="form-control" formControlName="fullname"
+                                    placeholder="Nhập họ và tên..." [class.is-invalid]="isControlInvalid('fullname')" />
+                                <app-validation-error [field]="'Họ và tên'" [submitted]="isControlInvalid('fullname')"
+                                    [control]="formGroup.controls.fullname">
+                                </app-validation-error>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <label class="col-form-label form-label">Ngày sinh<span
+                                        class="required-field">*</span></label>
+                                <div class="">
+                                    <div class="d-flex justify-content-between">
+                                        <input matInput [matDatepicker]="picker2"
+                                            [class.is-invalid]="isControlInvalid('birthday')" placeholder="Ngày sinh"
+                                            formControlName="birthday" class="form-control custom-date-picker">
+                                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker2></mat-datepicker>
+                                    </div>
+                                    <app-validation-error [field]="'Ngày sinh'"
+                                        [submitted]="isControlInvalid('birthday')"
+                                        [control]="formGroup.controls.birthday">
+                                    </app-validation-error>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <div class="col-lg-6 col-md-6">
+                                <label class="col-form-label form-label">Giới tính <span
+                                        class="required-field">*</span></label>
+                                <div class="d-flex justify-content-start col-form-label">
+                                    <mat-radio-group [color]="'primary'" formControlName="gender">
+                                        <mat-radio-button *ngFor="let item of initData?.genders" [value]="item.code">{{
+                                            item.value
+                                            }}
+                                        </mat-radio-button>
+                                    </mat-radio-group>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <label class="col-form-label form-label">CMND / CCCD<span
+                                        class="required-field">*</span></label>
+                                <input matInput appTrim type="text" class="form-control"
+                                    placeholder="Nhập số CMND / CCCD..." formControlName="identifyCode"
+                                    [class.is-invalid]="isControlInvalid('identifyCode')" />
+                                <app-validation-error [field]="'CMND / CCCD'"
+                                    [submitted]="isControlInvalid('identifyCode')"
+                                    [control]="formGroup.controls.identifyCode">
+                                </app-validation-error>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-lg-6 col-md-6">
+                                <label class="col-form-label form-label">Trình độ học vấn</label>
+                                <input matInput appTrim type="text" class="form-control"
+                                    placeholder="Nhập trình độ học vấn..." formControlName="education" />
+                            </div>
+
+                            <div class="col-lg-6 col-md-6">
+                                <label class="col-form-label form-label">Tình trạng hôn
+                                    nhân</label>
+                                <ng-select formControlName="marriageState">
+                                    <ng-option *ngFor="let item of initData?.marriageStates" [value]="item.code">{{
+                                        item.value }}
+                                    </ng-option>
+                                </ng-select>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <p class="card-title font-weight-bolder text-dark mb-0 mt-4">Địa chỉ</p>
+            <div class="row">
+                <div [class]="isOwner ? 'col-md-6 col-sm-6' : 'col-md-12 col-sm-12'">
+                    <app-address [title]="'Địa chỉ thường trú'" [isRequire]="true" [countryList]="initData?.countries"
+                        [formControlNameCountry]="'permanentCountryId'"
+                        [formControlNameProvince]="'permanentProvinceId'"
+                        [formControlNameDistrict]="'permanentDistrictId'" [formControlNameWard]="'permanentWardId'"
+                        [addressDetail]="'permanentAddress'" [formGroup]="formGroup" [addressType]="0"></app-address>
+                </div>
+                <div [class]="isOwner ? 'col-md-6 col-sm-6' : 'col-md-12 col-sm-12'">
+                    <app-address [title]="'Địa chỉ tạm trú'" [countryList]="initData?.countries"
+                        [formControlNameCountry]="'temporaryCountryId'"
+                        [formControlNameProvince]="'temporaryProvinceId'"
+                        [formControlNameDistrict]="'temporaryDistrictId'" [formControlNameWard]="'temporaryWardId'"
+                        [addressDetail]="'temporaryAddress'" [formGroup]="formGroup" [addressType]="1">
+                    </app-address>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div [class]="isOwner ? 'col-md-6 col-sm-6' : 'col-md-12 col-sm-12'">
+                    <p class="card-title font-weight-bolder text-dark mb-0 mt-5">Liên hệ</p>
+                    <div class="form-group row">
+                        <div class="col-lg-6 col-md-6">
+                            <label class="col-form-label form-label">Email</label>
+                            <input matInput appTrim type="email" class="form-control" placeholder="Nhập email..."
+                                formControlName="email" />
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <label class="col-form-label form-label">Số điện thoại</label>
+                            <div class="">
+                                <input matInput appTrim type="text" class="form-control"
+                                    placeholder="Nhập số điện thoại..." formControlName="phone" />
+                            </div>
+                        </div>
+                    </div>
+                    <p class="card-title font-weight-bolder text-dark mb-0 mt-5">Nghề nghiệp</p>
+                    <div class="form-group row">
+                        <!-- Nghề nghiệp -->
+                        <div class="col-lg-6 col-md-6">
+                            <label class="col-form-label form-label">Nghề nghiệp</label>
+                            <div class="">
+                                <input matInput appTrim type="text" class="form-control"
+                                    placeholder="Nhập nghề nghiệp..." formControlName="occupation" />
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6">
+                            <label class="col-form-label form-label">Thu nhập (VNĐ/Tháng)</label>
+                            <input matInput appTrim type="number" class="form-control" placeholder="Nhập thu nhập..."
+                                formControlName="monthlyIncome" />
+                        </div>
+                    </div>
+                </div>
+                <div [class]="isOwner ? 'col-md-6 col-sm-6' : 'col-md-12 col-sm-12'">
+                    <p class="card-title font-weight-bolder text-dark mb-0 mt-5">Tài khoản ngân hàng</p>
+                    <label class="col-form-label form-label">Ngân hàng giao dịch</label>
+                    <div class="form-group row">
+                        <ng-container formArrayName="bankAccounts"
+                            *ngFor="let bank of userBanks().controls;let i= index">
+                            <div class="col-4 mb-3" [formGroupName]="i">
+                                <ng-select [items]="initData?.banks" bindLabel="value" bindValue="id"
+                                    formControlName="bankId" [notFoundText]="'Không có mục nào được chọn'"
+                                    placeholder="Ngân hàng" loadingText="Đang tải" [appendTo]="'body'"
+                                    [class.is-invalid]="isControlBankInValid('bankId', i)">
+                                    <ng-template ng-option-tmp let-item="item">
+                                        <span title="{{item.value}}">({{item.code}}) - {{item.value}}</span>
+                                    </ng-template>
+                                </ng-select>
+                            </div>
+                            <div class="col-4 mb-3" [formGroupName]="i">
+                                <input matInput appTrim type="text" class="form-control" formControlName="number"
+                                    placeholder="Nhập số tài khoản..."
+                                    [class.is-invalid]="isControlBankInValid('number', i)" />
+                            </div>
+                            <div class="col-3 mb-3" [formGroupName]="i">
+                                <input matInput appTrim type="text" class="form-control" formControlName="name"
+                                    placeholder="Nhập tên chủ tài khoản..."
+                                    [class.is-invalid]="isControlBankInValid('name', i)" />
+                            </div>
+                            <a [formGroupName]="i" class="col-1 btn btn-icon btn-delete-item btn-sm btn-remove bg-white"
+                                (click)="removeBank(i)">
+                                <span [inlineSVG]="'./assets/media/svg/icons/Common/Delete.svg'" cacheSVG="true"
+                                    class="svg-icon svg-icon-sm svg-icon-danger">
+                                </span>
+                            </a>
+                        </ng-container>
+                    </div>
+                    <div>
+                        <button (click)="addBank()" class="btn btn-outline-primary" style="width: 100%">
+                            <i class="ki ki-plus icon-sm"></i> Thêm tài khoản ngân hàng
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

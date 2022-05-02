@@ -1,0 +1,18 @@
+<div class="outer-btn">
+    <app-scaleline [map]="map"></app-scaleline>
+    <app-mouse-position [map]="map" positionTemplate="{x}, {y} m"></app-mouse-position>
+</div>
+<div class="rel">
+    <div id="map" class="map"></div>
+    <div id="popup" class="ol-popup">
+        <a href="javascript:void(0)" id="popup-closer" class="ol-popup-closer"></a>
+        <div id="popup-content"></div>
+        <a href="javascript:void(0)" (click)="showDetail()">Xem chi tiết</a>
+    </div>
+    <div id="plot"></div>
+</div>
+
+<div class="d-hidden" id="kt_quick_custom_toggle"></div>
+<ng-container>
+  <custom-offcanvas [component]="weatherComponent"  [isForm]="true" [filter]="filter"></custom-offcanvas>
+</ng-container>

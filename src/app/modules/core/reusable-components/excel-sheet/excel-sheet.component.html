@@ -1,0 +1,70 @@
+<div class="card-header p-5">
+  <ng-container *ngIf="errors.length">
+    <div class="alert alert-warning fade show d-flex align-items-center justify-content-between" role="alert"
+      *ngFor="let err of errors; let i = index">
+      <strong>{{ err }}</strong>
+      <div class="btn-selection btn-custom-close">
+        <i class="ki ki-bold-close icon-xs align-text-bottom cursor-pointer text-white" (click)="closeAlert(i)"></i>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="importSuccess">
+    <div class="alert alert-success fade show d-flex align-items-center justify-content-between" role="alert">
+      <strong>Import thành công</strong>
+      <div class="btn-selection btn-custom-close">
+        <i class="ki ki-bold-close icon-xs align-text-bottom cursor-pointer text-white"
+          (click)="importSuccess = false"></i>
+      </div>
+    </div>
+  </ng-container>
+
+  <div class="h4 d-flex align-items-center justify-content-between">
+    <ng-container>Import Excel</ng-container>
+    <div class="btn-selection btn-custom-close">
+      <i class="ki ki-bold-close icon-xs align-text-bottom cursor-pointer" (click)="activateModal.dismiss()"></i>
+    </div>
+  </div>
+</div>
+<div class="card-body pt-0">
+  <div>
+    <div class="d-flex align-items-center justify-content-center">
+      <div *ngIf="isExcelFile === false">
+        <label class="text-danger">File không đúng định dạng! (hỗ trợ: .xls, .xlsx)</label>
+      </div>
+      <div *ngIf="isOneFile === false">
+        <label class="text-danger">Số file tối đa là 1 file!</label>
+      </div>
+    </div>
+
+    <ng-container *ngIf="isHaveFile">
+      <div class="table-responsive angular-bootstrap-table">
+        <basic-table (outputSort)="sort($event)" [items]="tableExcelService.items$" [columns]="columnsConfig"
+          (outputDelete)="delete($event)" [paginator]="tableExcelService.paginator"
+          [sorting]="tableExcelService.sorting" [grouping]="tableExcelService.grouping" [isHideEditBtn]="true"
+          (outputImport)="importRow($event)">
+        </basic-table>
+      </div>
+    </ng-container>
+  </div>
+  <hr *ngIf="isHaveFile" />
+  <div class="mt-5 p-5">
+    <div class="row">
+      <ng-select class="col-3" [items]="files" style="width: 130;" bindLabel="name" (change)="choosedTemplate($event)"
+        placeholder="Tải mẫu template" [notFoundText]="'Không có template nào'">
+        <ng-template ng-option-tmp let-item="item">
+          <span title="{{ item.name }}">{{ item.name }}</span>
+        </ng-template>
+      </ng-select>
+
+      <div class="col-3">
+        <input class="d-none" type="file" (change)="onFileChange($event)" #inputFileEx accept=".xls, .xlsx">
+        <!-- <button class="btn btn-info" (click)="downloadTemplate()">Download Template</button> -->
+        <button class="btn btn-warning ml-5" (click)="inputFileEx.click()">Upload file</button>
+        <button *ngIf="isHaveFile" class="btn btn-outline-danger ml-5" (click)="removeFile()">Clear file</button>
+      </div>
+      <div class="col-6 text-right" *ngIf="isHaveFile">
+        <button class="btn btn-primary" (click)="importAll()">Import all</button>
+      </div>
+    </div>
+  </div>
+</div>

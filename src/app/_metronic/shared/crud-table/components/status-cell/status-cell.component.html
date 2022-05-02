@@ -1,0 +1,6 @@
+<span class="label label-lg label-inline"
+      [class.label-light-danger]="prop.deleteFlag !== 0"
+      [class.label-light-success]="prop.deleteFlag === 0">
+  <ng-container *ngIf="prop.deleteFlag !== 0">Đã xóa</ng-container>
+  <ng-container *ngIf="prop.deleteFlag === 0">Bình thường</ng-container>
+</span>

@@ -1,0 +1,5 @@
+<ng-container *ngIf="subheaderVersion$ | async as _version">
+  <ng-container *ngIf="_version === 'v1'">
+    <app-subheader1></app-subheader1>
+  </ng-container>
+</ng-container>

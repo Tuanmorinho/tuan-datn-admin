@@ -1,0 +1,228 @@
+.custom-progressbar {
+  position: absolute;
+  width: 64.5%;
+  height: 5px;
+  top: 39px;
+  left: 3px;
+}
+
+@media (max-width: 768px) {
+  .custom-file-label {
+    display: none;
+  }
+
+  .custom-file-icon {
+    &.wrapper {
+      display: inline-block;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .custom-file-label {
+    display: inline-block;
+  }
+
+  .custom-file-icon {
+    &.wrapper {
+      display: none;
+    }
+  }
+}
+
+.form-input {
+  &__file {
+    position: relative;
+    overflow: hidden;
+    padding-right: 120px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__file-hidden {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  &__file-button {
+    cursor: pointer;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: -1px;
+    bottom: 0;
+    padding: 0.71em 1em 0;
+    background-color: rgb(241, 241, 241);
+
+    &:hover {
+      background-color: #e4e6ef;
+    }
+  }
+
+  &__file-button-disabled {
+    pointer-events: none;
+  }
+}
+
+// image
+
+.avatar-upload {
+  position: relative;
+  // max-width: 205px;
+  // margin: 10px auto 30px;
+}
+
+.avatar-upload .avatar-edit {
+  position: absolute;
+  right: 19px;
+  z-index: 1;
+  top: 13px;
+}
+
+.avatar-upload .avatar-edit input {
+  display: none;
+}
+
+.avatar-upload .avatar-edit .custom-label {
+  display: inline-block;
+  width: 34px;
+  height: 34px;
+  margin-bottom: 0;
+  background: #3efc78;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-weight: normal;
+  transition: all 0.2s ease-in-out;
+}
+
+.avatar-upload .avatar-edit .upload-image {
+  background: #3efc78;
+}
+
+.avatar-upload .avatar-edit .remove-image {
+  background: rgba(233, 30, 98, 0.075);
+}
+
+.avatar-upload .avatar-edit .custom-label:hover {
+  opacity: 1;
+}
+
+.avatar-upload .avatar-edit .custom-label:after {
+  position: absolute;
+  text-align: center;
+  margin: auto;
+  top: 8px;
+  right: 0;
+  left: 2px;
+  width: 18px;
+}
+
+.avatar-upload .avatar-edit .upload-image:after {
+  content: url('/assets/edit.svg');
+}
+
+.avatar-upload .avatar-edit .remove-image:after {
+  content: url('/assets/close.svg');
+  left: 0px !important;
+}
+
+.avatar-upload .avatar-preview {
+  width: 250px;
+  height: 250px;
+  position: relative;
+  overflow: hidden;
+  border: 12px solid #fff;
+}
+
+.avatar-upload .avatar-preview>div {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.form-control {
+  height: auto;
+  padding: 15px;
+  font-size: 14px;
+  color: #222222;
+  background: #FDFDFD;
+  border: 1px solid #312BC6;
+}
+
+.custom-select {
+  height: auto;
+  padding: 15px;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: 400;
+  color: #222222;
+  background-color: #FDFDFD;
+  border: 1px solid #312BC6;
+}
+
+.custom-control-input:checked~.custom-control-label::before {
+  border-color: rgb(59, 38, 45);
+  background-color: rgb(165, 143, 150);
+}
+
+.custom-control-input:focus~.custom-control-label::before {
+  box-shadow: none;
+}
+
+.custom-control-label {
+  cursor: pointer;
+}
+
+.upload-file-preview {
+  background: #F2F9E8;
+  border: 1px dashed #828282 !important;
+  border-radius: 4px;
+  width: 100% !important;
+}
+
+.item-img {
+  border: 1px solid #F2F2F2;
+  border-radius: 10px;
+
+  .icon-img {
+    position: relative;
+
+    span.svg-icon.svg-icon-sm.svg-icon-danger {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+    }
+  }
+}
+
+.add-img-btn {
+  cursor: pointer;
+}
+
+#imagePreview {
+  filter: blur(8px);
+  -webkit-filter: blur(2px);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.bg-text {
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0, 0); /* Black w/opacity/see-through */
+  color: white;
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 80%;
+  padding: 20px;
+  text-align: center;
+}

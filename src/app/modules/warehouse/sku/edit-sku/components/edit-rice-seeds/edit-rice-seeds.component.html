@@ -1,0 +1,133 @@
+<form [formGroup]="formGroup">
+    <div class="d-flex align-items-end">
+        <div class="mt-5"
+            style="font-weight: 700; font-size: 14px;">Thông tin giống lúa</div>
+    </div>
+    <!-- Tên giống lúa -->
+    <div class="form-group row">
+        <label class="col-xl-12 col-lg-12 col-form-label form-label font-weight-bold">Tên giống lúa<span
+                class="required-field">*</span></label>
+        <div class="col-lg-12 col-xl-12">
+            <input matInput appTrim type="text" class="form-control" formControlName="name" placeholder="Nhập tên..."
+                [class.is-invalid]="isControlInvalid('name')" />
+        </div>
+        <app-validation-error [field]="'Tên'" [submitted]="isControlInvalid('name')"
+            [control]="formGroup.controls.name">
+        </app-validation-error>
+    </div>
+
+    <!-- Nguồn gốc -->
+    <div class="form-group row">
+        <label class="col-xl-12 col-lg-12 col-form-label form-label font-weight-bold">Nguồn gốc<span
+                class="required-field">*</span></label>
+        <div class="col-lg-12 col-xl-12">
+            <input matInput appTrim type="text" class="form-control" formControlName="manufacture"
+                placeholder="Nhập nguồn gốc..." [class.is-invalid]="isControlInvalid('manufacture')" />
+        </div>
+        <app-validation-error [field]="'Nguồn gốc'" [submitted]="isControlInvalid('manufacture')"
+            [control]="formGroup.controls.manufacture">
+        </app-validation-error>
+    </div>
+
+    <!-- Loại -->
+    <div class="form-group row">
+        <label class="col-xl-12 col-lg-12 col-form-label form-label font-weight-bold">Loại giống lúa</label>
+        <div class="col-lg-12 col-xl-12">
+            <input matInput appTrim type="text" class="form-control" formControlName="susr08"
+                placeholder="Nhập loại giống lúa..." [class.is-invalid]="isControlInvalid('susr08')" />
+        </div>
+        <app-validation-error [field]="'Loại giống lúa'" [submitted]="isControlInvalid('susr08')"
+            [control]="formGroup.controls.susr08">
+        </app-validation-error>
+    </div>
+
+    <!-- <div class="form-group row">
+        <label class="col-xl-2 col-lg-2 col-form-label form-label font-weight-bold">Đơn vị<span
+            class="required-field">*</span></label>
+        <div class="col-lg-12 col-xl-12">
+            <ng-select [items]="initDataWarehouse?.units" bindLabel="value" bindValue="code" class="form-control"
+                formControlName="unit" [notFoundText]="'Không có mục nào được chọn'"
+                placeholder="Chọn đơn vị..." loadingText="Đang tải"
+                [class.is-invalid]="isControlInvalid('unit')">
+                <ng-template ng-option-tmp let-item="item">
+                    <span title="{{ item.value }}">{{item.value}}</span>
+                </ng-template>
+            </ng-select>
+            <app-validation-error [field]="'Đơn vị'" [submitted]="isControlInvalid('unit')"
+                [control]="formGroup.controls.unit">
+            </app-validation-error>
+        </div>
+    </div> -->
+
+    <!-- <div class="form-group row">
+        <div class="col-6">
+            <label class="col-form-label form-label font-weight-bold" style="padding-left: 0">Khối lượng<span class="required-field">*</span></label>
+            <input matInput formControlName="netWeight" [class.is-invalid]="isControlInvalid('netWeight')"
+                placeholder="Nhập khối lượng..." class="form-control custom-date-picker" />
+            <app-validation-error [field]="'Khối lượng'" [submitted]="isControlInvalid('netWeight')"
+                [control]="formGroup.controls.netWeight ">
+            </app-validation-error>
+        </div>
+
+        <div class="col-6">
+            <label class="col-form-label form-label font-weight-bold" style="padding-left: 0">Đơn vị
+                đo<span class="required-field">*</span></label>
+            <ng-select [items]="initDataWarehouse?.weightUnits" bindLabel="value" bindValue="code" class="form-control"
+                formControlName="weightUnit" [notFoundText]="'Không có mục nào được chọn'" placeholder="Chọn đơn vị đo"
+                loadingText="Đang tải" [class.is-invalid]="isControlInvalid('weightUnit')">
+                <ng-template ng-option-tmp let-item="item">
+                    <span title="{{ item.value }}">{{item.value}}</span>
+                </ng-template>
+            </ng-select>
+            <app-validation-error [field]="'Đơn vị đo'" [submitted]="isControlInvalid('weightUnit')"
+                [control]="formGroup.controls.weightUnit">
+            </app-validation-error>
+        </div>
+    </div> -->
+
+    <div class="form-group row">
+        <label class="col-xl-12 col-lg-12 col-form-label form-label font-weight-bold">Thời gian sinh trưởng</label>
+        <div class="col-lg-12 col-xl-12">
+            <input matInput appTrim type="text" class="form-control" formControlName="susr04"
+                placeholder="Nhập thời gian sinh trưởng..." [class.is-invalid]="isControlInvalid('susr04')" />
+        </div>
+        <app-validation-error [field]="'Thời gian sinh trưởng'" [submitted]="isControlInvalid('susr04')"
+            [control]="formGroup.controls.susr04">
+        </app-validation-error>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-xl-12 col-lg-12 col-form-label form-label font-weight-bold">Năng suất</label>
+        <div class="col-lg-12 col-xl-12">
+            <input matInput appTrim type="text" class="form-control" formControlName="susr05"
+                placeholder="Nhập năng suất..." [class.is-invalid]="isControlInvalid('susr05')" />
+        </div>
+        <app-validation-error [field]="'Năng suất'" [submitted]="isControlInvalid('susr05')"
+            [control]="formGroup.controls.susr05">
+        </app-validation-error>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-xl-12 col-lg-12 col-form-label form-label font-weight-bold">Điểm chống sâu bệnh</label>
+        <div class="col-lg-12 col-xl-12">
+            <input matInput appTrim type="text" class="form-control" formControlName="susr07"
+                placeholder="Nhập điểm chống sâu bệnh..." [class.is-invalid]="isControlInvalid('susr07')" />
+        </div>
+        <app-validation-error [field]="'Điểm chống sâu bệnh'" [submitted]="isControlInvalid('susr07')"
+            [control]="formGroup.controls.susr07">
+        </app-validation-error>
+    </div>
+
+    <!-- <div class="d-flex align-items-end mt-5">
+        <div class="mt-5" style="font-weight: 700; font-size: 14px;">Tài liệu đính kèm</div>
+    </div> -->
+
+    <!-- <div class="form-group row">
+        <label class="col-xl-12 col-lg-12 col-xs-12 col-form-label form-label font-weight-bold"></label>
+        <div class="col-lg-12 col-xl-12 col-xs-12">
+            <app-upload-files [formGroup]="formGroup" [formControlName]="'files'" uploadType="file" [field]="'Tài liệu đính kèm'"
+                [maxLength]="10"
+                [fileContainerStyle]="{'border': '1px solid #E4E6EF', 'border-radius': '0.42rem'}"></app-upload-files>
+        </div>
+    </div> -->
+</form>

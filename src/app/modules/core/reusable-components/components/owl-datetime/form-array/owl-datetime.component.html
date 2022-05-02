@@ -1,0 +1,27 @@
+<ng-container [formGroup]="formGroup">
+    <div class="input-group">
+        <input [formControlName]="formControlName"
+               (dateTimeChange)="dateValidator(index,startDate,endDate)"
+               [owlDateTime]="dt1"
+               class="hidden-owl-input">
+        <input
+               [value]="formGroup?.getRawValue()[formControlName] | dateFilter:_dateType"
+               readonly
+               [class.disabled]="disabled"
+               class="form-control"
+               [class.is-invalid]="isControlInValid(formControlName)"
+               placeholder="Thời gian dự kiến vào">
+        <div class="input-group-append"
+              *ngIf="!disabled"
+             [owlDateTimeTrigger]="dt1">
+            <span class="input-group-text"
+                  id="basic-addon2">Chọn</span>
+        </div>
+        <owl-date-time #dt1
+                       [pickerType]="pickerType"></owl-date-time>
+    </div>
+    <app-validation-error [field]="errorField"
+                          [submitted]="isControlInValid(formControlName)"
+                          [control]="formGroup.controls[formControlName]">
+    </app-validation-error>
+</ng-container>

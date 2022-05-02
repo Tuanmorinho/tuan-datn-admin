@@ -1,0 +1,117 @@
+<div class="loading-overlay" *ngIf="(soService.isLoading$ | async)">Loading&#8230;</div>
+<div class="row">
+    <div class="col-4">
+        <div class="card card-body pt-4">
+            <p class="card-title font-weight-bolder text-dark mb-0">Thông tin phiếu xuất</p>
+            <div class="row py-2">
+                <label class="col-lg-4 col-xl-4 col-form-label form-label d-flex align-items-center">Mã phiếu
+                    xuất:</label>
+                <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                    <label class="font-weight-bold">{{ soData?.code }}</label>
+                </div>
+            </div>
+            <hr class="m-0" />
+            <div class="row py-2">
+                <label class="col-lg-4 col-xl-4 col-form-label form-label d-flex align-items-center">Phân loại:</label>
+                <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                    <label class="font-weight-bold">{{ soData?.type }}</label>
+                </div>
+            </div>
+            <hr class="m-0" />
+            <div class="row py-2">
+                <label class="col-lg-4 col-xl-4 col-form-label form-label d-flex align-items-center">Khách
+                    hàng:</label>
+                <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                    <label class="font-weight-bold">{{ soData?.customerName }}</label>
+                </div>
+            </div>
+            <hr class="m-0" />
+            <div class="row py-2">
+                <label class="col-lg-4 col-xl-4 col-form-label form-label d-flex align-items-center">Mã khách
+                    hàng:</label>
+                <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                    <label class="font-weight-bold">{{ soData?.customerCode }}</label>
+                </div>
+            </div>
+            <hr class="m-0" />
+            <div class="row py-2">
+                <label class="col-lg-4 col-xl-4 col-form-label form-label d-flex align-items-center">Ngày xuất dự
+                    kiến:</label>
+                <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                    <label class="font-weight-bold">{{ soData?.requestedShipDate }}</label>
+                </div>
+            </div>
+            <hr class="m-0" />
+            <div class="row py-2">
+                <label class="col-lg-4 col-xl-4 col-form-label form-label d-flex align-items-center">Ngày xuất thực
+                    tế:</label>
+                <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                    <label class="font-weight-bold">{{ soData?.actualShipDate ? soData?.actualShipDate : '...' }}</label>
+                </div>
+            </div>
+            <hr class="m-0" />
+            <div class="row py-2 d-flex align-items-start">
+                <label class="col-lg-4 col-xl-4 col-form-label form-label d-flex align-items-center">Ghi chú:</label>
+                <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                    <label class="font-weight-bold">{{ soData?.note ? soData?.note : '...' }}</label>
+                </div>
+            </div>
+            <hr class="m-0" />
+            <div class="row py-2">
+                <label class="col-lg-4 col-xl-4 col-form-label form-label d-flex align-items-center">Giá trị đơn
+                    hàng:</label>
+                <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                    <label class="font-weight-bold">{{ totalMoneySO | number }} {{ soData?.priceCurrencyType }}</label>
+                </div>
+            </div>
+            <hr class="m-0" />
+            <div class="row py-2">
+                <label class="col-lg-4 col-xl-4 col-form-label form-label d-flex align-items-center">Trạng thái:</label>
+                <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                    <label [className]="styleStatus">{{ soData?.status }}</label>
+                </div>
+            </div>
+            <hr class=" m-0" />
+        </div>
+    </div>
+    <div class="col-8">
+        <div class="card card-body">
+            <form class="form form-label-right" [formGroup]="searchGroup">
+                <p style="font-size: 16px !important;" class="card-title font-weight-bolder text-dark mb-3">Danh sách vật tư</p>
+                <div class="form-group row">
+                    <div class="col-lg-2 col-md-2">
+                        <p class="card-subtitle mt-1">Số lượng vật tư: <span style="color: #27AE60;">{{
+                                itemsFilter.length }}</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-2 col-md-2">
+                        <input matInput appTrim appTrim type="text" class="form-control" placeholder="Tìm kiếm" value=""
+                            formControlName="name" />
+                        <i class="fa fa-search" aria-hidden="true"
+                            style="position: absolute; right: 20px; top: 14px; font-size: 12px;"></i>
+                    </div>
+                    <div class="col-lg-2 col-md-2">
+                        <ng-select [items]="SO_STATUS" class="form-control col-lg-12  input" bindLabel="name"
+                            bindValue="code" placeholder="Trạng thái" formControlName="status"
+                            [notFoundText]="'Không có trạng thái nào'">
+                        </ng-select>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <button class="btn btn-outline-primary btn-elevate" (click)="reset()" type="button">
+                            Làm mới
+                        </button>
+                        <button class="btn btn-primary get-data btn-elevate ml-6" (click)="search()" type="submit">
+                            Tìm kiếm
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <div class="table-responsive angular-bootstrap-table">
+                <basic-table (outputSort)="sort($event)" [items]="itemSOService.items$" [columns]="columnsConfig"
+                    [grouping]="itemSOService.grouping" [paginator]="itemSOService.paginator"
+                    [sorting]="itemSOService.sorting" [isHideDeleteBtn]="true" [isHideEditBtn]="true">
+                </basic-table>
+            </div>
+        </div>
+    </div>
+</div>

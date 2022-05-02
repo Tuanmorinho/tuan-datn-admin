@@ -1,0 +1,65 @@
+<flash-messages></flash-messages>
+<div class="loading-overlay" *ngIf="skuService.isLoading$ | async">
+    Loading&#8230;
+</div>
+<div class="card card-custom gutter-b">
+    <div class="card-body">
+        <!-- Filter -->
+        <form class="form form-label-right" [formGroup]="searchGroup">
+            <div class="form-group row">
+                <div class="col-lg-1 col-md-1">
+                    <p class="card-subtitle mt-1">Vật tư: <span style="color: #27AE60;">{{ skuService.paginator.total
+                            }}</span>
+                    </p>
+                </div>
+                <div class="col-lg-2 col-md-2">
+                    <input matInput appTrim appTrim type="text" class="form-control" placeholder="Tìm kiếm theo mã"
+                        value="" formControlName="codeLike" />
+                    <i class="fa fa-search" aria-hidden="true"
+                        style="position: absolute; right: 20px; top: 14px; font-size: 12px;"></i>
+                </div>
+                <div class="col-lg-2 col-md-2">
+                    <input matInput appTrim appTrim type="text" class="form-control" placeholder="Tìm kiếm theo tên"
+                        value="" formControlName="name" />
+                    <i class="fa fa-search" aria-hidden="true"
+                        style="position: absolute; right: 20px; top: 14px; font-size: 12px;"></i>
+                </div>
+                <div class="col-lg-2 col-md-2" style="max-width: 180px !important;">
+                    <ng-select [items]="groupCodes" class="form-control col-lg-12" style="width: 130;" bindLabel="name"
+                        bindValue="code" placeholder="Loại vật tư" formControlName="groupCode"
+                        [notFoundText]="'Không có danh mục nào'">
+                        <ng-template ng-option-tmp let-item="item">
+                            <span title="{{ item.name }}">{{ item.name }}</span>
+                        </ng-template>
+                    </ng-select>
+                </div>
+                <div *ngIf="searchGroup?.value.groupCode === 'LUA'" class="col-lg-2 col-md-2"
+                    style="max-width: 180px !important;">
+                    <ng-select [items]="initDataWareHouse?.fertilizerTypes" class="form-control col-lg-12" style="width: 130;"
+                        bindLabel="value" bindValue="code" placeholder="Loại giống lúa" formControlName="type"
+                        [notFoundText]="'Không có giống lúa nào'">
+                        <ng-template ng-option-tmp let-item="item">
+                            <span title="{{ item.value }}">{{ item.value }}</span>
+                        </ng-template>
+                    </ng-select>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <button class="btn btn-outline-primary" (click)="reset()" type="button">
+                        Làm mới
+                    </button>
+                    <button class="btn btn-primary ml-6" (click)="search()" type="submit">
+                        Tìm kiếm
+                    </button>
+                </div>
+            </div>
+        </form>
+        <!-- Table -->
+        <div class="table-responsive angular-bootstrap-table">
+            <basic-table [isModal]="isModal" [ids]="ids" [isSelectedOnlyItem]="isSelectedOnlyItem"
+                (outputSort)="sort($event)" [items]="skuService.items$" [columns]="columnsConfig"
+                [grouping]="skuService.grouping" [paginator]="skuService.paginator" [sorting]="skuService.sorting"
+                [isHideDeleteBtn]="true" [isHideEditBtn]="true">
+            </basic-table>
+        </div>
+    </div>
+</div>

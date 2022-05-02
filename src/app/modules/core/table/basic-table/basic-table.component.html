@@ -1,0 +1,248 @@
+<div #settingDropdown setting-dropdown class="position-relative" [headersConfig]="columns"
+  (showFields)="showFields($event)">
+</div>
+
+<!-- <div class="above-scroller" *ngIf="enabledScroller" #scroller (scroll)="scroll('tableContainer')">
+  <div class="scroller" [ngStyle]="{'width':widthScrollbar}">
+  </div>
+</div> -->
+
+<div class="mt-3 table-responsive angular-bootstrap-table" (scroll)="scroll('scroller')" #tableContainer>
+  <table class="table table-head-custom table-vertical-center"
+    [ngClass]="{'table-custom overflow-auto': this.hasScrollbarX}" #table>
+    <thead>
+      <!-- Header expand buttons -->
+      <th *ngIf="isExpand" class="datatable-cell selection-cell-header">
+      </th>
+
+      <!-- Header select all button -->
+      <!-- <th *ngIf="(!isModal && !isHideDeleteBtn) || isApprove" class="selection-cell-header" style="width:34px"
+        data-row-selection="true">
+        <mat-checkbox (change)="grouping.selectAllRows()" [checked]="grouping.checkAreAllRowsSelected()"></mat-checkbox>
+      </th> -->
+
+      <!-- Header content -->
+      <ng-container *ngFor="let column of columns;let iColumn = index">
+        <th *ngIf="column.isShowed" [fixedColumn]="column.fixedColumn" [columns]="columns" [iColumn]="iColumn"
+          class="table-header" [ngClass]="{'sortable position-relative mr-10':column.sort,
+                        'selection-cell-header position-sticky':column.dataKey==='actionCell'}" [ngStyle]="
+            {
+              'min-width':column.minWidth && column.minWidth+'px',
+              'width':column.width && column.width+'px',
+              'text-align':(column.subLabels || column.subLabelsNoData) &&'center'}">
+          <span>
+            {{column.label}}
+            <ng-container *ngIf="column.subLabels">
+              <tr class="sub-header text-left">
+                <td *ngFor="let subLabel of column.subLabels" [ngStyle]="
+                {
+                  'width':subLabel.width}">
+                  {{subLabel.label}}
+                </td>
+              </tr>
+            </ng-container>
+            <ng-container *ngIf="column.subLabelsNoData">
+              <tr class="sub-header text-left">
+                <td *ngFor="let subLabel of column.subLabelsNoData" [ngStyle]="
+                {
+                  'width':subLabel.width}">
+                  {{subLabel.label}}
+                </td>
+              </tr>
+            </ng-container>
+          </span>
+          <ng-container *ngIf="column.sort">
+            <app-sort-icon [column]="column.dataKey" [activeColumn]="sorting.column"
+              [activeDirection]="sorting.direction" (sort)="sort($event)"></app-sort-icon>
+          </ng-container>
+        </th>
+      </ng-container>
+
+      <!-- Header default buttons in case of modal -->
+      <th *ngIf="isModal" [ngStyle]="{'width':isSelectedOnlyItem ? '65px' : '25px'}"
+        class="selection-cell-header position-sticky text-center" data-row-selection="true">
+        <span *ngIf="!isSelectedOnlyItem" class="checkbox checkbox-single">
+          <mat-checkbox (change)="selectAllDetailRows()" [checked]="grouping.checkAreAllRowsSelected()"></mat-checkbox>
+        </span>
+      </th>
+
+      <!-- Header default buttons -->
+      <th *ngIf="!isModal && (!isHideEditBtn || !isHideDeleteBtn)"
+        [style.min-width]="(isHideEditBtn || isHideDeleteBtn) ? '0' : '130px'"></th>
+    </thead>
+    <tbody>
+
+      <!-- Rows -->
+      <ng-container *ngFor="let item of items | async;index as i" class="hello">
+        <tr>
+          <!-- Expand buttons -->
+          <!-- <td class="datatable-cell" *ngIf="isExpand" style="border: 1px dashed rgb(5, 5, 5) !important;">
+            <a class="datatable-toggle-detail" *ngIf="item.childrens && item.childrens.length>0"
+              (click)="expandRow(item.id)">
+              <i style="width: 5px"
+                [ngClass]="expanding.isRowSelected(item.id) ? 'fa fa-caret-down': 'fa fa-caret-right'"></i>
+            </a>
+          </td> -->
+
+          <!-- Checkbox -->
+          <!-- <td *ngIf="(!isModal && !isHideDeleteBtn) || isApprove" class="selection-cell">
+            <mat-checkbox (change)="grouping.selectRow(item.id)" [checked]="grouping.isRowSelected(item.id)">
+            </mat-checkbox>
+          </td> -->
+
+          <!-- Content -->
+          <ng-container *ngFor="let column of columns;let iColumn = index">
+            <td *ngIf="column.isShowed" [fixedColumn]="column.fixedColumn" [columns]="columns" [iColumn]="iColumn"
+              class="table-cell" [ngClass]="{'selection-cell position-sticky':column.dataKey==='actionCell'}">
+              <ng-container *ngIf="!column.subLabels">
+                <span *ngIf="!column.component && !column.predict">{{ column.dataKey === 'No' ? i + offset :
+                  item[column.dataKey]}}</span>
+                <span *ngIf="column.predict && !column.component">
+                  {{column.predict(item)}}
+                </span>
+                <ng-template *ngIf="column.component" customCell [component]="column.component"
+                  [dataKey]="column.dataKey" [isModal]="isModal" [prop]="item">
+                </ng-template>
+              </ng-container>
+              <!-- Sub Label -->
+              <div *ngIf="column.subLabels" class="sub-cell">
+        <tr *ngFor="let value of item[column.dataKey];let l = count" class="sub-cell__tr">
+          <td *ngFor="let subLabel of column.subLabels" [ngStyle]="{'width':subLabel.width}">
+            <span *ngIf="!subLabel.component && !subLabel.predict">{{value[subLabel.dataKey][subLabel.field]}}</span>
+            <span *ngIf="subLabel.predict && !subLabel.component">
+              {{subLabel.predict(value)}}
+            </span>
+            <ng-template *ngIf="subLabel.component" customSubCell [dataKey]="subLabel.dataKey"
+              [component]="subLabel.component" [prop]="value">
+            </ng-template>
+          </td>
+        </tr>
+</div>
+</td>
+</ng-container>
+
+
+
+
+<!-- Default buttons -->
+<td *ngIf="!isModal && (!isHideEditBtn || !isHideDeleteBtn)">
+  <div class="float-right">
+    <a title="Sửa" *ngIf="!isHideEditBtn" class="btn btn-icon btn-primary m-1 btn-sm"
+      (click)="edit(item.id)">
+      <span [inlineSVG]="'./assets/media/svg/icons/Common/Pencil-alt.svg'" cacheSVG="true"
+        class="svg-icon svg-icon-md svg-icon-primary">
+      </span>
+    </a>
+
+    <a title="Import" *ngIf="!isHideImportBtn" class="btn btn-icon btn-primary m-1 btn-sm"
+      (click)="import(item)">
+      <span [inlineSVG]="'./assets/media/svg/icons/Common/Plus-circle.svg'" cacheSVG="true"
+        class="svg-icon svg-icon-md svg-icon-primary">
+      </span>
+    </a>
+
+    <a title="Xóa" *ngIf="!isHideDeleteBtn" class="btn btn-icon btn-danger m-1 btn-sm"
+      (click)="delete(item)">
+      <span [inlineSVG]="'./assets/media/svg/icons/Common/Trash.svg'" cacheSVG="true"
+        class="svg-icon svg-icon-md svg-icon-danger">
+      </span>
+    </a>
+  </div>
+</td>
+
+<!-- Default buttons in case of modal -->
+<td *ngIf="isModal" class="selection-cell position-sticky text-center">
+  <ng-container *ngIf="!isSelectedOnlyItem">
+    <span class="checkbox checkbox-single">
+      <mat-checkbox (change)="select(item)" [checked]="grouping.isDetailRowSelected(item.id)">
+      </mat-checkbox>
+    </span>
+  </ng-container>
+  <ng-container *ngIf="isSelectedOnlyItem">
+    <ng-container *ngIf="grouping.isDetailRowSelected(item.id);else notSelected">
+      <button class="btn btn-active btn-elevate" disabled>Đã chọn </button>
+    </ng-container>
+    <ng-template #notSelected>
+      <!-- Trường hợp tài liệu đang có 1 phiếu hủy -->
+      <span *ngIf="item?.isCancel" class="btn btn-elevate required-field">Đang tồn tại phiếu hủy </span>
+      <button *ngIf="!item?.isCancel" class="btn btn-primary btn-elevate" (click)="selectOnlyItem(item)">Chọn </button>
+    </ng-template>
+  </ng-container>
+</td>
+</tr>
+
+<!-- Children rows -->
+<ng-container *ngIf="item.childrens && item.childrens.length>0 && isExpand && expanding.isRowSelected(item.id)">
+  <ng-container *ngTemplateOutlet="childComponent;
+  context: {
+    item:item,
+    columns:columns,
+    i:i,
+    ordinalNumber:1,
+    offset:offset,
+    isModal:isModal,
+    isHideEditBtn: isHideEditBtn,
+    isHideDeleteBtn: isHideDeleteBtn
+  }">
+  </ng-container>
+</ng-container>
+</ng-container>
+
+</tbody>
+</table>
+<div *ngIf="(items| async)?.length <= 0">
+  <p class="text-dark-50 m-0 pt-5 font-weight-normal text-center">Không tìm thấy kết quả !!!</p>
+</div>
+</div>
+<app-paginator class="d-flex justify-content-between align-items-center flex-wrap" [paginator]="paginator"
+  [isLoading]="isLoading" (paginate)="paginate($event)"></app-paginator>
+
+
+<ng-template #childComponent let-item="item" let-columns="columns" let-i="i" let-ordinalNumber="ordinalNumber"
+  let-offset="offset" let-isModal="isModal" let-isHideEditBtn="isHideEditBtn" let-isHideDeleteBtn="isHideDeleteBtn">
+  <ng-container *ngFor="let childItem of item.childrens;index as cIndex">
+    <tr [@enterAnimation] class="expanded-row" [ngClass]="'basic-table__row-'+ordinalNumber">
+      <td style="width: 50px"></td>
+      <!-- <td></td> -->
+      <td *ngFor="let column of columns;index as columnIndex;let colLength = count"
+        [ngClass]="'pl-'+(column.type === 'button' ? 0 : ordinalNumber*5)" class="expanded-cell"
+        [style.text-align]="column.type === 'button' ? 'center' : ''">
+        <span *ngIf="!column.component">{{ column.dataKey === 'No' ? i + offset +'.'+ (cIndex+1) :
+          childItem[column.dataKey]}}</span>
+        <ng-template *ngIf="column.component" customCell [component]="column.component" [prop]="childItem">
+        </ng-template>
+      </td>
+      <td *ngIf="!isModal && !isHideEditBtn && !isHideDeleteBtn" class="expanded-cell">
+        <div class="float-right">
+          <a *ngIf="!isHideEditBtn" title="Sửa" class="btn btn-icon btn-light btn-hover-primary btn-sm m-1"
+            style="border-color: #e8e8e8" (click)="edit(childItem)">
+            <span [inlineSVG]="'./assets/media/svg/icons/Common/Pencil-alt.svg'" cacheSVG="true"
+              class="svg-icon svg-icon-md svg-icon-primary">
+            </span>
+          </a>
+
+          <a *ngIf="!isHideDeleteBtn" title="Xóa" class="btn btn-icon btn-light btn-hover-danger btn-sm m-1"
+            style="border-color: #e8e8e8" (click)="delete(childItem, true)">
+            <span [inlineSVG]="'./assets/media/svg/icons/Common/Trash.svg'" cacheSVG="true"
+              class="svg-icon svg-icon-md svg-icon-danger">
+            </span>
+          </a>
+        </div>
+      </td>
+    </tr>
+
+    <ng-container *ngTemplateOutlet="childComponent;
+    context: {
+      item:childItem,
+      columns:columns,
+      i:0,
+      ordinalNumber: ordinalNumber+1,
+      offset:offset,
+      isModal:isModal,
+      isHideEditBtn: isHideEditBtn,
+      isHideDeleteBtn: isHideDeleteBtn
+    }">
+    </ng-container>
+
+  </ng-container>
+</ng-template>

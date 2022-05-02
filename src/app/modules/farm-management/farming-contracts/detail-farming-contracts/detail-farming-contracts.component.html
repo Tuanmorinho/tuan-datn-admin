@@ -1,0 +1,151 @@
+<div class="loading-overlay" *ngIf="farmContractsService.isLoading$ | async">Loading&#8230;</div>
+
+<div class="row">
+    <div class="col-5">
+        <div class="card card-custom">
+            <div class="card-body">
+                <p class="card-title font-weight-bolder text-dark mb-3">Thông tin hợp đồng</p>
+                <!-- Số hợp đồng-->
+                <div class="form-group row py-1">
+                    <label class="col col-form-label form-label d-flex align-items-center">Số hợp đồng:</label>
+                    <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                        <label class="d-flex align-items-center m-0">{{ farmingContract?.code }}</label>
+                    </div>
+                </div>
+
+                <hr class=" m-0" />
+
+                <!-- Hộ gia đình -->
+                <div class="form-group row py-1">
+                    <label class="col col-form-label form-label d-flex align-items-center">Hộ gia đình: </label>
+                    <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                        <label class="d-flex align-items-center m-0">{{ farmingContract?.household.owner.fullname
+                            }}</label>
+                    </div>
+                </div>
+
+                <hr class=" m-0" />
+
+                <!-- Số hộ khẩu -->
+                <div class="form-group row py-1">
+                    <label class="col col-form-label form-label d-flex align-items-center">Mã hộ gia đình:</label>
+                    <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                        <label class="d-flex align-items-center m-0">{{
+                            farmingContract?.household?.registrationBookCode }}</label>
+                    </div>
+                </div>
+
+                <hr class=" m-0" />
+
+                <!-- Ngày bắt đầu -->
+                <div class="form-group row py-1">
+                    <label class="col col-form-label form-label d-flex align-items-center">Ngày bắt đầu:</label>
+                    <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                        <label class="d-flex align-items-center m-0">{{ farmingContract?.createdAt |
+                            date:'dd/MM/yyyy' }}</label>
+                    </div>
+                </div>
+
+                <hr class=" m-0" />
+
+                <!-- Ngày kết thúc -->
+                <div class="form-group row py-1">
+                    <label class="col col-form-label form-label d-flex align-items-center">Ngày kết thúc:</label>
+                    <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                        <label class="d-flex align-items-center m-0">{{ farmingContract?.endDate | date:'dd/MM/yyyy'
+                            }}</label>
+                    </div>
+                </div>
+
+                <hr class=" m-0" />
+
+                <!-- Chi phí chưa tính thuế -->
+                <div class="form-group row py-1">
+                    <label class="col col-form-label form-label d-flex align-items-center">Chi phí chưa tính
+                        thuế:</label>
+                    <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                        <label class="d-flex align-items-center m-0">{{ farmingContract?.paymentPriceWithoutTax |
+                            number }} {{ farmingContract?.paymentCurrencyType }}</label>
+                    </div>
+                </div>
+
+                <hr class=" m-0" />
+
+                <!-- Chi phí đã tính thuế -->
+                <div class="form-group row py-1">
+                    <label class="col col-form-label form-label d-flex align-items-center">Chi phí đã tính
+                        thuế:</label>
+                    <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                        <label class="d-flex align-items-center m-0">{{ farmingContract?.paymentPriceWithoutTax * (1
+                            + farmingContract?.taxPercent/100) | number }} {{ farmingContract?.paymentCurrencyType
+                            }}</label>
+                    </div>
+                </div>
+
+                <hr class=" m-0" />
+
+                <!-- Hình thức thanh toán -->
+                <div class="form-group row py-1">
+                    <label class="col col-form-label form-label d-flex align-items-center">Hình thức thanh
+                        toán:</label>
+                    <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                        <label class="d-flex align-items-center m-0">{{ farmingContract?.paymentType ===
+                            'ON_ACCOUNT' ? 'Chuyển khoản' : 'Tiền mặt' }}</label>
+                    </div>
+                </div>
+
+                <hr class=" m-0" />
+
+                <!-- Tài khoản ngân hàng -->
+                <div class="form-group row py-1">
+                    <label class="col col-form-label form-label d-flex align-items-center">Tài khoản ngân
+                        hàng:</label>
+                    <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                        <label class="d-flex align-items-center m-0">{{ farmingContract?.paymentBankAccount?.number
+                            }}</label>
+                    </div>
+                </div>
+
+                <hr class=" m-0" />
+
+                <!-- Trạng thái hoạt động -->
+
+                <div class="form-group row py-1">
+                    <label class="col col-form-label form-label d-flex align-items-center">Trạng thái hoạt
+                        động</label>
+                    <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+                        <label class="d-flex align-items-center m-0" style="color: #27AE60;">
+                            {{ farmingContract?.status === 'EFFECTIVE' ? 'Còn hiệu lực' : '' }}
+                            {{ farmingContract?.status === 'EXPIRED' ? 'Hết hiệu lực' : '' }}
+                            {{ farmingContract?.status === 'PENDING' ? 'Chờ' : '' }}
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-7">
+        <div class="card card-custom gutter-b">
+            <div class="card-body">
+                <p class="card-title font-weight-bolder text-dark mb-2">Tài liệu đính kèm</p>
+                <span class="mb-5">Tài liệu: <strong style="color: #6BA425;">{{ farmingContract?.relatedPapers.length }}</strong></span>
+                <div class="row m-1 mt-4" [ngStyle]="{'border': '1px solid #E4E6EF', 'border-radius': '0.42rem'}"
+                    *ngFor="let doc of farmingContract?.relatedPapers">
+                    <div class="col-10 col-xl-10 col-form-label text-wrap">
+                        <a class="text-primary cursor-pointer mw-10" target="_blank">
+                            <span [inlineSVG]="'./assets/media/svg/icons/Design/File.svg'" cacheSVG="true"
+                                class="svg-icon svg-icon-sm svg-icon-danger">
+                            </span>
+                            <span>{{ doc?.name }}</span></a>
+                    </div>
+                    <div class="col-2 col-xl-2 col-form-label text-right">
+                        <span (click)="downloadFile(doc)" style="cursor: pointer;"
+                            [inlineSVG]="'./assets/media/svg/icons/Design/Downloads-folder.svg'" cacheSVG="true"
+                            class="svg-icon svg-icon-sm svg-icon-danger">
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

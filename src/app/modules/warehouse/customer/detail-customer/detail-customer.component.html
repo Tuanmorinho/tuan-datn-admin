@@ -1,0 +1,85 @@
+<div class="loading-overlay" *ngIf="(customerService.isLoading$ | async)">Loading&#8230;</div>
+<div class="card card-custom gutter-b">
+  <div class="card-body pt-4">
+
+    <div class="row">
+      <div class="col-lg-6 col-md-12">
+        <!-- Tên sản phẩm -->
+        <div class="form-group row py-2">
+          <label class="col-xl-2 col-lg-2 col-form-label form-label d-flex align-items-center">Tên khách hàng:</label>
+          <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+            <label class="d-flex align-items-center m-0">{{customer?.name}}</label>
+          </div>
+        </div>
+
+        <hr class=" m-0" />
+
+        <!-- Loại sản phẩm -->
+        <div class="form-group row py-2">
+          <label class="col-xl-2 col-lg-2 col-form-label form-label d-flex align-items-center">Mã khách hàng:</label>
+          <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+            <label class="d-flex align-items-center m-0">{{customer?.code}}</label>
+          </div>
+        </div>
+
+        <hr class=" m-0" />
+
+        <!-- Khối lượng -->
+        <div class="form-group row py-2">
+          <label class="col-xl-2 col-lg-2 col-form-label form-label d-flex align-items-center">Mã số thuế:</label>
+          <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+            <label class="d-flex align-items-center m-0">{{customer?.taxCode}}</label>
+          </div>
+        </div>
+
+        <hr class=" m-0" />
+
+        <!-- Đơn vị -->
+        <div class="form-group row py-2">
+          <label class="col-xl-2 col-lg-2 col-form-label form-label d-flex align-items-center">Email:</label>
+          <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+            <label class="d-flex align-items-center m-0">{{customer?.email}}</label>
+          </div>
+        </div>
+
+        <hr class=" m-0" />
+
+        <!-- Xuất xứ -->
+        <div class="form-group row py-2">
+          <label class="col-xl-2 col-lg-2 col-form-label form-label d-flex align-items-center">Số điện thoại:</label>
+          <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+            <label class="d-flex align-items-center m-0">{{customer?.phone}}</label>
+          </div>
+        </div>
+
+        <hr class=" m-0" />
+
+        <!-- Thành phần -->
+        <div class="form-group row py-2">
+          <label class="col-xl-2 col-lg-2 col-form-label form-label d-flex align-items-center">Địa chỉ:</label>
+          <div class="col-lg-7 col-xl-7 col-form-label ml-6">
+            <label class="d-flex align-items-center m-0 text-uppercase">{{customer?.address}}</label>
+          </div>
+        </div>
+
+        <hr class=" m-0" />
+      </div>
+
+      <!-- Ảnh sản phẩm -->
+        <div class="col-lg-6 col-md-12">
+          <div class="form-group row">
+            <div class="col-lg-12 col-xl-12 d-flex justify-content-center flex-column">
+              <div class="avatar-upload d-flex justify-content-center">
+                <div class="avatar-preview">
+                  <img [src]="imageUrl" style="width: inherit;"/>
+                </div>
+              </div>
+              <label class="col-form-label form-label text-image text-muted text-center">Ảnh khách hàng</label>
+            </div>
+          </div>
+        </div>
+      <!--  -->
+    </div>
+  </div>
+
+</div>

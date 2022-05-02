@@ -1,0 +1,35 @@
+.card-subHeader {
+  padding: 0 !important;
+  border: none !important;
+}
+
+.card-subBody {
+  padding: 0 !important;
+}
+
+.text-householdID {
+  font-size: 14px !important;
+  color: #828282 !important;
+}
+
+.text-householdID-id {
+  font-size: 14px !important;
+  font-weight: bold !important;
+  color: #4f4f4f !important;
+}
+
+.list-group li {
+  padding: 7px 0 7px 0 !important;
+}
+
+.card-container {
+  padding: 8px;
+}
+
+.text-label-listCard {
+  color: #828282;
+}
+
+::ng-deep .cdk-overlay-container {
+  z-index: 2000;
+}

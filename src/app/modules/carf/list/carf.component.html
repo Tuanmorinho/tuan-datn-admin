@@ -1,0 +1,67 @@
+<div class="loading-overlay"
+     *ngIf="isLoading$ | async">Loading&#8230;</div>
+<div class="card card-custom gutter-b">
+    <div class="card-header">
+        <div class="card-title">
+            <h3 class="card-label">Danh sách khắc phục phòng ngừa</h3>
+        </div>
+        <div class="card-toolbar"
+             *ngIf="!isModal">
+            <button type="button"
+                    class="btn btn-primary"
+                    [routerLink]="'/carf/add'">Tạo mới <i class="i-add"></i></button>
+        </div>
+    </div>
+    <div class="card-body">
+        <!-- Filter -->
+        <form class="form form-label-right"
+              [formGroup]="searchGroup">
+            <div class="form-group row">
+                <label class="col-xl-2 col-lg-2 col-form-label form-label text-dark-75"><b>Từ khóa</b></label>
+                <div class="col-lg-4 col-xl-4">
+                    <input matInput
+                           appTrim
+                           type="text"
+                           class="form-control"
+                           placeholder="Hãy nhập tìm kiếm"
+                           value=""
+                           formControlName="keyword" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-lg-10 offset-lg-2">
+                    <button class="btn btn-secondary btn-elevate mr-2"
+                            (click)="reset()"
+                            type="button">Làm mới</button>
+                    <button class="btn btn-primary btn-elevate"
+                            (click)="search()"
+                            type="submit">Tìm kiếm</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<div class="card card-custom gutter-b">
+    <div class="card-body">
+        <!-- Table -->
+        <div class="table-responsive angular-bootstrap-table ">
+            <!-- <basic-table (outputDelete)="delete($event)"
+                         (outputDeleteSelected)="deleteMany($event)"
+                         (outputEdit)="edit($event)"
+                         (outputSort)="sort($event)"
+                         [isModal]="isModal"
+                         [isSelectedOnlyItem]="isSelectedOnlyItem"
+                         [ids]="ids"
+                         [items]="correctiveActionReportService.items$"
+                         [columns]="columnsConfig"
+                         [grouping]="correctiveActionReportService.grouping"
+                         [paginator]="correctiveActionReportService.paginator"
+                         [sorting]="correctiveActionReportService.sorting"
+                         [isLoading]="isLoading$ | async"
+                         [hasScrollbarX]="false"> -->
+            <!-- </basic-table> -->
+        </div>
+    </div>
+</div>

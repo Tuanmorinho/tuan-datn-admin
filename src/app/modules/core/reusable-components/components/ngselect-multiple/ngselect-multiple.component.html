@@ -1,0 +1,19 @@
+<ng-container [formGroup]="formGroup">
+    <div class="input-group">
+        <mat-chip-list #chipList
+                       [ngClass]="{'disabled':disabled}"
+                       [class.is-invalid]="isControlInValid(this.formControlName)"
+                       class="form-control d-table overflow-hidden">
+          <mat-chip *ngFor="let item of _items"
+                    [removable]="!disabled"
+                    (removed)="removeById(item,this.formControlName)">
+            <span>{{item.nameVn || item.name || item.usernameFull}}</span>
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+      <app-validation-error [field]="field"
+                            [submitted]="isControlInValid(this.formControlName)"
+                            [control]="formGroup.controls[this.formControlName]">
+      </app-validation-error>
+</ng-container>

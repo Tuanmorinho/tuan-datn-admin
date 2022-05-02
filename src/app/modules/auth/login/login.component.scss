@@ -1,0 +1,88 @@
+:host {
+  width: 100%;
+  @media (min-width: 992px) {
+    .login-form {
+      width: 100%;
+      max-width: 450px;
+
+      .mat-form-field {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.field-icon {
+  float: right;
+  left: -15px;
+  margin-top: -30px;
+  position: relative;
+  z-index: 2;
+}
+
+.fa-eye {
+  color: #4C8C03;
+}
+
+.form-control-solid {
+  &.is-invalid {
+    background-image: none !important;
+  }
+}
+
+.btn {
+  font-size: 1.1rem;
+}
+
+.input-login:hover {
+  border: 1px solid #90C837;
+}
+
+#kt_login_forgot {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+
+  color: #4C8C03;
+}
+
+.btn-login {
+  background-color: #6BA425 !important;
+  border-color: #6BA425 !important;
+
+  color: #FFFFFF;
+}
+
+.btn-login:hover {
+  background-color: #57901B !important;
+  border-color: #57901B;
+}
+
+.text-or {
+  font-weight: 700;
+  font-size: 12px;
+
+  color: #828282;
+}
+
+.social-media-link {
+
+  border-radius: 50%;
+  overflow: hidden;
+  display:inline-block;
+  vertical-align:middle;
+
+  background: #FFFFFF;
+  width: 40px;
+  height: 40px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.14); 
+
+  .item-img {
+    padding: auto;
+
+  }
+  .icon-img {
+    // width: 100%;
+    height: auto;
+  }
+}

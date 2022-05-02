@@ -1,0 +1,96 @@
+@media (max-width: 767px) {
+    .col-md-4 {
+        margin-top: 10px;
+    }
+}
+
+:host ::ng-deep .mat-expansion-panel-header {
+    padding: 0px 4px;
+}
+
+:host ::ng-deep .mat-expansion-indicator {
+    left: -40%;
+    position: relative;
+
+    &::after {
+        color: #b5b5c3;
+    }
+}
+
+:host ::ng-deep .mat-expansion-panel-body{
+    padding-left: 0 ;
+    padding-right: 0;
+}
+
+.mat-expansion-panel-header:hover{
+    background: rgb(132 132 132 / 4%);
+}
+
+.mat-expansion-panel-header{
+    height: 40px;
+}
+
+::ng-deep .mat-datepicker-toggle {
+    position: absolute;
+    right: 12px;
+}
+
+
+.btn.btn-primary.get-data {
+    color: #ffffff;
+    background-color: #6BA425 ;
+    border-color: #6BA425;
+  }
+  
+.get-data:hover {
+    color: #ffffff;
+    background-color: #57901B !important;
+    border-color: #57901B !important;
+}
+
+.get-data:active {
+    color: #ffffff;
+    background-color: #57901B !important;
+    border-color: #57901B;
+}
+
+.card-body {
+    // padding-top: 10px;
+}
+
+.table-header {
+    padding-left: 0;
+}
+
+.userActive {
+    color:#57901B;
+}
+.userDisable {
+    color: #EB5757;
+}
+
+
+.status { 
+    font-weight: bolder; 
+    font-size: 13px;
+    margin: 0px !important;
+} 
+
+.userPending { 
+    color: #F2C94C;
+}
+
+.userActive { 
+    color:#27AE60;
+} 
+
+.userDisable { 
+    color: #EB5757;
+}
+
+.card-custom-none-shadow {
+    border: none;
+    .card-body {
+        padding-top: 0;
+    }
+}

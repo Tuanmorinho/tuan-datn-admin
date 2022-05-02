@@ -1,0 +1,48 @@
+@import "../../../../../assets/sass/components/variables.bootstrap";
+@import "../../../../../assets/sass/components/variables.demo";
+
+:host {
+  ::ng-deep {
+    .loading-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+
+      .progress-bar {
+        // brand color
+        background-color: #5d78ff;
+      }
+    }
+
+    .topbar-item {
+      height: 100%;
+    }
+
+    .brand-toggle{
+      &:hover{
+        svg > path {
+          stroke: $blue !important;
+        }
+      }
+    }
+
+    @media (min-width: 1025px) {
+      .topbar,
+      .topbar-item-wrapper {
+        height: 100%;
+      }
+    }
+  }
+}
+
+#kt_brand{
+  // flex-grow: 0.1;
+  height: -webkit-fill-available;
+  padding: 0;
+}
+
+#slogan {
+  color: $primary;
+}

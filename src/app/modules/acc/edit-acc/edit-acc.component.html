@@ -1,0 +1,187 @@
+<div class="loading-overlay"
+  *ngIf="isLoading$ | async">Loading&#8230;</div>
+<form class="form form-label-right"
+  [formGroup]="formGroup">
+  <div class="card card-custom gutter-b">
+    <div class="card-header">
+      <div class="card-title h4">
+        <ng-container *ngIf="accData?.id">Sửa</ng-container>
+        <ng-container *ngIf="!accData?.id">Tạo</ng-container>
+        phiếu yêu cầu điều chỉnh dữ liệu
+      </div>
+    </div>
+    <div class="card-body row">
+      <div class="col-lg-7">
+        <div class="row form-group"
+          *ngIf="accData?.id">
+          <div class=" col-lg-2">
+            <label class="col-form-label form-label"><b>ACC #</b></label>
+          </div>
+          <div class="col-lg-9">
+            <input matInput
+              type="text"
+              class="form-control disabled"
+              placeholder="Mã"
+              value="{{ accData?.code }}"
+              disabled />
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class=" col-lg-2">
+            <label class="col-form-label form-label"><b>Chọn phòng ban<span class="required-field">*</span></b></label>
+          </div>
+          <div class="col-lg-9">
+            <ng-select formControlName="departmentId"
+              [class.is-invalid]="isControlInvalid('departmentId')"
+              placeholder="Phòng ban"
+              [items]="listDepartments"
+              bindLabel="fullName"
+              bindValue="id">
+              <ng-template ng-option-tmp let-item="item">
+                <span title="{{item.fullName}}">{{item.fullName}}</span>
+             </ng-template>
+            </ng-select>
+            <app-validation-error [field]="'Phòng ban'"
+              [submitted]="isControlInvalid('departmentId')"
+              [control]="formGroup.controls.departmentId">
+            </app-validation-error>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-xl-2 col-lg-2 form-label font-weight-bold"><b>Nhân viên lập sai phiếu</b><span
+              class="required-field">*</span></label>
+          <div class="col-lg-9 col-xl-9">
+            <div class="input-group">
+              <input formControlName="accEmployeeNames"
+                class="form-control table-input"
+                placeholder="Nhân viên lập sai phiếu"
+                readonly>
+              <div class="input-group-append">
+                <span class="input-group-text"
+                  (click)="openModal()">
+                  Chọn
+                </span>
+              </div>
+            </div>
+            <app-validation-error [field]="'Nhân viên lập sai phiếu'"
+              [submitted]="isControlInvalid('accEmployeeNames')"
+              [control]="formGroup.controls.accEmployeeNames">
+            </app-validation-error>
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class=" col-lg-2">
+            <label class="col-form-label form-label"><b>Ticket liên quan</b></label>
+          </div>
+          <div class="col-lg-9">
+            <input matInput
+              appTrim
+              type="text"
+              class="form-control"
+              placeholder="Ticket liên quan"
+              formControlName="ticket" />
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-xl-2 col-lg-2 form-label font-weight-bold"><b>Chứng từ đính kèm (Bản sai ...)</b></label>
+          <div class="col-lg-9 col-xl-9">
+            <app-upload-files [formGroup]="formGroup"
+              [formControlName]="'attachedFiles'"
+              [isRequired]="true"
+              [field]="'File yêu cầu'"
+              [maxLength]="3">
+            </app-upload-files>
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class=" col-lg-2">
+            <label class="col-form-label form-label"><b>Số chứng từ<span class="required-field">*</span></b></label>
+          </div>
+          <div class="col-lg-9">
+            <input matInput
+              appTrim
+              type="text"
+              class="form-control"
+              placeholder="Số chứng từ"
+              [class.is-invalid]="isControlInvalid('licenseNumber')"
+              formControlName="licenseNumber" />
+              <app-validation-error [field]="'Số chứng từ'"
+              [submitted]="isControlInvalid('licenseNumber')"
+              [control]="formGroup.controls.licenseNumber">
+            </app-validation-error>
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class=" col-lg-2">
+            <label class="col-form-label form-label"><b>Ngày</b></label>
+          </div>
+          <div class="col-lg-9">
+            <div class="input-group pt-2">
+              <input formControlName="dateContent"
+                class="form-control table-input"
+                [owlDateTime]="dtPicker4"
+                readonly
+                required
+                [(ngModel)]="formGroup.value.dateContent"
+                [class.is-invalid]="isControlInvalid('dateContent')">
+              <div class="input-group-append">
+                <span class="trigger pt-3"
+                  [owlDateTimeTrigger]="dtPicker4">
+                  <i class="fas fa-calendar-alt"></i>
+                </span>
+              </div>
+              <owl-date-time #dtPicker4></owl-date-time>
+            </div>
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class=" col-lg-2">
+            <label class="col-form-label form-label"><b>Nội dung sai (cần ghi tay lên chứng từ)<span class="required-field">*</span></b></label>
+          </div>
+          <div class="col-lg-9">
+            <app-editor (exportContent)="getCorrective($event)"
+              [content]="accData?.contentIncorrect"></app-editor>
+            <app-validation-error [field]="'Nội dung sai'"
+              [submitted]="isControlInvalid('contentIncorrect')"
+              [control]="formGroup.controls.contentIncorrect">
+            </app-validation-error>
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class=" col-lg-2">
+            <label class="col-form-label form-label"><b>Nội dung khắc phục (cần ghi tay lên chứng từ)<span class="required-field">*</span></b></label>
+          </div>
+          <div class="col-lg-9">
+            <app-editor (exportContent)="getInCorrective($event)"
+              [content]="accData?.contentCorrective"></app-editor>
+            <app-validation-error [field]="'Nội dung khắc phục'"
+              [submitted]="isControlInvalid('contentCorrective')"
+              [control]="formGroup.controls.contentCorrective">
+            </app-validation-error>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <h3 class="text-decoration-underline text-primary">Kiểm tra phê duyệt</h3>
+      </div>
+    </div>
+    <div class="modal-footer custom-footer">
+      <button type="button"
+        class="btn btn-light btn-elevate mr-2"
+        [routerLink]="'/acc'">
+        Trở về
+      </button>
+      <button type="button"
+        (click)="onSubmit(1)"
+        class="btn btn-primary btn-elevate">
+        Lưu
+      </button>
+      <button type="button"
+        (click)="onSubmit(2)"
+        class="btn btn-primary btn-elevate">
+        Chuyển kiểm tra
+      </button>
+    </div>
+  </div>
+</form>

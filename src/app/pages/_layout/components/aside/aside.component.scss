@@ -1,0 +1,154 @@
+@import "../../../../../assets/sass/components/variables.bootstrap";
+@import "../../../../../assets/sass/components/variables.demo";
+
+@mixin padding-left-menu-text($layer, $value) {
+  @if $layer >= 0 {
+    .menu-submenu .menu-subnav {
+      @if $layer == 0 {
+        .menu-text__header {
+          padding-left: #{5 * $value}px;
+        }
+        .menu-text.p-submenu {
+          padding-left: #{5 * $value + 5}px;
+        }
+      } @else {
+        @include padding-left-menu-text($layer - 1, $value);
+      }
+    }
+  }
+}
+
+@mixin genarate-padding-left-menu-text() {
+  @for $layer from 0 through 6 {
+    @include padding-left-menu-text($layer, $layer + 1);
+  }
+}
+
+:host {
+  .aside {
+    height: 100%;
+
+    .aside-menu {
+      margin: 0;
+      width: 100%;
+    }
+  }
+
+  .aside-extended {
+    margin-top: 80px;
+    width: 200px;
+
+    .aside-primary {
+      width: 100px;
+      overflow-y: auto;
+      height: calc(100% - 45px);
+      background-color: $blue;
+
+      .aside-nav {
+        .nav {
+          .nav-item {
+            width: 45px;
+            height: 45px;
+            margin-bottom: 20px;
+            background-color: rgba(234, 234, 234, 0.2);
+            border-radius: 5px;
+            cursor: pointer;
+
+            &:first-child {
+              margin-top: 17px;
+            }
+
+            .p-menu-item {
+              margin-top: 10px;
+              &__text {
+                line-height: 11px;
+              }
+
+              .svg-icon svg {
+                height: 2.5rem;
+                width: 2.5rem;
+              }
+            }
+
+            &.selected-item {
+              background-color: #fff;
+
+              > .p-menu-item {
+                .p-menu-item {
+                  &__icon > ::ng-deep svg {
+                    path {
+                      fill: $blue !important;
+                    }
+                  }
+
+                  &__text {
+                    color: $blue !important;
+                  }
+                }
+              }
+            }
+
+            &:hover:not(.selected-item) {
+              background-color: #fff;
+
+              > .p-menu-item {
+                .p-menu-item {
+                  &__icon > ::ng-deep svg {
+                    path {
+                      fill: $blue !important;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.menu-nav {
+  margin-top: 80px;
+}
+
+.menu-text {
+  color: #828282;
+}
+
+li {
+  .menu-item-active {
+    border-right: 2px solid #6ba425;
+    background-color: #f2f9e8;
+    > .menu-link {
+      > .menu-text {
+        color: #6ba425 !important;
+      }
+    }
+  }
+  .menu-item:not(.menu-item-active) {
+    &:hover {
+      > .menu-link {
+        > .menu-text {
+          color: #6ba425 !important;
+        }
+      }
+    }
+  }
+}
+
+.menu-item-open {
+  > .menu-heading,
+  > .menu-link {
+    > .menu-text {
+      color: #6ba425 !important;
+    }
+    > .menu-icon {
+      > svg {
+        > path {
+          fill: #6ba425 !important;
+        }
+      }
+    }
+  }
+}

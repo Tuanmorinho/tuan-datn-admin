@@ -1,0 +1,49 @@
+<!-- thanh tìm kiếm theo ngày tháng -->
+<!-- <div class="search-bar form-group row" [formGroup]="searchGroup"> -->
+    <!-- <div class="col-lg-2 col-md-2">
+        <mat-form-field appearance="fill">
+            <input matInput [matDatepicker]="dp" placeholder="Tháng này" formControlName="thisMonth"
+                [class.is-invalid]="isControlInvalid('birthday')" class="form-control custom-date-picker">
+            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker #dp startView="multi-year" (monthSelected)="setMonthAndYear($event, dp)"
+                panelClass="example-month-picker">
+            </mat-datepicker>
+        </mat-form-field>
+    </div> -->
+
+    <!-- <div class="col-lg-2 col-md-2">
+        <mat-form-field class="example-full-width" appearance="fill">
+            <input matInput [matDatepicker]="picker1" placeholder="Từ ngày..." formControlName="fromDate">
+            <mat-datepicker-toggle matSuffix [for]="picker1">
+                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+    </div> -->
+    <!-- <div class="col-lg-2 col-md-2">
+        <mat-form-field class="example-full-width" appearance="fill">
+            <input matInput [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker">
+                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </div> -->
+    <!-- <div class="col-lg-4 col-md-4">
+        <button class="btn btn-primary get-data btn-elevate" (click)="search()" type="submit">Lấy dữ
+            liệu</button>
+
+        <button class="btn btn-light btn-elevate" style="margin-left: 20px;" (click)="reset()">
+            <img src="./assets/user/Icon.png" alt="">
+        </button>
+    </div> -->
+<!-- </div> -->
+
+<!-- Table -->
+<div class="table-responsive angular-bootstrap-table ">
+    <basic-table [isModal]="isModal" [ids]="ids" [isSelectedOnlyItem]="isSelectedOnlyItem" (outputSort)="sort($event)"
+        [items]="usersHistoryService.items$" [columns]="columnsConfig" [grouping]="usersHistoryService.grouping"
+        [paginator]="usersHistoryService.paginator" [sorting]="usersHistoryService.sorting" [isHideDeleteBtn]="true"
+        [isHideEditBtn]="true">
+    </basic-table>
+</div>

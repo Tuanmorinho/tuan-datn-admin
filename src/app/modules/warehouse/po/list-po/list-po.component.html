@@ -1,0 +1,55 @@
+<flash-messages></flash-messages>
+<div class="loading-overlay" *ngIf="POService.isLoading$ | async">
+  Loading&#8230;
+</div>
+<div class="card card-custom gutter-b">
+  <div class="card-body">
+    <!-- Filter -->
+    <form class="form form-label-right" [formGroup]="searchGroup">
+      <div class="form-group row">
+        <div class="col-lg-1 col-md-1">
+          <p class="card-subtitle mt-1">Phiếu nhập kho: <span style="color: #27AE60;">{{ POService.paginator.total
+              }}</span>
+          </p>
+        </div>
+        <div class="col-lg-2 col-md-2">
+          <input matInput appTrim appTrim type="text" class="form-control" placeholder="Mã nhập kho" value=""
+            formControlName="codeLike" />
+          <i class="fa fa-search" aria-hidden="true"
+            style="position: absolute; right: 20px; top: 14px; font-size: 12px;"></i>
+        </div>
+        <div class="col-lg-2 col-md-2">
+          <input matInput appTrim appTrim type="text" class="form-control" placeholder="Mã nhà cung cấp" value=""
+            formControlName="supplierCode" />
+          <i class="fa fa-search" aria-hidden="true"
+            style="position: absolute; right: 20px; top: 14px; font-size: 12px;"></i>
+        </div>
+        <div class="col-lg-2 col-md-2">
+          <ng-select [items]="PO_TYPES" class="form-control col-lg-12  input" bindLabel="name" bindValue="code"
+            placeholder="Phân loại" formControlName="type" [notFoundText]="'Không có trạng thái nào'">
+          </ng-select>
+        </div>
+        <div class="col-lg-2 col-md-2">
+          <ng-select [items]="PO_STATUS" class="form-control col-lg-12  input" bindLabel="name" bindValue="code"
+            placeholder="Trạng thái" formControlName="status" [notFoundText]="'Không có trạng thái nào'">
+          </ng-select>
+        </div>
+        <div class="col-lg-3 col-md-3">
+          <button class="btn btn-outline-primary btn-elevate" (click)="reset()" type="button">
+            Làm mới
+          </button>
+          <button class="btn btn-primary get-data btn-elevate ml-6" (click)="search()" type="submit">
+            Tìm kiếm
+          </button>
+        </div>
+      </div>
+    </form>
+    <!-- Table -->
+    <div class="table-responsive angular-bootstrap-table">
+      <basic-table [isModal]="isModal" [isSelectedOnlyItem]="isSelectedOnlyItem" (outputSort)="sort($event)"
+        [items]="POService.items$" [columns]="columnsConfig" [grouping]="POService.grouping"
+        [paginator]="POService.paginator" [sorting]="POService.sorting" [isHideDeleteBtn]="true" [isHideEditBtn]="true">
+      </basic-table>
+    </div>
+  </div>
+</div>

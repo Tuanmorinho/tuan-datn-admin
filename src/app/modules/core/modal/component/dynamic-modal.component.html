@@ -1,0 +1,38 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <div class="modal-title h4">
+      {{title}}
+    </div>
+  </div>
+  <div
+    class="overlay overlay-block cursor-default modal-body"
+    style="min-height: 404px"
+  >
+    <ng-container *ngIf="isLoading">
+      <div class="overlay-layer bg-transparent">
+        <div class="spinner spinner-lg spinner-success"></div>
+      </div>
+    </ng-container>
+    <dynamic-form [fields]="regConfig" (submit)="submit($event)">
+    </dynamic-form>
+  </div>
+
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-light btn-elevate mr-2"
+      (click)="modal.dismiss()"
+    >
+      Cancel
+    </button>
+    <ng-container >
+      <button
+        type="submit"
+        class="btn btn-primary btn-elevate"
+        (click)="save()"
+      >
+        Save
+      </button>
+    </ng-container>
+  </div>
+</div>

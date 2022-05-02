@@ -1,0 +1,25 @@
+<div class="card card-custom gutter-b" #card
+     [ngClass]="{'d-none': hide}">
+    <div class="card-body ">
+        <span class="example-list-section">
+            <ul>
+                <!-- <li class="text-left">
+                    <mat-checkbox class="example-margin"
+                                  [checked]="allComplete"
+                                  [indeterminate]="someComplete()"
+                                  (change)="setAll($event.checked)">
+                        Tất cả
+                    </mat-checkbox>
+                </li> -->
+                <li *ngFor="let header of headersConfig"
+                    class="text-left">
+                    <mat-checkbox [(ngModel)]="header.isShowed"
+                                  [checked]="header.isShowed"
+                                  (ngModelChange)="updateAllComplete(header.id || header.label,$event)">
+                        <span [innerHTML]="header.title || header.label"></span>
+                    </mat-checkbox>
+                </li>
+            </ul>
+        </span>
+    </div>
+</div>

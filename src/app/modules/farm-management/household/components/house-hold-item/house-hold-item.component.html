@@ -1,0 +1,82 @@
+<div class="card">
+    <div class="card-container">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item border-0">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12">
+                        <div class="avatar-upload d-flex justify-content-start align-items-center">
+                            <div class="avatar-preview ml-3 rounded-circle">
+                                <img class="rounded-circle" [src]="imageUrl" style="width: 55px; height: 55px;" />
+                            </div>
+                            <div class="ml-4">
+                                <label class="d-flex align-items-center m-0"
+                                    style="font-weight: bold; font-size: 16px;">{{member?.fullname}}</label>
+                                <label
+                                    class="d-flex relationship align-items-center m-0">{{member?.relationship}}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <div class="d-flex justify-content-end mr-5">
+                            <a href="javascript:void(0)" (click)="onUpdate()">
+                                <span [inlineSVG]="'./assets/media/svg/household/edit.svg'" cacheSVG="true">
+                                </span>
+                            </a>
+                            <a href="javascript:void(0)" class="ml-3" (click)="onDetail()">
+                                <span [inlineSVG]="'./assets/media/svg/household/detail.svg'" cacheSVG="true">
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="list-group-item border-0">
+                <div class="row m-0 d-flex align-items-center">
+                    <label class="col-3 d-flex align-items-center m-0 text-label-listCard">Ngày sinh:</label>
+                    <div class="col-lg-8 col-xl-8">
+                        <label class="d-flex align-items-center m-0 font-weight-bold">{{member?.birthday |
+                            date:'dd/MM/yyyy'}}</label>
+                    </div>
+                </div>
+            </li>
+            <li class="list-group-item border-0">
+                <div class="row m-0 d-flex align-items-center">
+                    <label class="col-3 d-flex align-items-center m-0 text-label-listCard">CMND/CCCD:</label>
+                    <div class="col-lg-8 col-xl-8">
+                        <label class="d-flex align-items-center m-0 font-weight-bold">{{member?.identifyCode}}</label>
+                    </div>
+                </div>
+            </li>
+            <li class="list-group-item border-0">
+                <div class="row m-0 d-flex align-items-center">
+                    <label class="col-3 d-flex align-items-center m-0 text-label-listCard">Địa chỉ thường
+                        trú:</label>
+                    <div class="col-lg-8 col-xl-8">
+                        <label class="d-flex align-items-center m-0 font-weight-bold">{{member?.permanentAddress}},
+                            {{member.permanentWard?.value}}, {{member.permanentDistrict?.value}},
+                            {{member.permanentProvince?.value}}, {{member.permanentCountry?.value}}</label>
+                    </div>
+                </div>
+            </li>
+            <li class="list-group-item border-0">
+                <div class="row m-0 d-flex align-items-center">
+                    <label class="col-3 d-flex align-items-center m-0 text-label-listCard">Số điện thoại:</label>
+                    <div class="col-lg-8 col-xl-8">
+                        <label class="d-flex align-items-center m-0 font-weight-bold">{{member?.phone}}</label>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <!-- <div class="modal-footer" style="border: none; padding: 0.75rem;" *ngIf="isEdit">
+            <div>
+                <button type="button" *ngIf="member?.role !== 'OWNER'" class="btn btn-outline-danger btn-elevate mr-1"
+                    (click)="onDelete()">
+                    Xóa
+                </button>&nbsp;
+                <button type="button" (click)="onUpdate()" class="btn btn-outline-primary btn-elevate">
+                    Chỉnh sửa
+                </button>
+            </div>
+        </div> -->
+    </div>
+</div>

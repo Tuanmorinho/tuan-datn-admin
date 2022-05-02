@@ -1,0 +1,10 @@
+.svg-icon-sort {
+    opacity: 1 !important;
+}
+
+:host ::ng-deep .svg-icon-xs {
+    svg {
+        height: 0.815rem !important;
+        width: 0.815rem !important;
+    }
+}

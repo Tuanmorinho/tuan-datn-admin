@@ -1,0 +1,31 @@
+app-layout {
+  opacity: 0;
+  height: 100%;
+
+  .grid-root {
+    height: 100%;
+  }
+}
+
+.page-loaded {
+  app-layout {
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+  }
+}
+
+
+:host {
+  ::ng-deep {
+    @media (min-width: 992px){
+      .header, .header-fixed {
+        height: 80px;
+      }
+    }
+
+  }
+}
+
+#kt_content {
+  margin-top: 45px;
+}

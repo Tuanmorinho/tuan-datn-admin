@@ -1,0 +1,12 @@
+<div class="d-flex flex-column">
+  <p class="mb-0"
+     *ngFor="let user of prop[dataKey]">{{user.fullName}} 
+    <i class="icon icon-1" *ngIf="user?.stepStatus === 1">➡</i>
+    <i class="icon icon-2" *ngIf="user?.stepStatus === 2">✏</i>
+    <i class="icon icon-3" *ngIf="user?.stepStatus === 3">✓</i>
+    <i class="icon icon-4" *ngIf="user?.stepStatus === 4">↶</i>
+    <i class="icon icon-5" *ngIf="user?.stepStatus === 5">x</i>
+    <i class="icon icon-6" *ngIf="user?.stepStatus === 6">!</i>
+    <i class="icon icon-7" *ngIf="user?.stepStatus === 7">↱</i>
+    </p>
+</div>

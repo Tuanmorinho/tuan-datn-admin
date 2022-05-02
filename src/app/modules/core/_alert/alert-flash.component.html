@@ -1,0 +1,8 @@
+<div *ngFor="let alert of alerts">
+    <ngb-alert class="alert-icon-left {{cssClass(alert)}}" [dismissible]="false"
+               [type]="alert.type" role="alert">
+        <span class="alert-icon"><i class="{{alert.type == 0 ? 'la la-check' : 'la-info'}}"></i></span>
+        <li *ngFor="let error of alert.message; index as i">{{ error | translate}}</li>
+        <a class="close" style="cursor: pointer;" (click)="removeAlert(alert)">&times;</a>
+    </ngb-alert>
+</div>

@@ -1,0 +1,21 @@
+<div class="card-header py-0" *ngIf="isModal">
+    <div class="h4">
+        <i (click)="offcanvasService.dismiss()" style="cursor: pointer;" id="kt_quick_custom_close" class="fa fa-arrow-left text-dark mr-3"></i>
+        <ng-container *ngIf="filter?.id">Chỉnh sửa thành viên</ng-container>
+        <ng-container *ngIf="!filter?.id">Thêm mới thành viên</ng-container>
+    </div>
+</div>
+<div class="card-body">
+    <user-info [formGroup]="formGroup" [validTypeFiles]="validTypeFiles" [initData]="initData" [ownerData]="filter">
+    </user-info>
+</div>
+<div class="modal-footer" *ngIf="isModal">
+    <div>
+        <button type="button" class="btn btn-light btn-elevate mr-1" (click)="offcanvasService.dismiss()">
+            Hủy
+        </button>&nbsp;
+        <button type="button" (click)="onSubmit()" class="btn btn-primary btn-elevate">
+            Xác nhận
+        </button>
+    </div>
+</div>

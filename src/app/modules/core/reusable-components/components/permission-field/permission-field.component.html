@@ -1,0 +1,59 @@
+<div class="form-group row pt-2px pb-2px"
+     [formGroup]="formGroup">
+  <div class="col-lg-12">
+    <label class="form-label mb-0"
+           *ngIf="title"><b>{{ title }}
+        <span *ngIf="isRequired"
+              class="required-field">*</span>
+      </b></label>
+    <div class="row col-lg-12">
+      <mat-chip-list #chipList
+                     class="form-control col-lg-8 d-table overflow-hidden"
+                     [ngClass]="{'disabled':grayBg || isView}"
+                     [class.is-invalid]="isControlInvalid(formControlName)"
+                     [formControlName]="formControlName">
+        <mat-chip *ngFor="let user of formGroup.controls[formControlName].value?.users"
+                  [removable]="true"
+                  (removed)="removeChipItem(user,formControlName,'users')">
+          {{user.usernameFull}}
+          <mat-icon *ngIf="!isView && roleOfUser?.isRequestUpdate"
+                    matChipRemove>cancel</mat-icon>
+        </mat-chip>
+        <mat-chip *ngFor="let department of formGroup.controls[formControlName].value?.departments"
+                  [removable]="true"
+                  (removed)="removeChipItem(department,formControlName,'departments')">
+          {{department.abbreviationName}}
+          <mat-icon *ngIf="!isView && roleOfUser?.isRequestUpdate"
+                    matChipRemove>cancel</mat-icon>
+        </mat-chip>
+        <mat-chip *ngFor="let position of formGroup.controls[formControlName].value?.positions"
+                  [removable]="true"
+                  (removed)="removeChipItem(position,formControlName,'positions')">
+          {{position.nameVn}}
+          <mat-icon *ngIf="!isView && roleOfUser?.isRequestUpdate"
+                    matChipRemove>cancel</mat-icon>
+        </mat-chip>
+        <mat-chip *ngFor="let positionLevel of formGroup.controls[formControlName].value?.positionLevels"
+                  [removable]="true"
+                  (removed)="removeChipItem(positionLevel, formControlName,'positionLevels')">
+          {{positionLevel.nameVn}}
+          <mat-icon *ngIf="!isView && roleOfUser?.isRequestUpdate"
+                    matChipRemove>cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
+      <div class="col-lg-4 col-md-4 d-flex"
+           *ngIf="!isView && roleOfUser?.isRequestUpdate">
+        <button type="button"
+                class="btn btn-light btn-custom-mat-chip"
+                (click)="onOpenModal(formControlName)">
+          Chọn
+        </button>
+      </div>
+      <app-validation-error *ngIf="isRequired"
+                            [field]="title || field"
+                            [submitted]="isControlInvalid(formControlName)"
+                            [control]="formGroup.controls[formControlName]">
+      </app-validation-error>
+    </div>
+  </div>
+</div>

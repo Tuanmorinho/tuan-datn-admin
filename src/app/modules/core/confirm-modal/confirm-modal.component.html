@@ -1,0 +1,27 @@
+<div class="modal-body py-5 pt-3 pb-0 text-center">
+  <div *ngIf="iconStatus === 'delete'" class="svg-icon svg-icon-md svg-icon-primary confirm-modal__svg-delete pt-3">
+  </div>
+  <div *ngIf="iconStatus === 'cancel'" class="svg-icon svg-icon-md svg-icon-primary confirm-modal__svg-cancel pt-3">
+  </div>
+  <div *ngIf="iconStatus === 'approve'" class="svg-icon svg-icon-md svg-icon-primary confirm-modal__svg-approve pt-3">
+  </div>
+  <div class="modal-title h4 font-weight-bold">{{ info.title }}</div>
+  <span [innerHTML]="info.content"
+        class="confirm-modal__content">
+  </span>
+</div>
+<div class="p-3 text-center">
+  <div>
+    <button type="button"
+            class="btn btn-secondary btn-elevate mr-4 font-weight-bold pr-10 pl-10"
+            (click)="modal.close(false)">
+      Hủy
+    </button>&nbsp;
+    <button type="button"
+            [style]="{'background-color':bgColor, 'color': '#FFFFFF'}"
+            class="btn btn-light btn-elevate pr-10 pl-10"
+            (click)="modal.close(true)">
+      Xác nhận
+    </button>
+  </div>
+</div>

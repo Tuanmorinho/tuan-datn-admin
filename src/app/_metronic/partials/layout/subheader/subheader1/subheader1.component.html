@@ -1,0 +1,65 @@
+<!--begin::Subheader-->
+<div class="subheader mt-5 mb-4 py-2 py-lg-6" [ngClass]="subheaderCSSClasses" id="kt_subheader">
+  <div [ngClass]="subheaderContainerCSSClasses"
+    class="d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+    <!--begin::Info-->
+    <div class="d-flex flex-column">
+      <ng-container *ngIf="subheaderMobileToggle">
+        <!--begin::Mobile Toggle-->
+        <button class="burger-icon burger-icon-left mr-4 d-inline-block d-lg-none" id="kt_subheader_mobile_toggle">
+          <span></span>
+        </button>
+        <!--end::Mobile Toggle-->
+      </ng-container>
+
+      <!--begin::Page Heading-->
+      <div class="d-flex align-items-baseline flex-wrap mr-5">
+        <!--begin::Breadcrumb-->
+        <ul class="breadcrumb breadcrumb-transparent breadcrumb-forward font-weight-bold p-0 my-2 font-size-sm">
+          <li class="breadcrumb-item" routerLinkActive="deactive">
+            <a [routerLink]="'/'" class="text-muted">
+              <!-- Báo cáo tổng hợp -->
+              {{title}}
+            </a>
+          </li>
+          <li class="breadcrumb-item" *ngFor="let bc of breadcrumbs" routerLinkActive="active">
+            <a [routerLink]="bc.linkPath" class="text-muted">
+              {{ bc.title }}
+            </a>
+          </li>
+        </ul>
+        <!--end::Breadcrumb-->
+      </div>
+      <!--end::Page Heading-->
+
+      <!--begin:: TitlePage-->
+      <div class="d-flex align-items-center">
+        <div>
+          <h4 class="font-weight-bold my-1" [innerHTML]="(description$ | async) + ((descriptionStyled$ | async) ? ':' : '')"></h4>
+        </div>
+        <div class="ml-2" *ngIf="(descriptionStyled$ | async)">
+          <h4 style="color: #6BA425; margin: 0" [innerHTML]="(descriptionStyled$ | async)"></h4>
+        </div>
+      </div>
+      <!--end:: TitlePage-->
+    </div>
+    <!--end::Info-->
+
+    <!--begin::Toolbar-->
+    <div class="d-flex align-items-center">
+
+      <ng-container *ngFor="let item of (breadcrumbsBtn$ | async)">
+        <!--begin::Daterange-->
+        <button *ngIf="item.isEvent" (click)="eventClick(item.type)" [class]="item.class" data-toggle="tooltip" [title]="item.name" data-placement="left"
+          [type]="item.type"><i *ngIf="item.icon" [class]="item.icon"></i>{{ item.name }}
+        </button>
+        <button *ngIf="!item.isEvent" [class]="item.class" [routerLink]="item.url" [queryParams]="item.queryParams" data-toggle="tooltip" [title]="item.name" data-placement="left"
+          [type]="item.type"><i *ngIf="item.icon" [class]="item.icon"></i>{{ item.name }}
+        </button>
+        <!--end::Daterange-->
+      </ng-container>
+    </div>
+    <!--end::Toolbar-->
+  </div>
+</div>
+<!--end::Subheader-->

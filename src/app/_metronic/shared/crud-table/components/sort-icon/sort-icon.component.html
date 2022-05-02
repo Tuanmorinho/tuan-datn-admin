@@ -1,0 +1,21 @@
+<ng-container *ngIf="isActive">
+  <ng-container *ngIf="activeDirection === 'asc'">
+    <span [inlineSVG]="'./assets/media/svg/icons/Navigation/Up-2.svg'"
+          cacheSVG="true"
+          class="svg-icon svg-icon-sm svg-icon-primary">
+    </span>
+  </ng-container>
+  <ng-container *ngIf="activeDirection === 'desc'">
+    <span [inlineSVG]="'./assets/media/svg/icons/Navigation/Down-2.svg'"
+          cacheSVG="true"
+          class="svg-icon svg-icon-sm svg-icon-primary">
+    </span>
+  </ng-container>
+</ng-container>
+
+<ng-container *ngIf="!isActive">
+  <span [inlineSVG]="'./assets/media/svg/icons/Common/Sort.svg'"
+        cacheSVG="true"
+        class="svg-icon svg-icon-xs svg-icon-dark-50 ml-1 svg-icon-sort align-text-bottom">
+  </span>
+</ng-container>

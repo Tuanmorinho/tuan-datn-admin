@@ -1,0 +1,210 @@
+<div class="loading-overlay" *ngIf="contractsService.isLoading$ | async">
+    Loading&#8230;
+</div>
+
+<form class="form form-label-right" [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <!-- Form input -->
+        <div class="col-7">
+            <div class="card card-custom gutter-b">
+                <div class="card-body">
+                    <p class="card-title font-weight-bolder text-dark mb-0">Thông tin hợp đồng</p>
+                    <div class="form-group row">
+                        <div class="col-6">
+                            <label class="col-form-label form-label font-weight-bold">Số hợp đồng<span
+                                    class="required-field">*</span></label>
+                            <div class="">
+                                <input matInput appTrim type="text" class="form-control" formControlName="code"
+                                    placeholder="----" disabled />
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <label class="col-form-label form-label">Mã hộ gia đình<span
+                                    class="required-field">*</span></label>
+                            <ng-select [items]="household" bindLabel="owner.fullname" bindValue="id"
+                                class="form-control" formControlName="householdId" placeholder="Tìm hộ gia đình..."
+                                [notFoundText]="'Không có mục nào được chọn'" loadingText="Đang tải"
+                                (change)="selectHouseHold($event)">
+                                <ng-template ng-option-tmp let-item="item">
+                                    <span title="{{ item.owner.fullname }}">{{ item.owner.fullname }}</span>
+                                </ng-template>
+                            </ng-select>
+                            <app-validation-error [field]="'Hộ gia đình'" [submitted]="isControlInvalid('householdId')"
+                                [control]="formGroup.controls.householdId">
+                            </app-validation-error>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-6">
+                            <label class="col-form-label form-label">Ngày bắt đầu<span
+                                    class="required-field">*</span></label>
+                            <div class="">
+                                <div class="d-flex justify-content-between">
+                                    <input matInput [matDatepicker]="picker1" placeholder="Ngày bắt đầu"
+                                        formControlName="startDate" [class.is-invalid]="isControlInvalid('startDate')"
+                                        class="form-control custom-date-picker" (dateChange)="dateValidator()"
+                                        [disabled]="contractId ? true : false" />
+                                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker1></mat-datepicker>
+                                </div>
+                                <app-validation-error [field]="'Ngày bắt đầu'"
+                                    [submitted]="isControlInvalid('startDate')"
+                                    [control]="formGroup.controls.startDate">
+                                </app-validation-error>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <label class="col-form-label form-label">Ngày kết thúc<span
+                                    class="required-field">*</span></label>
+                            <div class="">
+                                <div class="d-flex justify-content-between">
+                                    <input matInput [matDatepicker]="picker2" placeholder="Ngày kết thúc"
+                                        formControlName="endDate" (dateChange)="dateValidator()"
+                                        [class.is-invalid]="isControlInvalid('endDate')"
+                                        class="form-control custom-date-picker"
+                                        [disabled]="contractId ? true : false" />
+                                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker2></mat-datepicker>
+                                </div>
+                                <app-validation-error [field]="'Ngày kết thúc'"
+                                    [submitted]="isControlInvalid('endDate')" [control]="formGroup.controls.endDate">
+                                </app-validation-error>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="card-title font-weight-bolder text-dark mt-5 mb-0">Chi phí hợp đồng</p>
+
+                    <div class="form-group row">
+                        <div class="col-4">
+                            <label class="col-form-label form-label">Đơn vị tiền tệ<span
+                                    class="required-field">*</span></label>
+                            <ng-select [items]="initData?.paymentCurrencyTypes" bindLabel="value" bindValue="code"
+                                class="form-control" formControlName="paymentCurrencyType"
+                                placeholder="Chọn đơn vị tiền tệ" [notFoundText]="'Không có mục nào được chọn'"
+                                loadingText="Đang tải" [class.is-invalid]="isControlInvalid('paymentCurrencyType')"
+                                [readonly]="contractId ? true : false">
+                                <ng-template ng-option-tmp let-item="item">
+                                    <span title="{{ item.value }}">{{item.value}}</span>
+                                </ng-template>
+                            </ng-select>
+                            <app-validation-error [field]="'Đơn vị tiền tệ'"
+                                [submitted]="isControlInvalid('paymentCurrencyType')"
+                                [control]="formGroup.controls.paymentCurrencyType">
+                            </app-validation-error>
+                        </div>
+
+                        <div class="col-4">
+                            <label class="col-form-label form-label">Chi phí chưa tính thuế<span
+                                    class="required-field">*</span></label>
+                            <div class="">
+                                <input matInput appTrim type="number" formControlName="paymentPriceWithoutTax"
+                                    placeholder="Nhập chi phí..." [readonly]="contractId ? true : false"
+                                    [attr.class]="contractId ? 'form-control disabled' : 'form-control'" />
+                                <app-validation-error [field]="'Chi phí chưa tính thuế'"
+                                    [submitted]="isControlInvalid('paymentPriceWithoutTax')"
+                                    [control]="formGroup.controls.paymentPriceWithoutTax">
+                                </app-validation-error>
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <label class="col-form-label form-label">Thuế (%)<span
+                                    class="required-field">*</span></label>
+                            <div class="">
+                                <input matInput appTrim type="number" class="form-control" formControlName="taxPercent"
+                                    placeholder="Nhập thuế..." [readonly]="contractId ? true : false"
+                                    [attr.class]="contractId ? 'form-control disabled' : 'form-control'" />
+                                <app-validation-error [field]="'Thuế'" [submitted]="isControlInvalid('taxPercent')"
+                                    [control]="formGroup.controls.taxPercent">
+                                </app-validation-error>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="card-title font-weight-bolder text-dark mt-5 mb-0">Hình thức thanh toán</p>
+
+                    <div class="form-group row">
+                        <div class="col-4">
+                            <label class="col-form-label form-label">Hình thức thanh toán<span
+                                    class="required-field">*</span></label>
+                            <div>
+                                <ng-select [items]="initData?.paymentTypes" bindLabel="value" bindValue="code"
+                                    class="form-control" formControlName="paymentType"
+                                    [notFoundText]="'Không có mục nào được chọn'" loadingText="Đang tải"
+                                    placeholder="Chọn hình thức thanh toán"
+                                    [class.is-invalid]="isControlInvalid('paymentType')">
+                                    <ng-template ng-option-tmp let-item="item">
+                                        <span title="{{ item.value }}">{{
+                                            item.value
+                                            }}</span>
+                                    </ng-template>
+                                </ng-select>
+                                <app-validation-error [field]="'Hình thức thanh toán'"
+                                    [submitted]="isControlInvalid('paymentType')"
+                                    [control]="formGroup.controls.paymentType">
+                                </app-validation-error>
+                            </div>
+                        </div>
+                        <div class="col-8" *ngIf="v.paymentType === 'ON_ACCOUNT'">
+                            <label class="col-form-label form-label">Tài khoản ngân hàng<span
+                                    class="required-field">*</span></label>
+                            <div>
+                                <ng-select [items]="bankAccounts" bindLabel="bankName" bindValue="id"
+                                    class="form-control" formControlName="paymentBankAccountId"
+                                    [notFoundText]="'Không có mục nào được chọn'" loadingText="Đang tải"
+                                    placeholder="Chọn tài khoản ngân hàng"
+                                    [class.is-invalid]="isControlInvalid('paymentBankAccountId')">
+                                    <ng-template ng-option-tmp let-item="item">
+                                        <span title="{{ item.bankName }}">{{ item.bankName }}</span>
+                                    </ng-template>
+                                </ng-select>
+                                <app-validation-error [field]="'Tài khoản ngân hàng'"
+                                    [submitted]="isControlInvalid('paymentBankAccountId')"
+                                    [control]="formGroup.controls.paymentBankAccountId">
+                                </app-validation-error>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ng-container *ngIf="v?.id">
+                        <p class="card-title font-weight-bolder text-dark mt-5 mb-0">Trạng thái hợp đồng</p>
+
+                        <div class="form-group">
+                            <label class="col-form-label form-label">Trạng thái</label>
+                            <div>
+                                <mat-radio-group [color]="'primary'" formControlName="status">
+                                    <mat-radio-button *ngFor="let item of initData?.farmingContractStatus" [value]="item.code">{{
+                                        item.value
+                                        }}
+                                    </mat-radio-button>
+                                </mat-radio-group>
+                            </div>
+                        </div>
+                    </ng-container>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- Papers -->
+        <div class="col-5">
+            <div class="card card-custom gutter-b">
+                <div class="card-body">
+                    <p class="card-title font-weight-bolder text-dark mb-2">Danh sách tài liệu đính kèm</p>
+                    <div class="form-group row">
+                        <div class="col-lg-12 col-xl-12 col-xs-12">
+                            <app-upload-files [formGroup]="formGroup" [formControlName]="'relatedPapers'"
+                                [isRequired]="true" [field]="'Tài liệu đính kèm '" [maxLength]="10"
+                                [fileContainerStyle]="{'border': '1px solid #E4E6EF', 'border-radius': '0.42rem'}"
+                                uploadType='file_styled'>
+                            </app-upload-files>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

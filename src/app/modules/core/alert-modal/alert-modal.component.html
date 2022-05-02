@@ -1,0 +1,20 @@
+<div class="modal-header p-3 bg-color__6"
+     [style]="{'background-color':bgColor}">
+  <div class="modal-title h4 text-light">{{ info.title }}</div>
+</div>
+<div class="modal-body py-10 pt-3 pb-0 text-center">
+  <div class="svg-icon svg-icon-md svg-icon-primary confirm-modal__svg-confirm"></div>
+  <span [innerHTML]="info.content"
+        class="confirm-modal__content">
+  </span>
+</div>
+<div class="modal-footer p-3">
+  <div>
+    <button type="button"
+            [style]="{'background-color':bgColor}"
+            class="btn btn-light btn-elevate mr-1"
+            (click)="modal.close(false)">
+      Đóng
+    </button>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="loading-overlay" *ngIf="(isLoading$ | async)">Loading&#8230;</div>
+<div class="text-center">
+  <a title="Publish đến CBNV" class="btn btn-light btn-hover-primary m-1 btn-sm action-cell__btn-sm"
+    style="border-color: #e8e8e8" (click)="publishDocument(prop)"
+    *ngIf="(prop.reviewStatus === 3 || prop.reviewStatus === 9) && roleOfUser.isApprovePublish">
+    <i class="fa fa-bullhorn"></i>Publish đến CBNV
+  </a>
+
+  <a title="Hủy" class="btn btn-light btn-hover-danger m-1 btn-sm action-cell__btn-sm" style="border-color: #e8e8e8"
+    (click)="delete(prop)" *ngIf="(prop.reviewStatus === 3 || prop.reviewStatus === 9) && roleOfUser.isApproveCancel">
+    <i class="fa fa-trash"></i>Hủy tài liệu
+  </a>
+
+  <a title="Hủy Publish" class="btn btn-light btn-hover-danger m-1 btn-sm action-cell__btn-sm"
+    style="border-color: #e8e8e8" *ngIf="prop.reviewStatus === 4 && roleOfUser.isApproveUnPublish"
+    (click)="publishDocument(prop)">
+    <i class="fa fa-ban"></i> Hủy Publish
+  </a>
+</div>

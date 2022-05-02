@@ -1,0 +1,27 @@
+<div class="loading-overlay" *ngIf="loading$ | async">Loading&#8230;</div>
+<div class="card card-custom gutter-b">
+  <div class="card-header pt-3 row" style="min-height: 0;">
+    <div class="form-group col-6" style="height: 50px;">
+      <label class="col-form-label form-label font-weight-bold">Mã hộ gia đình:</label>
+      <div class="">
+        <input matInput appTrim type="text" class="form-control" value="{{registrationBookCode}}" disabled/>
+      </div>
+    </div>
+    <div class="col-6 d-flex justify-content-end align-items-end">
+      <button type="button" class="btn btn-outline-secondary mr-2" [routerLink]="'/farm-management/household'">
+        Hủy</button>
+      <button type="button" class="btn btn-primary get-data btn-elevate" (click)="addMember()">
+        <i class="ki ki-plus icon-sm"></i>
+        Thêm thành viên</button>
+    </div>
+    <hr class="m-0" />
+  </div>
+  <div class="card-body pt-0 pb-2">
+    <div class="row mb-5">
+      <ng-container *ngFor="let member of memebers; let i = index">
+        <div class="col-6 mt-5" app-house-hold-item [member]="member" [index]="i" (updateEvent)="updateEvent($event)"
+          (deleteEvent)="deleteEvent($event)"></div>
+      </ng-container>
+    </div>
+  </div>
+</div>

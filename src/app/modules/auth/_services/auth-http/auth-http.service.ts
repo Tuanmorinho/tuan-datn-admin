@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { UserModel } from '../../_models/user.model';
 import { environment } from '../../../../../environments/environment';
 import { AuthModel } from '../../_models/auth.model';
+import { authLocalRefreshToken } from '../auth.service';
 
 const API_USERS_URL = `${environment.apiDevUrl}/authentication`;
 @Injectable({
@@ -17,12 +18,17 @@ export class AuthHTTPService {
     const body = new HttpParams()
       .set('grant_type', 'password')
       .set('client_id', environment.KEYCLOAK_CLIENT_ID)
+      .set('client_secret', environment.KEYCLOAK_CLIENT_SECRET)
       .set('username', username)
       .set('password', password);
 
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/x-www-form-urlencoded');
-    return this.http.post<AuthModel>(`${environment.apiDevUrl}/auth/realms/${environment.KEYCLOAK_REALM}/protocol/openid-connect/token`, body.toString(), {
+    // return this.http.post<AuthModel>(`${environment.apiDevUrl}/auth/realms/${environment.KEYCLOAK_REALM}/protocol/openid-connect/token`, body.toString(), {
+    //   headers: headers
+    // });
+
+    return this.http.post<AuthModel>(`http://localhost:8180/auth/realms/${environment.KEYCLOAK_REALM}/protocol/openid-connect/token`, body.toString(), {
       headers: headers
     });
   }
@@ -46,8 +52,15 @@ export class AuthHTTPService {
     return this.http.put<boolean>(`${API_URL}/users/${userId}/reset-password`, params, { headers });
   }
 
-  logout(userId: string) {
-    const API_URL = `${environment.apiDevUrl}/auth/admin/realms/${environment.KEYCLOAK_REALM}`;
-    return this.http.post(`${API_URL}/user/${userId}/logout`, {});
+  logout() {
+    const body = new HttpParams()
+      .set('refresh_token', authLocalRefreshToken)
+      .set('client_id', environment.KEYCLOAK_CLIENT_ID)
+      .set('client_secret', environment.KEYCLOAK_CLIENT_SECRET)
+      let headers = new HttpHeaders();
+      headers = headers.set('Content-Type', 'application/x-www-form-urlencoded'); 
+      return this.http.post<AuthModel>(`http://localhost:8180/auth/realms/${environment.KEYCLOAK_REALM}/protocol/openid-connect/logout`, body.toString(), {
+        headers: headers
+      });
   }
 }

@@ -9,7 +9,9 @@ export const environment = {
   domain: 'https://localhost:4200',
   KEYCLOAK_CLIENT_ID: 'auth-keycloak-testing',
   KEYCLOAK_REALM: 'testing-auth',
+  KEYCLOAK_CLIENT_SECRET: 'ch9bkQNSJYaeb3nA0KBvZeWBUvVxUQai',
   APP_CLIENT: 'ch9bkQNSJYaeb3nA0KBvZeWBUvVxUQai',
+  apiDevUrl: 'https://localhost:3333'
 };
 
 /*

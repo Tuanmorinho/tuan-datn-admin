@@ -59,8 +59,8 @@ $dark-light:          							    $gray-400 !default; // Custom variable
 $dark-inverse:         								$white !default; // Custom variable
 
 // Primary colors
-$primary:       									#6BA425 !default; // Bootstrap variable
-$primary-hover:    									#57901B  !default; // Custom variable
+$primary:       									#5D37A2; // Bootstrap variable
+$primary-hover:    									#4B2D83; // Custom variable
 $primary-light:    									#E1F0FF !default; // Custom variable
 $primary-inverse:  									$white !default;  // Custom variable
 
@@ -117,7 +117,7 @@ $theme-colors: (
     "danger":     $danger,
     "light":      $light,
     "dark":       $dark
-) !default;
+);
 
 // Extended hover colors for Bootstrap theme colors
 $theme-hover-colors: (
@@ -130,7 +130,7 @@ $theme-hover-colors: (
     "danger":     $danger-hover,
     "light":      $light-hover,
     "dark":       $dark-hover
-) !default;  // Custom variable
+);  // Custom variable
 
 // Extended inverse colors for Bootstrap theme colors
 $theme-inverse-colors: (
@@ -143,7 +143,7 @@ $theme-inverse-colors: (
     "danger":     $danger-inverse,
     "light":      $light-inverse,
     "dark":       $dark-inverse
-) !default;  // Custom variable
+);  // Custom variable
 
 // Extended outline colors for Bootstrap theme colors
 $theme-outline-inverse-colors: (
@@ -156,7 +156,7 @@ $theme-outline-inverse-colors: (
     "danger":     $danger,
     "light":      $dark-75,
     "dark":       $dark
-) !default;  // Custom variable
+);  // Custom variable
 
 // Extended light colors for Bootstrap theme colors
 $theme-light-colors: (
@@ -169,7 +169,7 @@ $theme-light-colors: (
     "danger":     $danger-light,
     "light":      $light-light,
     "dark":       $dark-light
-) !default;  // Custom variable
+);  // Custom variable
 
 // Extended shadow colors for Bootstrap theme colors
 $theme-shadow-colors: (
@@ -182,7 +182,7 @@ $theme-shadow-colors: (
     "danger":     $danger,
     "light":      $dark,
     "dark":       $dark
-) !default;  // Custom variable
+);  // Custom variable
 
 // Extended theme text colors
 $theme-text-colors: (
@@ -200,7 +200,7 @@ $theme-text-colors: (
     "dark-50":    $dark-50,
     "dark-25":    $dark-25,
     "muted":      $text-muted
-) !default;  // Custom variable
+);  // Custom variable
 
 // Social Network Colors Used With Boostrap Buttons(see: https://primarycolors.net/)
 $social-colors: (
